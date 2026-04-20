@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ELECTROMEC | Soluciones Eléctricas Industriales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ELECTROMEC – Empresa especializada en instalaciones eléctricas, tableros industriales, ascensores y mantenimiento en Tacna, Perú.">
+    <meta name="keywords" content="electricidad industrial, tableros eléctricos, ascensores, mantenimiento eléctrico, Tacna, Perú, ELECTROMEC">
+    <!-- Open Graph / WhatsApp / Redes sociales -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://electromec.pe/">
+    <meta property="og:title"       content="ELECTROMEC – Soluciones Eléctricas Industriales en Tacna">
+    <meta property="og:description" content="Especialistas en instalaciones eléctricas, tableros industriales, ascensores y mantenimiento técnico en Tacna, Perú.">
+    <meta property="og:image"       content="img/carrusel1.jpg">
+    <meta property="og:locale"      content="es_PE">
+    <meta name="twitter:card"       content="summary_large_image">
+    <meta name="twitter:title"      content="ELECTROMEC – Soluciones Eléctricas Industriales">
+    <meta name="twitter:description" content="Instalaciones eléctricas, tableros y ascensores en Tacna, Perú.">
+    <meta name="twitter:image"      content="img/carrusel1.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary:   rgb(0, 54, 68);
+            --primary-d: rgb(0, 35, 45);
+            --primary-l: rgb(0, 75, 95);
+            --cyan:      #00bcd4;
+            --cyan-d:    #0097a7;
+            --orange:    #ff5a1f;
+            --orange-d:  #e04a10;
+            --light:     #F2F2F2;
+            --white:     #ffffff;
+            --gray:      #607080;
+            --dark:      #0a1a20;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Barlow', sans-serif; font-weight: 400; line-height: 1.6; background: #fff; color: #2a3a40; overflow-x: hidden; }
+        img  { display: block; max-width: 100%; }
+        a    { text-decoration: none; color: inherit; }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        .section-tag {
+            display: inline-block; background: var(--cyan); color: white;
+            font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+            padding: 5px 16px; border-radius: 20px; margin-bottom: 14px; font-weight: 600;
+        }
+        .section-tag.naranja { background: var(--orange); }
+
+        /* ── TINTALIFT VARS ── */
+        :root { 
+            --tl-green:  #7dc10e;
+            --tl-green-d:#5e9a00;
+            --tl-green-l:#a8e033;
+            --tl-black:  #0f0f0f;
+            --tl-dark:   #1a1a1a;
+        }
+        .nav-tintalift {
+            background: var(--tl-green) !important;
+            color: var(--tl-black) !important;
+            padding: 5px 14px !important;
+            border-radius: 20px !important;
+            font-weight: 700 !important;
+        }
+        .nav-tintalift:hover { background: var(--tl-green-l) !important; }
+        .nav-tintalift::after { display: none !important; }
+
+        .tintalift-section { background: var(--tl-black); padding-bottom: 80px; }
+        .tintalift-hero {
+            background: linear-gradient(135deg, #4a7a00 0%, var(--tl-green) 55%, var(--tl-green-l) 100%);
+            padding: 90px 0 70px; position: relative; overflow: hidden;
+        }
+        .tintalift-hero::before {
+            content:''; position:absolute; top:-60px; right:-60px;
+            width:350px; height:350px; border-radius:50%; background:rgba(255,255,255,.08);
+        }
+        .tintalift-hero::after {
+            content:''; position:absolute; bottom:-80px; left:-40px;
+            width:250px; height:250px; border-radius:50%; background:rgba(0,0,0,.1);
+        }
+        .tintalift-hero-inner { text-align:center; position:relative; z-index:1; }
+        .tintalift-badge {
+            display:inline-block; background:rgba(0,0,0,.22); color:var(--tl-black);
+            font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+            padding:5px 18px; border-radius:20px; margin-bottom:20px;
+        }
+        .tintalift-title {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:clamp(3.5rem,9vw,7rem); font-weight:900;
+            line-height:1; margin-bottom:20px; letter-spacing:.04em;
+        }
+        .tintalift-title .tinta { color:var(--tl-black); }
+        .tintalift-title .lift  { color:#fff; }
+        .tintalift-sub {
+            font-size:1.05rem; color:rgba(0,0,0,.75); max-width:600px;
+            margin:0 auto 34px; font-weight:500;
+        }
+        .btn-tintalift {
+            display:inline-block; background:var(--tl-black); color:var(--tl-green);
+            padding:14px 36px; border-radius:40px; font-weight:700; font-size:.95rem;
+            letter-spacing:.05em; transition:background .3s,color .3s,transform .2s;
+            box-shadow:0 4px 20px rgba(0,0,0,.3);
+        }
+        .btn-tintalift:hover { background:#222; color:var(--tl-green-l); transform:translateY(-2px); }
+
+        .tintalift-servicios {
+            display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:24px; margin:60px 0 50px;
+        }
+        .tl-card {
+            background:var(--tl-dark); border:1px solid rgba(125,193,14,.2);
+            border-radius:16px; padding:28px;
+            border-left: 3px solid var(--tl-green);
+            transition:border-color .3s,transform .3s,box-shadow .3s;
+        }
+        .tl-card:hover { border-color:var(--tl-green); transform:translateY(-6px); box-shadow:0 16px 40px rgba(125,193,14,.15); }
+        .tl-icon { font-size:2.4rem; margin-bottom:18px; display:block; }
+        .tl-card h4 {
+            font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700;
+            color:var(--tl-green); text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px;
+        }
+        .tl-card p { color:rgba(255,255,255,.65); font-size:.92rem; line-height:1.7; }
+
+        .tintalift-cta {
+            background:linear-gradient(120deg,#4a7a00,var(--tl-green));
+            border-radius:20px; padding:48px 40px; margin-bottom:10px;
+        }
+        .tintalift-cta-inner { display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+        .tintalift-cta h3 {
+            font-family:'Barlow Condensed',sans-serif; font-size:1.8rem; font-weight:900;
+            color:var(--tl-black); text-transform:uppercase; margin-bottom:8px;
+        }
+        .tintalift-cta p { color:rgba(0,0,0,.7); font-size:.95rem; }
+        .tintalift-cta-btns { display:flex; gap:14px; flex-wrap:wrap; }
+        .btn-tl-wa {
+            background:var(--tl-black); color:var(--tl-green);
+            padding:13px 28px; border-radius:30px; font-weight:700; font-size:.88rem;
+            transition:background .25s,transform .2s;
+        }
+        .btn-tl-wa:hover { background:#111; transform:translateY(-2px); }
+        .btn-tl-form {
+            background:rgba(0,0,0,.18); color:var(--tl-black);
+            padding:13px 28px; border-radius:30px; font-weight:700; font-size:.88rem;
+            border:2px solid rgba(0,0,0,.3); transition:background .25s,transform .2s;
+        }
+        .btn-tl-form:hover { background:rgba(0,0,0,.3); transform:translateY(-2px); }
+
+        /* TitanLift mejorado */
+        .tl-hero-btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+        .btn-tintalift-outline { display:inline-block; background:transparent; color:var(--tl-black); border:2px solid var(--tl-black); padding:14px 32px; border-radius:40px; font-weight:700; font-size:.95rem; letter-spacing:.05em; transition:background .3s,color .3s,transform .2s; }
+        .btn-tintalift-outline:hover { background:var(--tl-black); color:var(--tl-green); transform:translateY(-2px); }
+        .tl-stats { display:grid; grid-template-columns:repeat(4,1fr); background:var(--tl-dark); border-radius:16px; margin:50px 0 60px; border:1px solid rgba(125,193,14,.15); overflow:hidden; }
+        .tl-stat-item { padding:32px 24px; text-align:center; border-right:1px solid rgba(125,193,14,.1); }
+        .tl-stat-item:last-child { border-right:none; }
+        .tl-stat-item strong { display:block; font-family:'Barlow Condensed',sans-serif; font-size:2.6rem; font-weight:900; color:var(--tl-green); line-height:1; }
+        .tl-stat-item span { font-size:.8rem; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.1em; margin-top:6px; display:block; }
+        .tl-servicios-titulo { text-align:center; margin-bottom:40px; }
+        .tl-servicios-titulo h3 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:white; text-transform:uppercase; margin-top:12px; }
+        .tl-card-num { display:inline-block; font-family:'Barlow Condensed',sans-serif; font-size:3rem; font-weight:900; color:rgba(125,193,14,.12); line-height:1; margin-bottom:12px; }
+        .tl-card-icon { font-size:2rem; margin-bottom:14px; display:block; }
+        .tl-card-btn { display:inline-block; margin-top:20px; background:var(--tl-green); color:var(--tl-black); padding:10px 22px; border-radius:30px; font-size:.8rem; font-weight:700; letter-spacing:.06em; transition:background .25s,transform .2s; }
+        .tl-card-btn:hover { background:var(--tl-green-l); transform:translateY(-2px); }
+
+        .anim { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+        .anim.visible { opacity:1; transform:translateY(0); }
+        .anim-delay-1 { transition-delay:.08s; }
+        .anim-delay-2 { transition-delay:.16s; }
+        .anim-delay-3 { transition-delay:.24s; }
+        .anim-delay-4 { transition-delay:.32s; }
+        .anim-delay-5 { transition-delay:.40s; }
+        .anim-delay-6 { transition-delay:.48s; }
+
+        /* HEADER */
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .logo-area {
+        display: flex;
+        flex-direction: column; /* coloca todo en vertical */
+        align-items: center; /* opcional: centra */
+        }
+        .logo-area img { height: 39px; }
+        .logo-area small {
+        font-size: .7rem;
+        font-weight: 400;
+        color: rgba(255,255,255,.35);
+        letter-spacing: .15em;
+        display: block;
+        margin-top: 4px; /* mejor positivo para separarlo */
+        }       
+        .logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 900; color: white; letter-spacing: .08em; }
+        .logo-text span { color: var(--cyan); }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,.75); font-size: .82rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; transition: color .25s; position: relative; padding-bottom: 2px; }
+        .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--cyan); transition:width .3s; }
+        .nav-links a:hover, .nav-links a.activo { color: white; }
+        .nav-links a:hover::after, .nav-links a.activo::after { width:100%; }
+        .menu-boton { background: rgba(0,0,0,.4); color: white; padding: 9px 22px; border-radius: 30px; cursor: pointer; font-weight: 700; font-size: .82rem; letter-spacing: .08em; transition: background .3s; border: 1px solid rgba(255,255,255,.1); }
+        .menu-boton:hover { background: var(--cyan-d); }
+
+        /* ── PANEL MENÚ LATERAL ────────────────── */
+        .menu-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.55); z-index: 9998;
+            backdrop-filter: blur(3px);
+        }
+        .menu-overlay.activo { display: block; }
+
+        .panel-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 100%; height: 100%;
+            display: flex;
+            z-index: 9999;
+            transition: right .5s cubic-bezier(.4,0,.2,1);
+        }
+        .panel-menu.activo { right: 0; }
+
+        /* columna izquierda: mosaico de imágenes */
+        .menu-visual { flex:1; display:grid; grid-template-rows:repeat(2,1fr); overflow:hidden; }
+        .menu-visual-item { position:relative; overflow:hidden; cursor:pointer; }
+        .menu-visual-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; filter:brightness(.65); }
+        .menu-visual-item:hover img { transform:scale(1.06); filter:brightness(.8); }
+        .menu-visual-label { position:absolute; bottom:18px; left:22px; font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:900; color:white; text-transform:uppercase; letter-spacing:.06em; text-shadow:0 2px 8px rgba(0,0,0,.5); display:flex; align-items:center; gap:10px; }
+        .menu-visual-label::before { content:''; width:28px; height:3px; background:var(--cyan); display:block; }
+        .menu-visual-logo { display:none; }
+        /* columna derecha: navegación */
+        .menu-nav {
+            width: 420px;
+            flex-shrink: 0;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 32px 40px 36px;
+            overflow-y: auto;
+        }
+
+        .menu-nav-top {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+        }
+        .cerrar-menu {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--light);
+            border: none; cursor: pointer;
+            padding: 10px 20px; border-radius: 30px;
+            font-family: 'Barlow', sans-serif;
+            font-size: .82rem; font-weight: 700;
+            color: var(--primary);
+            letter-spacing: .08em;
+            transition: background .3s;
+        }
+        .cerrar-menu:hover { background: var(--primary); color: white; }
+
+        .menu-nav-links {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .menu-nav-link {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: .02em;
+            line-height: 1.1;
+            text-decoration: none;
+            transition: color .25s, transform .25s;
+            display: flex; align-items: center; gap: 12px;
+            padding: 6px 0;
+        }
+        .menu-nav-link::before {
+            content: '▶';
+            font-size: 1rem;
+            color: var(--cyan);
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity .25s, transform .25s;
+        }
+        .menu-nav-link:hover {
+            color: var(--primary);
+            transform: translateX(6px);
+        }
+        .menu-nav-link:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .menu-nav-link.activo { color: var(--primary); }
+        .menu-nav-link.activo::before { opacity: 1; transform: translateX(0); }
+
+        .menu-nav-cta {
+            margin-top: 32px;
+        }
+        .btn-menu-cta {
+            display: block;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Barlow', sans-serif;
+            font-weight: 700;
+            font-size: .88rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            transition: background .3s;
+        }
+        .btn-menu-cta:hover { background: var(--cyan-d); }
+
+        .menu-nav-contact {
+            font-size: .8rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        .menu-nav-contact a {
+            color: var(--gray);
+            transition: color .3s;
+            display: block;
+        }
+        .menu-nav-contact a:hover { color: var(--primary); }
+
+        .menu-nav-social {
+            display: flex; gap: 10px; margin-top: 12px;
+        }
+        .social-btn {
+            width: 34px; height: 34px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .85rem;
+            color: var(--primary);
+            transition: background .3s, color .3s;
+            cursor: pointer;
+        }
+        .social-btn:hover { background: var(--primary); color: white; }
+
+        /* stagger al abrir */
+        .menu-nav-link {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: color .25s, transform .4s ease, opacity .4s ease;
+        }
+        .panel-menu.activo .menu-nav-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .panel-menu.activo .menu-nav-link:nth-child(1) { transition-delay: .1s; }
+        .panel-menu.activo .menu-nav-link:nth-child(2) { transition-delay: .17s; }
+        .panel-menu.activo .menu-nav-link:nth-child(3) { transition-delay: .24s; }
+        .panel-menu.activo .menu-nav-link:nth-child(4) { transition-delay: .31s; }
+        .panel-menu.activo .menu-nav-link:nth-child(5) { transition-delay: .38s; }
+
+        @media (max-width: 768px) {
+            .menu-visual { display: none; }
+            .menu-nav { width: 100%; }
+            .menu-nav-link { font-size: 2.2rem; }
+        }
+
+        /* HERO */
+        .hero { height:100vh; position:relative; overflow:hidden; display:flex; align-items:center; }
+        .hero-slider { position:absolute; inset:0; }
+        .slide { position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease; }
+        .slide.active { opacity:1; }
+        .slide img { width:100%; height:100%; object-fit:cover; }
+        .hero-overlay { position:absolute; inset:0; background:linear-gradient(105deg, rgba(0,35,45,.95) 30%, rgba(0,54,68,.65) 60%, rgba(0,0,0,.2) 100%); }
+        .hero-deco { position:absolute; right:0; top:0; width:42%; height:100%; opacity:.06; background-image: repeating-linear-gradient(90deg, white 0,white 1px,transparent 1px,transparent 60px), repeating-linear-gradient(0deg, white 0,white 1px,transparent 1px,transparent 60px); }
+        .slide-dots { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:3; }
+        .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.35); cursor:pointer; transition:background .3s,transform .3s; }
+        .dot.active { background:var(--cyan); transform:scale(1.3); }
+        .hero-content { position:relative; z-index:2; color:white; margin-left:80px; max-width:680px; }
+        .hero-eyebrow { display:flex; align-items:center; gap:10px; font-size:.78rem; letter-spacing:.25em; text-transform:uppercase; color:var(--cyan); margin-bottom:16px; font-weight:600; animation:fadeUp .8s ease both; }
+        .hero-eyebrow::before { content:''; display:block; width:30px; height:2px; background:var(--cyan); }
+        .hero h1 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(3rem,7vw,6.5rem); font-weight:900; line-height:.95; letter-spacing:.02em; text-transform:uppercase; animation:fadeUp .8s .12s ease both; }
+        .hero h1 span  { color: var(--cyan); }
+        .hero h1 .naranja { color: var(--orange); }
+        .hero-sub { margin-top:20px; font-size:1.05rem; color:rgba(255,255,255,.7); max-width:480px; font-weight:300; animation:fadeUp .8s .24s ease both; }
+        .hero-buttons { margin-top:32px; display:flex; gap:16px; flex-wrap:wrap; animation:fadeUp .8s .36s ease both; }
+        .btn-principal { background:var(--orange); color:white; padding:15px 34px; border-radius:40px; font-weight:700; font-size:.88rem; letter-spacing:.08em; transition:background .3s,transform .2s; }
+        .btn-principal:hover { background:var(--orange-d); transform:translateY(-2px); }
+        
+        .btn-secundario 
+        { display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:white; padding:15px 36px; border-radius:40px; font-weight:700; font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; transition:background .3s,transform .2s; }
+        .btn-secundario:hover {
+        background: rgba(0,35,45,.95);
+        color: white;
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.678);
+        transform: translateY(-2px);
+        }
+        .catalogo a.btn-secundario {
+        display: block;
+        width: fit-content;
+        margin: 50px auto 0;
+        }
+
+        /* STATS */
+        .stats-bar { background:var(--primary-d); display:grid; grid-template-columns:repeat(4,1fr); border-bottom:3px solid var(--cyan); }
+        .stat-item { padding:26px 20px; text-align:center; color:white; border-right:1px solid rgba(255,255,255,.08); }
+        .stat-item:last-child { border-right:none; }
+        .stat-num { font-family:'Barlow Condensed',sans-serif; font-size:2.6rem; font-weight:900; color:var(--cyan); line-height:1; }
+        .stat-label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; opacity:.6; margin-top:4px; }
+
+        /* NOSOTROS */
+        .nosotros { padding:90px 0; background:var(--light); overflow:hidden; }
+        .nosotros-inner { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+        .nosotros-texto h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--primary); line-height:1.05; text-transform:uppercase; margin-bottom:20px; }
+        .nosotros-texto h2 span { color:var(--cyan); }
+        .nosotros-texto p { font-size:.97rem; color:var(--gray); line-height:1.75; margin-bottom:14px; font-weight:300; }
+        .nosotros-valores { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:28px; }
+        .valor-item { display:flex; align-items:flex-start; gap:10px; background:white; padding:14px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+        .valor-icon { font-size:1.4rem; flex-shrink:0; }
+        .valor-icon img{width:60%;height:60%;object-fit:cover;/* recorta sin deformar */display:block;}
+        .valor-item h4 { font-size:.82rem; font-weight:700; color:var(--primary); }
+        .valor-item p  { font-size:.73rem; color:var(--gray); margin:0; line-height:1.4; }
+        .nosotros-visual { position:relative; }
+        .nosotros-img-wrap { border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,54,68,.25); }
+        .nosotros-img-wrap img { width:100%; height:440px; object-fit:contain; background:var(--primary); padding:40px; }
+
+        /* SERVICIOS RESUMEN */
+        .servicios-home { padding:90px 0; background:white; }
+        .servicios-home-header { text-align:center; margin-bottom:50px; }
+        .servicios-home-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--primary); text-transform:uppercase; }
+        .servicios-home-header p { color:var(--gray); max-width:520px; margin:10px auto 0; font-size:.95rem; font-weight:300; }
+        .servicios-home-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .serv-home-card { border:2px solid #e8eef0; border-radius:14px; padding:32px 26px 26px; transition:border-color .3s,transform .3s,box-shadow .3s; position:relative; overflow:hidden; cursor:pointer; }
+        .serv-home-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:0; background:var(--cyan); transition:height .4s; }
+        .serv-home-card:hover { border-color:var(--cyan); transform:translateY(-6px); box-shadow:0 14px 36px rgba(0,54,68,.12); }
+        .serv-home-card:hover::before { height:100%; }
+        .serv-home-icon { font-size:2.4rem; margin-bottom:14px; }
+        .serv-home-num { position:absolute; top:16px; right:20px; font-family:'Barlow Condensed',sans-serif; font-size:2rem; font-weight:900; color:rgba(0,54,68,.06); }
+        .serv-home-card h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px; }
+        .serv-home-card p { font-size:.86rem; color:var(--gray); line-height:1.6; font-weight:300; }
+        .servicios-ver-mas { text-align:center; margin-top:42px; }
+        .btn-ver-mas { display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:white; padding:15px 36px; border-radius:40px; font-weight:700; font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; transition:background .3s,transform .2s; }
+        .btn-ver-mas:hover { background:var(--primary-l); transform:translateY(-2px); }
+        .serv-home-icon{width:100%;height:180px;   /* altura igual para todas */overflow:hidden;border-radius:8px;margin-bottom:14px;}
+
+.serv-home-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;   /* recorta sin deformar */
+    display:block;
+}
+
+        /* PROYECTOS */
+        .proyectos { padding:90px 0; background:var(--dark); color:white; }
+        .proyectos-header { text-align:center; margin-bottom:50px; }
+        .proyectos-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:white; text-transform:uppercase; }
+        .proyectos-header p { color:rgba(255,255,255,.45); margin-top:8px; font-size:.9rem; font-weight:300; }
+        .proyectos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+        .proyecto { position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+        .proyecto img { width:100%; height:260px; object-fit:cover; transition:transform .55s ease; }
+        .proyecto:hover img { transform:scale(1.07); }
+        .proyecto-overlay { position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,54,68,.95) 0%,rgba(0,54,68,.4) 50%,transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:26px; text-align:left; opacity:0; transition:opacity .4s; }
+        .proyecto:hover .proyecto-overlay { opacity:1; }
+        .proyecto-overlay h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.25rem; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+        .btn-ver { display:inline-block; padding:8px 22px; background:var(--orange); color:white; border-radius:30px; font-weight:700; font-size:.78rem; letter-spacing:.08em; transition:background .3s; width:fit-content; }
+        .btn-ver:hover { background:var(--orange-d); }
+
+        /* CATÁLOGO */
+        .catalogo { padding:90px 0; background:var(--light); }
+        .catalogo-header { text-align:center; margin-bottom:50px; }
+        .catalogo-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--primary); text-transform:uppercase; }
+        .catalogo-header p { color:var(--gray); max-width:480px; margin:10px auto 0; font-size:.9rem; }
+        .catalogo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .product-card { background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.08); transition:transform .3s,box-shadow .3s; }
+        .product-card:hover { transform:translateY(-6px); box-shadow:0 14px 36px rgba(0,0,0,.14); }
+        .product-img { height:160px; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:4rem; position:relative; overflow:hidden; }
+        .product-img::after { content:''; position:absolute; bottom:-20px; right:-20px; width:80px; height:80px; border-radius:50%; background:rgba(0,188,212,.15); }
+        .product-body { padding:20px 22px 22px; }
+        .product-body h4 { font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px; }
+        .product-desc { font-size:.8rem; color:var(--gray); margin-bottom:14px; font-weight:300; }
+        .product-precio { font-family:'Barlow Condensed',sans-serif; font-size:1.6rem; font-weight:900; color:var(--orange); margin-bottom:14px; }
+        .product-precio span { font-size:.85rem; font-weight:400; color:var(--gray); }
+        .btn-cotizar { width:100%; background:var(--primary); color:white; border:none; padding:12px; border-radius:8px; cursor:pointer; font-family:'Barlow',sans-serif; font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; transition:background .3s; display:flex; align-items:center; justify-content:center; gap:6px; }
+        .btn-cotizar:hover { background:var(--cyan-d); }
+
+        /* TESTIMONIOS */
+        .testimonios { padding:90px 0; background:white; }
+        .testimonios-header { text-align:center; margin-bottom:50px; }
+        .testimonios-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--primary); text-transform:uppercase; }
+        .testimonios-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .testimonio-card { background:var(--light); border-radius:14px; padding:28px; border-left:4px solid var(--cyan); transition:transform .3s,box-shadow .3s; position:relative; }
+        .testimonio-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,.08); }
+        .testimonio-stars { color:#f59e0b; font-size:.9rem; margin-bottom:12px; }
+        .testimonio-card p { font-size:.9rem; color:#3a4a55; line-height:1.65; font-style:italic; margin-bottom:18px; font-weight:300; }
+        .testimonio-autor { display:flex; align-items:center; gap:10px; }
+        .autor-avatar { width:40px; height:40px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:900; color:var(--cyan); flex-shrink:0; letter-spacing:0; }
+        .autor-nombre { font-weight:700; font-size:.85rem; color:var(--primary); }
+        .autor-empresa { font-size:.73rem; color:var(--gray); }
+        .testimonio-verificado { position:absolute; top:16px; right:18px; display:flex; align-items:center; gap:4px; font-size:.68rem; font-weight:700; color:var(--cyan); letter-spacing:.06em; text-transform:uppercase; }
+        .testimonio-verificado::before { content:'✓'; background:var(--cyan); color:white; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.6rem; flex-shrink:0; }
+
+        /* MARCAS */
+        .marcas { padding:60px 0; background:var(--primary-d); text-align:center; }
+        .marcas h3 { font-family:'Barlow Condensed',sans-serif; font-size:.8rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:32px; }
+        .marcas-row { display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; }
+        .marca-item { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:16px 28px; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:700; letter-spacing:.1em; color:rgba(255,255,255,.55); transition:background .3s,color .3s; }
+        .marca-item:hover { background:rgba(0,188,212,.12); color:var(--cyan); }
+
+        /* UBICACIÓN */
+        .ubicacion { padding:90px 0; background:var(--light); }
+        .ubicacion-header { text-align:center; margin-bottom:50px; }
+        .ubicacion-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--primary); text-transform:uppercase; }
+        .ubicacion-grid { display:grid; grid-template-columns:1fr 1.6fr; gap:36px; align-items:start; }
+        .info-ubicacion { background:white; padding:32px; border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+        .info-ubicacion h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.3rem; font-weight:900; color:var(--primary); text-transform:uppercase; letter-spacing:.06em; margin-bottom:20px; padding-bottom:14px; border-bottom:2px solid var(--cyan); }
+        .info-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+        .info-row p { font-size:.88rem; color:var(--gray); line-height:1.5; }
+        .info-row strong { display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--primary); margin-bottom:2px; }
+        .mapa iframe { width:100%; height:380px; border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,.12); border:0; }
+
+        /* CONTACTO */
+        .contacto { padding:90px 0; background:var(--primary); }
+        .contacto-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        .contacto-texto h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:white; text-transform:uppercase; line-height:1.05; margin-bottom:16px; }
+        .contacto-texto h2 span { color:var(--cyan); }
+        .contacto-texto p { color:rgba(255,255,255,.6); font-size:.95rem; font-weight:300; line-height:1.7; margin-bottom:28px; }
+        .contacto-wa { display:inline-flex; align-items:center; gap:10px; background:#25d366; color:white; padding:14px 30px; border-radius:40px; font-weight:700; font-size:.88rem; letter-spacing:.06em; transition:background .3s,transform .2s; }
+        .contacto-wa:hover { background:#1db954; transform:translateY(-2px); }
+        .contacto-form { background:white; padding:36px; border-radius:18px; }
+        .contacto-form h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:.06em; margin-bottom:22px; }
+        .form-group { margin-bottom:14px; }
+        .form-group label { display:block; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--primary); margin-bottom:6px; }
+        .form-group input, .form-group textarea, .form-group select { width:100%; padding:11px 14px; border:2px solid #e2eaed; border-radius:8px; font-family:'Barlow',sans-serif; font-size:.88rem; color:#2a3a40; transition:border-color .3s; outline:none; background:white; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--cyan); }
+        .form-group textarea { height:100px; resize:vertical; }
+        .btn-enviar { width:100%; background:var(--primary); color:white; border:none; padding:14px; border-radius:8px; cursor:pointer; font-family:'Barlow',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.1em; text-transform:uppercase; margin-top:6px; transition:background .3s; }
+        .btn-enviar:hover { background:var(--primary-l); }
+        .form-success { display:none; background:#d1fae5; color:#065f46; padding:12px 16px; border-radius:8px; font-size:.85rem; font-weight:600; margin-top:10px; text-align:center; }
+        /* Validación visual */
+        .form-group input.error,
+        .form-group textarea.error,
+        .form-group select.error { border-color:#ef4444 !important; }
+        .form-error-msg { display:none; font-size:.72rem; color:#ef4444; margin-top:4px; font-weight:600; }
+        .form-error-msg.visible { display:block; }
+        .btn-enviar:disabled { opacity:.6; cursor:not-allowed; }
+
+        /* FOOTER */
+        .footer { background:var(--dark); padding:50px 0 24px; }
+        .footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:50px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:24px; }
+        .footer-brand .logo-text { font-size:1.4rem; }
+        .footer-brand p { font-size:.82rem; color:rgba(255,255,255,.4); line-height:1.6; margin-top:12px; font-weight:300; max-width:280px; }
+        .footer-col h4 { font-family:'Barlow Condensed',sans-serif; font-size:.8rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--cyan); margin-bottom:16px; }
+        .footer-col a { display:block; font-size:.82rem; color:rgba(255,255,255,.45); margin-bottom:8px; transition:color .3s; }
+        .footer-col a:hover { color:white; }
+        .footer-col p { font-size:.82rem; color:rgba(255,255,255,.45); margin-bottom:8px; line-height:1.5; }
+        .footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:.75rem; color:rgba(255,255,255,.25); }
+
+        /* WHATSAPP */
+        .whatsapp { position:fixed; bottom:24px; right:24px; width:58px; height:58px; z-index:1000; }
+        .whatsapp img { width:100%; height:100%; border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,.35); transition:transform .3s; }
+        .whatsapp img:hover { transform:scale(1.12); }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
+        
+        /*-------------TARJETA FLOTANTE------------------*/
+
+        .hero-floating-cards {
+            position: absolute;
+            right: 56px;
+            bottom: 70px;   /* clearance sobre los dots */
+            z-index: 4;
+            display: flex;
+            flex-direction: column;   /* columna vertical */
+            gap: 10px;
+        }
+
+        .float-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,255,255,.10);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,.22);
+            border-radius: 14px;
+            padding: 13px 18px;
+            width: 220px;           /* ancho fijo, no se expande */
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .3s, transform .3s, border-color .3s, box-shadow .3s;
+            box-shadow: 0 8px 28px rgba(0,0,0,.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .float-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(0,188,212,.18) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity .35s;
+        }
+        .float-card:hover {
+            background: rgba(255,255,255,.18);
+            transform: translateX(-5px) translateY(-2px);
+            border-color: var(--cyan);
+            box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 0 0 1px var(--cyan);
+        }
+        .float-card:hover::before { opacity: 1; }
+
+        .float-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            transition: background .3s, transform .3s;
+            box-shadow: 0 4px 14px rgba(0,188,212,.45);
+        }
+        .float-card:nth-child(2) .float-card-icon {
+            background: var(--orange);
+            box-shadow: 0 4px 14px rgba(255,90,31,.35);
+        }
+        .float-card:nth-child(3) .float-card-icon {
+            background: var(--primary-l);
+            box-shadow: 0 4px 14px rgba(0,75,95,.45);
+        }
+        .float-card:hover .float-card-icon { transform: scale(1.1) rotate(-4deg); }
+
+        .float-card-text { flex: 1; min-width: 0; }
+
+        .float-card-label {
+            font-size: .66rem;
+            letter-spacing: .15rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .float-card-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+        .float-card-arrow {
+            font-size: .95rem;
+            color: rgba(255,255,255,.55);
+            transition: color .3s, transform .3s;
+            flex-shrink: 0;
+        }
+        .float-card:hover .float-card-arrow {
+            color: var(--cyan);
+            transform: translateX(4px);
+        }
+
+        /* Pulse en la primera tarjeta — inicia luego de que termina el fadeUp */
+        @keyframes floatPulse {
+            0%, 100% { box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+            50%       { box-shadow: 0 8px 32px rgba(0,188,212,.38); }
+        }
+        .float-card:first-child       { animation: fadeUp .7s .55s ease both, floatPulse 3.5s 1.8s ease-in-out infinite; }
+        .float-card:first-child:hover { animation: none; }
+
+        /* Stagger de entrada — fadeUp individual por tarjeta */
+        .float-card { animation: fadeUp .7s ease both; }
+        .float-card:nth-child(1) { animation-delay: .55s; }
+        .float-card:nth-child(2) { animation-delay: .70s; }
+        .float-card:nth-child(3) { animation-delay: .85s; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            .hero-floating-cards {
+                position: absolute;
+                right: unset;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 52px;        /* sobre los dots */
+                flex-direction: row;
+                gap: 8px;
+                width: calc(100% - 32px);
+                max-width: 480px;
+            }
+            .float-card {
+                flex: 1;
+                width: auto;
+                min-width: 0;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 10px 8px;
+                gap: 7px;
+            }
+            .float-card-title  { font-size: .8rem; white-space: normal; }
+            .float-card-label  { font-size: .6rem; }
+            .float-card-icon   { width: 34px; height: 34px; font-size: 1rem; }
+            .float-card-icon svg { width: 18px; height: 18px; }
+            .float-card-arrow  { display: none; }
+        }
+
+        /* ── MUY PEQUEÑO (<400px) ── */
+        @media (max-width: 400px) {
+            .hero-floating-cards { gap: 6px; }
+            .float-card { padding: 8px 6px; gap: 5px; }
+            .float-card-title { font-size: .75rem; }
+            .float-card-icon  { width: 30px; height: 30px; }
+            .float-card-icon svg { width: 16px; height: 16px; }
+        }
+        /* ══ CARDS DE SERVICIO (estilo home) CON DESPLEGABLE ══ */
+        .servicios-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 0;
+        }
+
+        .serv-card {
+            border: 2px solid #e8eef0;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+        .serv-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 0;
+            background: var(--secondary);
+            transition: height 0.4s;
+            z-index: 2;
+        }
+        .serv-card:hover,
+        .serv-card.activo {
+            border-color: var(--secondary);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0,54,68,0.14);
+        }
+        .serv-card:hover::before,
+        .serv-card.activo::before { height: 100%; }
+
+        .serv-card.activo {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(0,54,68,0.18);
+            transform: translateY(-4px);
+        }
+        .serv-card.activo::before { background: var(--primary); height: 100%; }
+
+        .serv-card-img {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+        .serv-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .serv-card:hover .serv-card-img img,
+        .serv-card.activo .serv-card-img img { transform: scale(1.06); }
+
+        .serv-card-body {
+            padding: 22px 22px 18px;
+        }
+        .serv-card-num {
+            position: absolute;
+            top: 14px; right: 18px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(0,54,68,0.07);
+            line-height: 1;
+            z-index: 3;
+        }
+        .serv-card-body h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+        .serv-card-body p {
+            font-size: 0.84rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        .serv-card-footer {
+            padding: 12px 22px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .serv-card-arrow {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #eef7f9;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            color: var(--primary);
+            transition: background 0.3s, transform 0.4s;
+        }
+        .serv-card.activo .serv-card-arrow {
+            background: var(--primary);
+            color: white;
+            transform: rotate(180deg);
+        }
+        .serv-card-tag {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* PANEL DESPLEGABLE */
+        .serv-panel-wrap {
+            grid-column: 1 / -1;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
+        }
+        .serv-panel-wrap.open { max-height: 900px; }
+
+        .serv-panel {
+            background: #fff;
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .serv-panel-header {
+            background: var(--primary);
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .serv-panel-header h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+        .serv-panel-header p { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; }
+
+        .subservicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0;
+        }
+        .subservicio-card {
+            padding: 28px 28px;
+            border-right: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .subservicio-card:hover { background: #f8fbfc; }
+        .subservicio-card:last-child { border-right: none; }
+
+        .subservicio-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .subservicio-card p { font-size: 0.86rem; color: var(--gray); line-height: 1.65; }
+        .subservicio-tag-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+        .subservicio-tag {
+            background: #eef7f9;
+            color: var(--primary);
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        .servicio-bloque-footer {
+            padding: 18px 30px;
+            background: #f8fbfc;
+            border-top: 1px solid #eef0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .servicio-bloque-footer p { font-size: 0.85rem; color: var(--gray); }
+        .btn-cotizar {
+            background: var(--orange);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .clas-despl-img {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+        .clas-despl-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .clas-despl-img img,
+        .clas-despl-img img { transform: scale(1.06); }
+
+
+        
+        .btn-cotizar:hover { background: #e04a10; transform: translateY(-2px); }
+
+        @media (max-width: 900px) {
+            .servicios-cards-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* RESPONSIVE */
+        @media (max-width:1024px) {
+            .servicios-home-grid, .catalogo-grid, .testimonios-grid { grid-template-columns:repeat(2,1fr); }
+            .proyectos-grid { grid-template-columns:repeat(2,1fr); }
+            .stats-bar { grid-template-columns:repeat(2,1fr); }
+            .nosotros-inner { grid-template-columns:1fr; gap:40px; }
+            .ubicacion-grid, .contacto-inner { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr 1fr; }
+            .tl-stats { grid-template-columns:repeat(2,1fr); }
+            .tl-stat-item:nth-child(2) { border-right:none; }
+            .tl-stat-item { border-bottom:1px solid rgba(125,193,14,.1); }
+            .tl-stat-item:nth-child(3){ border-bottom:none; }
+            .tintalift-servicios { grid-template-columns:1fr; }
+        }
+        @media (max-width:768px) {
+            .header { padding:0 16px; }
+            .nav-links { display:none; }
+            .hero-content { margin-left:20px; margin-right:20px; }
+            .hero-content h1 { font-size:clamp(2.4rem,9vw,3.5rem); }
+            .hero-buttons { flex-direction:column; gap:10px; align-items:flex-start; }
+            .menu-grid { grid-template-columns:repeat(3,1fr); }
+            .servicios-home-grid, .catalogo-grid, .testimonios-grid, .proyectos-grid { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr; gap:28px; }
+            /* Stats bar */
+            .stats-bar { grid-template-columns:repeat(2,1fr); gap:0; }
+            .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:20px; }
+            /* Nosotros */
+            .nosotros-inner { grid-template-columns:1fr; }
+            .nosotros-visual { display:none; }
+            .nosotros-valores { grid-template-columns:repeat(2,1fr); }
+            /* Proyectos */
+            .proyectos-grid { grid-template-columns:1fr; }
+            .proyecto img { height:220px; }
+            /* Catalogo */
+            .catalogo-grid { grid-template-columns:1fr; }
+            /* TitanLift */
+            .tl-stats { grid-template-columns:repeat(2,1fr); }
+            .tintalift-servicios { grid-template-columns:1fr; }
+            .tintalift-cta-inner { flex-direction:column; text-align:center; }
+            .tintalift-cta-btns { justify-content:center; }
+            /* Ubicación */
+            .ubicacion-grid { grid-template-columns:1fr; }
+            .mapa iframe { height:260px; }
+            /* Contacto */
+            .contacto-inner { grid-template-columns:1fr; gap:36px; }
+            /* Marcas */
+            .marcas-row { gap:12px; }
+            .marca-item { padding:12px 18px; font-size:.9rem; }
+            /* Testimonios */
+            .testimonios-grid { grid-template-columns:1fr; }
+            /* Footer */
+            .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+            /* WhatsApp flotante */
+            .whatsapp { bottom:18px; right:18px; width:52px; height:52px; }
+        }
+        @media (max-width:480px) {
+            .menu-grid { grid-template-columns:repeat(2,1fr); }
+            .nosotros-valores { grid-template-columns:1fr; }
+            .hero-content { margin-left:16px; }
+            .hero-eyebrow { font-size:.65rem; }
+            .tl-stats { grid-template-columns:1fr 1fr; }
+            .tintalift-hero { padding:60px 0 50px; }
+            .tintalift-title { font-size:clamp(3rem,15vw,5rem); }
+            .tl-hero-btns { flex-direction:column; align-items:center; }
+            .btn-tintalift, .btn-tintalift-outline { width:100%; max-width:280px; text-align:center; }
+            .contacto-form { padding:24px 20px; }
+            .proyectos-grid { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr; }
+        }
+       
+
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <a href="index.html" class="logo-area">
+        <img src="img/lofo.png" alt="Electromec" onerror="this.style.display='none'">
+        <small class="by"> Tacna, Perú</small>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#" class="activo">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="catalogo.html">Productos</a></li>
+        <li><a href="titanlift.html"><img src="img/iconotintan.png" alt="TitanLift" style="height:22px;vertical-align:middle;   " loading="lazy"></a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="menu-boton" onclick="abrirMenu()">MENU</div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay" onclick="cerrarMenu()"></div>
+
+<!-- PANEL MENÚ LATERAL -->
+<div id="panelMenu" class="panel-menu">
+
+    <!-- Columna izquierda: mosaico visual -->
+    <div class="menu-visual">
+        <div class="menu-visual-item" onclick="location.href='servicios.html'">
+            <img src="img/carrusel1.jpg" alt="servicios" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+            <div class="menu-visual-label">Servicios</div>
+            <div class="menu-visual-logo"><img src="img/logo.3.png" alt="" onerror="this.style.display='none'" loading="lazy"></div>
+        </div>
+        <div class="menu-visual-item" onclick="location.href='catalogo.html'">
+            <img src="img/carrusel3.jpeg" alt="Productos" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+            <div class="menu-visual-label">Productos</div>
+            <div class="menu-visual-logo"><img src="img/logo.3.png" alt="" onerror="this.style.display='none'" loading="lazy"></div>
+        </div>
+    </div>
+
+    <!-- Columna derecha: navegación -->
+    <div class="menu-nav">
+        <div class="menu-nav-top">
+            <button class="cerrar-menu" onclick="cerrarMenu()">Cerrar</button>
+        </div>
+
+        <nav class="menu-nav-links">
+            <a href="index.html" class="menu-nav-link activo">Inicio</a>
+            <a href="nosotros.html" class="menu-nav-link" onclick="cerrarMenu()">Nosotros</a>
+            <a href="servicios.html" class="menu-nav-link">Servicios</a>
+            <a href="#catalogo"     class="menu-nav-link" onclick="cerrarMenu()">Productos</a>
+            <a href="titanlift.html" class="menu-nav-link tintalift-link"><img src="img/TITANLIFTS-removebg-preview.png" alt="TitanLift" style="height:20px;vertical-align:middle;filter:brightness(0) saturate(100%) invert(62%) sepia(80%) saturate(500%) hue-rotate(50deg);" loading="lazy"></a>
+            <a href="#contacto"     class="menu-nav-link" onclick="cerrarMenu()">Contáctanos</a>
+        </nav>
+
+        <div class="menu-nav-cta">
+            <a href="#contacto" class="btn-menu-cta" onclick="cerrarMenu()">Solicita tu presupuesto</a>
+            <div class="menu-nav-contact">
+                <a href="mailto:contacto@electromec.com">contacto@electromec.com</a>
+                <a href="tel:+51971022550">+51 971 022 550</a>
+            </div>
+            <div class="menu-nav-social">
+                <a href="#" class="social-btn" aria-label="Facebook" title="Facebook">f</a>
+                <a href="#" class="social-btn" aria-label="LinkedIn" title="LinkedIn">in</a>
+                <a href="https://wa.me/51971022550" target="_blank" class="social-btn">wa</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-slider">
+        <div class="slide active"><img src="img/carrusel4.jpg" alt="Electromec industrial"></div>
+        <div class="slide"><img src="img/carrusel2.jpg" alt="Instalaciones eléctricas" loading="lazy"></div>
+        <div class="slide"><img src="img/carrusel3.jpeg" alt="Tableros industriales" loading="lazy"></div>
+        
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">Tacna, Perú </p>
+        <h1>EXCELENCIA<br>EN <span>SOLUCIONES</span><br><span class="naranja">ELÉCTRICAS</span></h1>
+        <p class="hero-sub">Especialistas en instalaciones industriales, diseño y fabricación de tableros eléctricos, sistemas de elevación (ascensores) y mantenimiento técnico de alta precisión. </p>
+        <div class="hero-buttons">
+            <a href="servicios.html" class="btn-principal">Nuestros servicios</a>
+            <a href="#catalogo" class="btn-secundario">Ver catálogo</a>
+        </div>
+    </div>
+    <div class="slide-dots">
+        <div class="dot active" onclick="irSlide(0)"></div>
+        <div class="dot" onclick="irSlide(1)"></div>
+        <div class="dot" onclick="irSlide(2)"></div>
+    </div>
+
+<!-- TARJETAS FLOTANTES -->
+    <div class="hero-floating-cards">
+        <a href="servicios.html" class="float-card">
+            <div class="float-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div class="float-card-text">
+                <div class="float-card-label">Explora</div>
+                <div class="float-card-title">Servicios</div>
+            </div>
+            <span class="float-card-arrow">&#8250;</span>
+        </a>
+        <a href="catalogo.html" class="float-card">
+            <div class="float-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+            <div class="float-card-text">
+                <div class="float-card-label">Ver</div>
+                <div class="float-card-title">Productos</div>
+            </div>
+            <span class="float-card-arrow">&#8250;</span>
+        </a>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stat-item anim anim-delay-1"><div class="stat-num">100%</div><div class="stat-label">Tacneños</div></div>
+    <div class="stat-item anim anim-delay-2"><div class="stat-num">150+</div><div class="stat-label">Proyectos realizados</div></div>
+    <div class="stat-item anim anim-delay-3"><div class="stat-num">6</div><div class="stat-label">Líneas de servicio</div></div>
+    <div class="stat-item anim anim-delay-4"><div class="stat-num">100%</div><div class="stat-label">Garantía de calidad</div></div>
+</div>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="nosotros">
+    <div class="container">
+        <div class="nosotros-inner">
+            <div class="nosotros-texto anim">
+                <span class="section-tag">Quiénes somos</span>
+                <h2>SOMOS <span>ELECTROMEC</span></h2>
+                <p>Somos una empresa tacneña especializada en soluciones eléctricas e industriales, orientada a atender al sector empresarial, institucional e industrial de la zona sur del país. 
+                Nos distinguimos por la alta calidad técnica de nuestros trabajos, el cumplimiento de plazos y nuestro firme compromiso con la seguridad en cada instalación que realizamos.</p> 
+                <p>Trabajamos bajo principios claros que garantizan resultados confiables: 
+                Seguridad: Cumplimiento de todas las normativas eléctricas vigentes. 
+                Calidad: Uso de materiales certificados y mano de obra especializada. 
+                Eficiencia: Soluciones optimizadas que reducen costos operativos. 
+                Compromiso: Acompañamiento integral en cada proyecto, desde el inicio hasta su finalización.</p>
+                <div class="nosotros-valores">
+                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Seguridad</h4><p>Cumplimos todas las normativas eléctricas vigentes.</p></div></div>
+                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Eficiencia</h4><p>Soluciones optimizadas para reducir costos operativos.</p></div></div>
+                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Calidad</h4><p>Materiales certificados y mano de obra experta.</p></div></div>
+                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Compromiso</h4><p>Acompañamos cada proyecto de inicio a fin.</p></div></div>
+                </div>
+            </div>
+            <div class="nosotros-visual anim anim-delay-2">
+                <div class="nosotros-img-wrap">
+                    <img src="img/page1.png" alt="ELECTROMEC" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS RESUMEN -->
+<section id="servicios" class="servicios-home">
+    <div class="container">
+        <div class="servicios-home-header anim">
+            <span class="section-tag">Lo que hacemos</span>
+            <h2>NUESTROS SERVICIOS</h2>
+            <p>Soluciones eléctricas e industriales a la medida, con altos estándares técnicos, seguridad y máxima eficiencia.</p>
+        </div>
+        <!-- GRID DE TARJETAS -->
+    <div class="servicios-cards-grid" id="serv-cards-grid">
+
+        <!-- TARJETA 1: Instalaciones Eléctricas -->
+        <div class="serv-card anim anim-delay-1" onclick="toggleServCard('panel-instalaciones', this)">
+            <span class="serv-card-num">01</span>
+            <div class="serv-card-img">
+                <img src="img/instalaciones-electricas-industriales.webp" alt="Instalaciones Eléctricas" onerror="this.src='img/cableado.webp'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Instalaciones Eléctricas</h3>
+                <p>Diseño, montaje y puesta en marcha de sistemas eléctricos con los más altos estándares de seguridad.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- TARJETA 2: Máquinas Eléctricas -->
+        <div class="serv-card anim anim-delay-2" onclick="toggleServCard('panel-maquinas', this)">
+            <span class="serv-card-num">02</span>
+            <div class="serv-card-img">
+                <img src="img/electricidad-industrial-1760980416.jpg" alt="Máquinas Eléctricas" onerror="this.src='img/electro.png'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Máquinas Eléctricas</h3>
+                <p>Instalación y mantenimiento integral de equipos y maquinaria eléctrica industrial.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- TARJETA 3: Automatización y Control -->
+        <div class="serv-card anim anim-delay-3" onclick="toggleServCard('panel-automatizacion', this)">
+            <span class="serv-card-num">03</span>
+            <div class="serv-card-img">
+                <img src="img/automatizacion.jpg" alt="Automatización y Control" onerror="this.src='img/tablero.jpg'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Automatización y Control</h3>
+                <p>Sistemas inteligentes de control y automatización para procesos industriales.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- PANEL 1: Instalaciones Eléctricas -->
+        <div class="serv-panel-wrap" id="panel-instalaciones">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Instalaciones Eléctricas</h3>
+                        <p>Diseño, montaje y puesta en marcha de sistemas eléctricos con los más altos estándares de seguridad.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                         <img src="img/instalaciones-residenciales.jpg" alt="residencial">
+                        </div>
+                         <h4>Instalaciones Residenciales</h4>
+                        <p>Instalación completa de sistemas eléctricos en viviendas, departamentos y conjuntos habitacionales. Incluye tableros domiciliarios, cableado, tomacorrientes, iluminación y sistemas de protección.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Viviendas</span>
+                            <span class="subservicio-tag">Departamentos</span>
+                            <span class="subservicio-tag">Urbanizaciones</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                        <img src="img/images (1).jpg" alt="industriales">
+                        </div>
+                        <h4>Instalaciones Industriales</h4>
+                        <p>Proyectos eléctricos de media y baja tensión para plantas, fábricas y almacenes industriales. Tendido de cables, ductos, bandejas portacables y conexiones a maquinaria.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Plantas</span>
+                            <span class="subservicio-tag">Fábricas</span>
+                            <span class="subservicio-tag">Media tensión</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Cumplimiento del Código Nacional de Electricidad y normativas vigentes.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: Máquinas Eléctricas -->
+        <div class="serv-panel-wrap" id="panel-maquinas">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Máquinas Eléctricas</h3>
+                        <p>Instalación y mantenimiento integral de equipos y maquinaria eléctrica industrial.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                            <img src="img/Mtto_en_instalaciones_electricas.jpg" alt="instalacioens-electricas">
+                        </div>
+                        <h4>Instalación de Máquinas</h4>
+                        <p>Instalación técnica de motores eléctricos, bombas, compresores, ventiladores y equipos industriales. Incluye conexionado, pruebas de funcionamiento y puesta en marcha.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Motores</span>
+                            <span class="subservicio-tag">Bombas</span>
+                            <span class="subservicio-tag">Compresores</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                            <img src="img/preventivo-correctivo.jpg" alt="preventivo-correctivo">
+                        </div>
+                        <h4>Mantenimiento Preventivo y Correctivo</h4>
+                        <p>Programas de mantenimiento periódico para prolongar la vida útil de equipos. Diagnóstico de fallas, reparación y reemplazo de componentes para evitar paradas no planificadas.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Preventivo</span>
+                            <span class="subservicio-tag">Correctivo</span>
+                            <span class="subservicio-tag">Diagnóstico</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Atención rápida ante emergencias. Técnicos certificados disponibles.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: Automatización y Control -->
+        <div class="serv-panel-wrap" id="panel-automatizacion">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Automatización y Control</h3>
+                        <p>Sistemas inteligentes de control y automatización para procesos industriales.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                    <div class="clas-despl-img">
+                        <img src="img/TABLERO-ELECTRICO-EINSAC.jpg" alt="tablero">
+                    </div>
+                        <h4>Armado de Tableros de Automatización</h4>
+                        <p>Diseño y fabricación de tableros eléctricos de control y automatización a medida: PLCs, variadores de frecuencia, relés, contactores y HMI. Integración con sistemas SCADA.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">PLC</span>
+                            <span class="subservicio-tag">SCADA</span>
+                            <span class="subservicio-tag">HMI</span>
+                            <span class="subservicio-tag">A medida</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                    <img src="img/IMG-nota-Mantenimiento-Electrico-Industrial-edited.jpg" alt="tablero">
+                        </div>
+                        <h4>Mant. a Sistemas de Automatización</h4>
+                        <p>Mantenimiento preventivo y correctivo de sistemas de control automatizado. Actualización de firmware, calibración de sensores, revisión de actuadores y optimización de procesos.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Preventivo</span>
+                            <span class="subservicio-tag">Correctivo</span>
+                            <span class="subservicio-tag">Calibración</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Soluciones personalizadas según el proceso y necesidad de tu planta.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /servicios-cards-grid -->
+        <div class="servicios-ver-mas anim"><a href="servicios.html" class="btn-ver-mas">Ver todos los servicios</a></div>
+    </div>
+</section>
+
+<!-- PROYECTOS -->
+<section class="proyectos">
+    <div class="container">
+        <div class="proyectos-header anim">
+            <span class="section-tag naranja">Portafolio</span>
+            <h2>Portafolio de proyectos</h2>
+            <p>Selección de trabajos ejecutados en la región, que evidencian nuestra capacidad técnica, cumplimiento y estándares de calidad. </p>
+        </div>
+        <div class="proyectos-grid">
+            <div class="proyecto anim anim-delay-1">
+                <img src="img/sc.png" alt="Proyecto 1" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+                <div class="proyecto-overlay"><h3>Instalación Eléctrica Industrial</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+            </div>
+            <div class="proyecto anim anim-delay-2">
+                <img src="img/sd.jpg" alt="Proyecto 2" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+                <div class="proyecto-overlay"><h3>Tablero de Control Industrial</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+            </div>
+            <div class="proyecto anim anim-delay-3">
+                <img src="img/sf.jpg" alt="Proyecto 3" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
+                <div class="proyecto-overlay"><h3>Sistema de Automatización</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section id="catalogo" class="catalogo">
+    <div class="container">
+        <div class="catalogo-header anim">
+            <span class="section-tag">Catálogo</span>
+            <h2>PRODUCTOS Y MATERIALES</h2>
+            <p>Ofrecemos equipos y materiales eléctricos de calidad industrial, cuidadosamente seleccionados para garantizar seguridad, eficiencia y alto rendimiento en cada proyecto.</p>
+        </div>
+        <div class="catalogo-grid">
+            <div class="product-card anim anim-delay-1">
+                <img src="img/tablero.jpg" alt="tablero" loading="lazy">
+                <div class="product-body">
+                    <h4>Tablero Industrial</h4>
+                    <p class="product-desc">Tablero de distribución eléctrica para uso industrial, certificado y fabricado a medida según los requerimientos del proyecto. </p>
+                    <button class="btn-cotizar" onclick="cotizarWhatsApp('Tablero Industrial', 950)">Cotizar por WhatsApp</button>
+                </div>
+            </div>
+            <div class="product-card anim anim-delay-2">
+                <img src="img/interruptor.jpg" alt="interruptor" loading="lazy">
+                <div class="product-body">
+                    <h4>Interruptor Trifásico</h4>
+                    <p class="product-desc">Interruptor termomagnético trifásico de alta capacidad para protección de circuitos eléctricos industriales.</p>
+                    <button class="btn-cotizar" onclick="cotizarWhatsApp('Interruptor Trifásico', 120)">Cotizar por WhatsApp</button>
+                </div>
+            </div>
+            <div class="product-card anim anim-delay-3">
+                <img src="img/cableado.webp" alt="cableado" loading="lazy">
+                <div class="product-body">
+                    <h4>Cableado Profesional</h4>
+                    <p class="product-desc">Cable eléctrico industrial certificado, disponible en diferentes secciones y calibres según la necesidad del proyecto.</p>
+                    <button class="btn-cotizar" onclick="cotizarWhatsApp('Cableado Profesional', 80)">Cotizar por WhatsApp</button>
+                </div>
+            </div>
+        </div>
+        <a href="catalogo.html" class="btn-secundario">VER MAS</a>
+    </div>
+</section>
+
+<!-- TINTALIFT -->
+<section id="tintalift" class="tintalift-section">
+
+    <div class="tintalift-hero">
+        <div class="container">
+            <div class="tintalift-hero-inner">
+                <div class="tintalift-badge anim">Marca especializada en sistemas de elevación vertical en Tacna, Perú. </div>
+                <h2 class="tintalift-title anim anim-delay-1">
+                    <span class="tinta">TITAN</span><span class="lift">LIFT</span>
+                </h2>
+                <p class="tintalift-sub anim anim-delay-2">Ofrecemos servicios de mantenimiento, instalación, venta y suministro de repuestos para ascensores y montacargas, con altos estándares de seguridad y confiabilidad.</p>
+                <div class="tl-hero-btns anim anim-delay-3">
+                    <a href="titanlift.html" class="btn-tintalift">Ver página TitanLift</a>
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20TitánLift" target="_blank" class="btn-tintalift-outline">Solicitar por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Stats TitanLift -->
+        <div class="tl-stats anim">
+            <div class="tl-stat-item">
+                <strong>+30</strong>
+                <span>Equipos mantenidos</span>
+            </div>
+            <div class="tl-stat-item">
+                <strong>100%</strong>
+                <span>Equipos certificados</span>
+            </div>
+            <div class="tl-stat-item">
+                <strong>24/7</strong>
+                <span>Soporte de emergencia</span>
+            </div>
+            <div class="tl-stat-item">
+                <strong>5★</strong>
+                <span>Satisfacción del cliente</span>
+            </div>
+        </div>
+
+        <!-- Servicios exactos -->
+        <div class="tl-servicios-titulo anim">
+            <span class="section-tag" style="background:var(--tl-green);color:#000">Nuestros Servicios</span>
+            <h3>TODO LO QUE HACE <span style="color:var(--tl-green)">TITAN LIFT</span></h3>
+        </div>
+
+        <div class="tintalift-servicios">
+            <div class="tl-card anim anim-delay-1">
+                <span class="tl-card-num">01</span>
+                <div class="tl-card-icon"></div>
+                <h4>Mantenimiento Preventivo y Correctivo</h4>
+                <p>Servicio técnico integral para equipos de elevación vertical como ascensores y montacargas. Incluye revisiones periódicas, diagnóstico y reparación de fallas, garantizando una operación continua, segura y eficiente.</p>
+                <a href="https://wa.me/51971022550?text=Hola,%20necesito%20mantenimiento%20de%20mi%20equipo%20de%20elevación" target="_blank" class="tl-card-btn">Solicitar mantenimiento</a>
+            </div>
+            <div class="tl-card anim anim-delay-2">
+                <span class="tl-card-num">02</span>
+                <div class="tl-card-icon"></div>
+                <h4>Venta de Repuestos para Ascensores</h4>
+                <p>Suministro de repuestos originales y compatibles para ascensores de distintas marcas. Contamos con puertas, motores, variadores, botoneras y más, con entrega rápida en Tacna para reducir tiempos de parada. </p>
+                <a href="https://wa.me/51971022550?text=Hola,%20necesito%20repuestos%20para%20mi%20ascensor" target="_blank" class="tl-card-btn">Consultar repuestos</a>
+            </div>
+            <div class="tl-card anim anim-delay-3">
+                <span class="tl-card-num">03</span>
+                <div class="tl-card-icon"></div>
+                <h4>Venta e Instalación de Montacargas y Ascensores</h4>
+                <p>Suministro e instalación completa de sistemas de elevación nuevos para edificios residenciales, comerciales e industriales. Incluye asesoría técnica, instalación certificada y puesta en marcha del equipo.</p>
+                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20instalar%20un%20ascensor%20o%20montacargas" target="_blank" class="tl-card-btn">Solicitar instalación</a>
+            </div>
+        </div>
+
+        <div class="tintalift-cta anim">
+            <div class="tintalift-cta-inner">
+                <div>
+                    <h3>¿Tu equipo necesita atención?</h3>
+                    <p>Un técnico especialista evaluará tu equipo sin costo en Tacna.</p>
+                </div>
+                <div class="tintalift-cta-btns">
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-tl-wa">WhatsApp</a>
+                    <a href="titanlift.html" class="btn-tl-form">Ver más de TitanLift</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- TESTIMONIOS -->
+<section class="testimonios">
+    <div class="container">
+        <div class="testimonios-header anim">
+            <span class="section-tag">Testimonios</span>
+            <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
+        </div>
+        <div class="testimonios-grid">
+            <div class="testimonio-card anim anim-delay-1">
+                <div class="testimonio-verificado">Verificado</div>
+                <div class="testimonio-stars">★★★★★</div>
+                <p>"Excelente servicio eléctrico industrial. El equipo de ELECTROMEC demostró gran profesionalismo y terminaron el trabajo antes del plazo acordado."</p>
+                <div class="testimonio-autor"><div class="autor-avatar">I</div><div><div class="autor-nombre">Industrias del Sur S.A.C.</div><div class="autor-empresa">Sector industrial · Tacna</div></div></div>
+            </div>
+            <div class="testimonio-card anim anim-delay-2">
+                <div class="testimonio-verificado">Verificado</div>
+                <div class="testimonio-stars">★★★★★</div>
+                <p>"Trabajo rápido y muy profesional. Instalaron nuestro tablero eléctrico sin interrumpir las operaciones. Totalmente recomendados."</p>
+                <div class="testimonio-autor"><div class="autor-avatar">C</div><div><div class="autor-nombre">Constructora Andina E.I.R.L.</div><div class="autor-empresa">Construcción · Tacna</div></div></div>
+            </div>
+            <div class="testimonio-card anim anim-delay-3">
+                <div class="testimonio-verificado">Verificado</div>
+                <div class="testimonio-stars">★★★★★</div>
+                <p>"Instalaron el ascensor de nuestro edificio con total seguridad y cumpliendo con todas las certificaciones requeridas. Muy satisfechos."</p>
+                <div class="testimonio-autor"><div class="autor-avatar">E</div><div><div class="autor-nombre">Edificio Residencial San Martín</div><div class="autor-empresa">Inmobiliaria · Tacna</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARCAS -->
+<section class="marcas">
+    <div class="container">
+        <h3>Marcas con las que trabajamos</h3>
+        <div class="marcas-row">
+            <div class="marca-item">SCHNEIDER</div>
+            <div class="marca-item">LEGRAND</div>
+            <div class="marca-item">ABB</div>
+            <div class="marca-item">TITAN LIFT</div>
+            <div class="marca-item">BTICINO</div>
+            <div class="marca-item">INDECO</div>
+        </div>
+    </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="ubicacion">
+    <div class="container">
+        <div class="ubicacion-header anim">
+            <span class="section-tag">Dónde estamos</span>
+            <h2>NUESTRA UBICACIÓN</h2>
+        </div>
+        <div class="ubicacion-grid">
+            <div class="info-ubicacion anim">
+                <h3>ELECTROMEC</h3>
+                <div class="info-row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><p><strong>Dirección</strong>Calle 1 de Septiembre Mz.Ñ - Lt.3, Tacna, Perú</p></div>
+                <div class="info-row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><p><strong>Teléfono</strong>+51 971 022 550</p></div>
+                <div class="info-row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><p><strong>Email</strong>contacto@electromec.com</p></div>
+                <div class="info-row"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p><strong>Horario de atención</strong>Lunes a Viernes: 8:00 AM – 6:00 PM<br>Sábados: 8:00 AM – 1:00 PM</p></div>
+            </div>
+            <div class="mapa anim anim-delay-2">
+                <iframe src="https://maps.google.com/maps?q=Calle+1+de+Septiembre+Mz.%C3%91+Lt.3+Tacna+Peru&output=embed&hl=es" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contacto">
+    <div class="container">
+        <div class="contacto-inner">
+            <div class="contacto-texto anim">
+                <span class="section-tag naranja">Contáctanos</span>
+                <h2>¿TIENES UN<br><span>PROYECTO</span><br>EN MENTE?</h2>
+                <p>Cuéntanos lo que necesitas y nuestro equipo técnico te brindará la mejor solución eléctrica para tu empresa o proyecto.</p>
+                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" target="_blank" class="contacto-wa">Escríbenos al WhatsApp</a>
+            </div>
+            <div class="contacto-form anim anim-delay-2">
+                <h3>Solicitar información</h3>
+                <form id="formContacto" novalidate>
+                    <div class="form-group"><label>Nombre completo</label><input id="fc-nombre" type="text" placeholder="Tu nombre" required><span class="form-error-msg">Por favor ingresa tu nombre.</span></div>
+                    <div class="form-group"><label>Teléfono / WhatsApp</label><input id="fc-telefono" type="tel" placeholder="+51 9XX XXX XXX" required><span class="form-error-msg">Ingresa un teléfono válido.</span></div>
+                    <div class="form-group"><label>Correo electrónico</label><input id="fc-email" type="email" placeholder="correo@empresa.com"><span class="form-error-msg">Correo no válido.</span></div>
+                    <div class="form-group">
+                        <label>Servicio de interés</label>
+                        <select id="fc-servicio" required>
+                            <option value="">Seleccionar servicio...</option>
+                            <option>Instalaciones Eléctricas</option>
+                            <option>Mantenimiento</option>
+                            <option>Tableros Eléctricos</option>
+                            <option>Ascensores</option>
+                            <option>Modernización</option>
+                            <option>Montacargas</option>
+                            <option>Otro</option>
+                        </select>
+                        <span class="form-error-msg">Selecciona un servicio.</span>
+                    </div>
+                    <div class="form-group"><label>Mensaje</label><textarea id="fc-mensaje" placeholder="Describe tu proyecto o solicitud..." required></textarea><span class="form-error-msg">Por favor escribe tu mensaje.</span></div>
+                    <button type="submit" class="btn-enviar" id="btnEnviar">Enviar por WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="logo-text">ELECTRO<span>MEC</span></span>
+                <p>Empresa especializada en soluciones eléctricas e industriales en Tacna, Perú. Calidad, seguridad y compromiso en cada proyecto.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegación</h4>
+                <a href="index.html">Inicio</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="#catalogo">Productos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p style="display:flex;align-items:flex-start;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Calle 1 de Septiembre Mz.Ñ - Lt.3, Tacna</span></p>
+                <p style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+51 971 022 550</span></p>
+                <p style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>contacto@electromec.com</span></p>
+                <p style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);flex-shrink:0;margin-top:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Lun–Vie 8am – 6pm</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 ELECTROMEC – Todos los derechos reservados</span>
+            <span>Tacna, Perú</span>
+        </div>
+    </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" class="whatsapp" target="_blank">
+    <img src="img/whatsapp (1).png" alt="WhatsApp" onerror="this.src='img/whatsapp.png'" loading="lazy">
+</a>
+
+<script>
+    /* CARRUSEL */
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+    let idx = 0, timer;
+    function irSlide(n) {
+        slides[idx].classList.remove('active'); dots[idx].classList.remove('active');
+        idx = n;
+        slides[idx].classList.add('active'); dots[idx].classList.add('active');
+        clearInterval(timer); timer = setInterval(siguiente, 5000);
+    }
+    function siguiente() { irSlide((idx + 1) % slides.length); }
+    timer = setInterval(siguiente, 5000);
+
+    /* MENÚ */
+    function abrirMenu() {
+        document.getElementById('panelMenu').classList.add('activo');
+        document.getElementById('menuOverlay').classList.add('activo');
+        document.body.style.overflow = 'hidden';
+    }
+    function cerrarMenu() {
+        document.getElementById('panelMenu').classList.remove('activo');
+        document.getElementById('menuOverlay').classList.remove('activo');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
+
+    /* WHATSAPP COTIZAR */
+    function cotizarWhatsApp(producto, precio) {
+        const msg = `Hola, estoy interesado en cotizar: ${producto} (precio referencial S/ ${precio})`;
+        window.open(`https://wa.me/51971022550?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    /* FORMULARIO → WHATSAPP con validación */
+    document.getElementById('formContacto').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valido = true;
+
+        // Helper: marca error o limpia
+        function validarCampo(id, condicion) {
+            const input = document.getElementById(id);
+            const msg   = input?.parentElement?.querySelector('.form-error-msg');
+            if (!condicion) {
+                input?.classList.add('error');
+                if (msg) msg.classList.add('visible');
+                valido = false;
+            } else {
+                input?.classList.remove('error');
+                if (msg) msg.classList.remove('visible');
+            }
+        }
+
+        const nombre   = document.getElementById('fc-nombre').value.trim();
+        const telefono = document.getElementById('fc-telefono').value.trim();
+        const email    = document.getElementById('fc-email').value.trim();
+        const servicio = document.getElementById('fc-servicio').value;
+        const mensaje  = document.getElementById('fc-mensaje').value.trim();
+
+        validarCampo('fc-nombre',   nombre.length >= 2);
+        validarCampo('fc-telefono', /^[\d\s\+\-]{7,15}$/.test(telefono));
+        if (email) validarCampo('fc-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+        validarCampo('fc-servicio', servicio !== '');
+        validarCampo('fc-mensaje',  mensaje.length >= 5);
+
+        if (!valido) return;
+
+        // Estado de carga — previene doble envío
+        const btn = document.getElementById('btnEnviar');
+        btn.disabled = true;
+        btn.textContent = 'Abriendo WhatsApp…';
+
+        let txt = "Hola ELECTROMEC, les escribo desde su página web con la siguiente consulta:%0A%0A";
+        txt += "*Nombre:* " + nombre + "%0A";
+        txt += "*Teléfono:* " + telefono + "%0A";
+        if (email)    txt += "*Correo:* " + email + "%0A";
+        if (servicio) txt += "*Servicio de interés:* " + servicio + "%0A";
+        txt += "%0A*Mensaje:*%0A" + encodeURIComponent(mensaje);
+
+        window.open("https://wa.me/51971022550?text=" + txt, "_blank");
+
+        setTimeout(() => {
+            this.reset();
+            btn.disabled = false;
+            btn.textContent = 'Enviar por WhatsApp';
+            // Limpiar errores
+            document.querySelectorAll('.form-error-msg').forEach(m => m.classList.remove('visible'));
+            document.querySelectorAll('.error').forEach(m => m.classList.remove('error'));
+        }, 2000);
+    });
+
+    // Limpiar error al escribir
+    document.querySelectorAll('#formContacto input, #formContacto textarea, #formContacto select')
+        .forEach(el => el.addEventListener('input', function() {
+            this.classList.remove('error');
+            const msg = this.parentElement?.querySelector('.form-error-msg');
+            if (msg) msg.classList.remove('visible');
+        }));
+
+  // Toggle tarjetas Electromec (card + panel desplegable)
+    function toggleServCard(panelId, cardEl) {
+        const panel = document.getElementById(panelId);
+        const allCards = document.querySelectorAll('.serv-card');
+        const allPanels = document.querySelectorAll('.serv-panel-wrap');
+        const isOpen = panel.classList.contains('open');
+
+        // Cerrar todos
+        allCards.forEach(c => c.classList.remove('activo'));
+        allPanels.forEach(p => p.classList.remove('open'));
+
+        // Si no estaba abierto, abrir este
+        if (!isOpen) {
+            cardEl.classList.add('activo');
+            panel.classList.add('open');
+            // Scroll suave al panel
+            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+        }
+    }
+    const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1 }
+    );
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

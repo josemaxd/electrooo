@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITÁN LIFT | Soluciones en Elevación Vertical – Tacna, Perú</title>
+    <meta name="description" content="Titán Lift – Mantenimiento preventivo y correctivo de ascensores, venta e instalación de montacargas y repuestos. Tacna, Perú.">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary:   rgb(0, 54, 68);
+            --primary-d: rgb(0, 35, 45);
+            --primary-l: rgb(0, 75, 95);
+            --cyan:      #00bcd4;
+            --cyan-d:    #0097a7;
+            --orange:    #ff5a1f;
+            --light:     #f2f5f6;
+            --gray:      #607080;
+            /* TitánLift */
+            --tl-green:  #7dc10e;
+            --tl-green-d:#5e9a00;
+            --tl-green-l:#a8e033;
+            --tl-black:  #0f0f0f;
+            --tl-dark:   #141414;
+            --tl-dark2:  #1e1e1e;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Barlow',sans-serif; line-height:1.6; background:#fff; color:#2a3a40; overflow-x:hidden; }
+        img  { display:block; max-width:100%; }
+        a    { text-decoration:none; color:inherit; }
+        .container { width:90%; max-width:1280px; margin:0 auto; }
+
+        .anim { opacity:0; transform:translateY(28px); transition:opacity .6s ease, transform .6s ease; }
+        .anim.visible { opacity:1; transform:translateY(0); }
+        .anim-delay-1 { transition-delay:.07s; }
+        .anim-delay-2 { transition-delay:.14s; }
+        .anim-delay-3 { transition-delay:.21s; }
+        .anim-delay-4 { transition-delay:.28s; }
+        .anim-delay-5 { transition-delay:.35s; }
+        .anim-delay-6 { transition-delay:.42s; }
+
+        /* ══ HEADER ══════════════════════════════════ */
+        .header {
+            background: var(--tl-black);
+            position: sticky; top:0; z-index:1000;
+            height: 70px; display:flex; align-items:center; justify-content:space-between;
+            padding: 0 48px;
+            box-shadow: 0 2px 20px rgba(0,0,0,.5);
+            border-bottom: 2px solid var(--tl-green);
+        }
+       .logo-area {
+        display: flex;
+        flex-direction: column; /* 👈 clave: vertical */
+        align-items: center;    /* centra */
+        justify-content: center;
+        gap: 2px;
+        }
+
+        .logo-area img {
+        height: 39px; /* ajusta tamaño del logo */
+        }
+
+        .logo-area .by {
+        font-size: .65rem;
+        color: rgba(255,255,255,.35);
+        letter-spacing: .12em;
+        text-align: center;
+        margin-top: 2px;
+        }
+
+        .nav-links { display:flex; gap:30px; list-style:none; }
+        .nav-links a {
+            color:rgba(255,255,255,.6); font-size:.82rem; font-weight:500;
+            letter-spacing:.1em; text-transform:uppercase; transition:color .25s;
+            position:relative; padding-bottom:2px;
+        }
+        .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--tl-green); transition:width .3s; }
+        .nav-links a:hover, .nav-links a.activo { color:white; }
+        .nav-links a:hover::after, .nav-links a.activo::after { width:100%; }
+
+        .nav-electromec {
+            background: rgba(0,54,68,.7);
+            color: var(--cyan) !important;
+            padding: 5px 14px !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(0,188,212,.3);
+            font-weight: 700 !important;
+        }
+        .nav-electromec:hover { background: var(--primary) !important; color: white !important; }
+        .nav-electromec::after { display:none !important; }
+
+        .menu-boton {
+            background: var(--tl-green); color: var(--tl-black);
+            padding:9px 22px; border-radius:30px; cursor:pointer;
+            font-weight:700; font-size:.82rem; letter-spacing:.08em;
+            transition:background .3s; border:none;
+        }
+        .menu-boton:hover { background: var(--tl-green-l); }
+
+        /* ══ PANEL MENÚ LATERAL ══════════════════════ */
+        .menu-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:9998; backdrop-filter:blur(3px); }
+        .menu-overlay.activo { display:block; }
+        .panel-menu { position:fixed; top:0; right:-100%; width:100%; height:100%; display:flex; z-index:9999; transition:right .5s cubic-bezier(.4,0,.2,1); }
+        .panel-menu.activo { right:0; }
+
+        .menu-visual { flex:1; display:grid; grid-template-rows:repeat(3,1fr); overflow:hidden; }
+        .menu-visual-item { position:relative; overflow:hidden; cursor:pointer; }
+        .menu-visual-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s; filter:brightness(.55); }
+        .menu-visual-item:hover img { transform:scale(1.06); filter:brightness(.75); }
+        .menu-visual-label {
+            position:absolute; bottom:18px; left:22px;
+            font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:900;
+            color:white; text-transform:uppercase; letter-spacing:.06em;
+            text-shadow:0 2px 8px rgba(0,0,0,.5);
+            display:flex; align-items:center; gap:10px;
+        }
+        .menu-visual-label::before { content:''; width:28px; height:3px; background:var(--tl-green); display:block; }
+
+        .menu-nav { width:420px; flex-shrink:0; background:var(--tl-dark); display:flex; flex-direction:column; padding:32px 40px 36px; overflow-y:auto; }
+        .menu-nav-top { display:flex; justify-content:flex-end; margin-bottom:40px; }
+        .cerrar-menu { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.07); border:none; cursor:pointer; padding:10px 20px; border-radius:30px; font-family:'Barlow',sans-serif; font-size:.82rem; font-weight:700; color:white; letter-spacing:.08em; transition:background .3s; }
+        .cerrar-menu:hover { background:var(--tl-green); color:var(--tl-black); }
+
+        .menu-nav-links { flex:1; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+        .menu-nav-link {
+            font-family:'Barlow Condensed',sans-serif; font-size:2.8rem; font-weight:900;
+            color:rgba(255,255,255,.3); text-transform:uppercase; letter-spacing:.02em; line-height:1.1;
+            display:flex; align-items:center; gap:12px; padding:6px 0;
+            opacity:0; transform:translateX(20px);
+            transition:color .25s, transform .4s ease, opacity .4s ease;
+        }
+        .menu-nav-link::before { content:'▶'; font-size:1rem; color:var(--tl-green); opacity:0; transform:translateX(-8px); transition:opacity .25s, transform .25s; }
+        .menu-nav-link:hover { color:var(--tl-green); transform:translateX(6px) !important; }
+        .menu-nav-link:hover::before, .menu-nav-link.activo::before { opacity:1; transform:translateX(0); }
+        .menu-nav-link.activo { color:var(--tl-green); }
+        .panel-menu.activo .menu-nav-link { opacity:1; transform:translateX(0); }
+        .panel-menu.activo .menu-nav-link:nth-child(1) { transition-delay:.10s; }
+        .panel-menu.activo .menu-nav-link:nth-child(2) { transition-delay:.17s; }
+        .panel-menu.activo .menu-nav-link:nth-child(3) { transition-delay:.24s; }
+        .panel-menu.activo .menu-nav-link:nth-child(4) { transition-delay:.31s; }
+        .panel-menu.activo .menu-nav-link:nth-child(5) { transition-delay:.38s; }
+
+        .menu-nav-cta { margin-top:32px; }
+        .btn-menu-cta { display:block; text-align:center; background:var(--tl-green); color:var(--tl-black); padding:15px 30px; border-radius:8px; font-weight:700; font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:20px; transition:background .3s; }
+        .btn-menu-cta:hover { background:var(--tl-green-l); }
+        .menu-nav-contact { font-size:.8rem; color:rgba(255,255,255,.4); line-height:1.8; }
+        .menu-nav-contact a { color:rgba(255,255,255,.4); transition:color .3s; display:block; }
+        .menu-nav-contact a:hover { color:var(--tl-green); }
+        .menu-nav-social { display:flex; gap:10px; margin-top:12px; }
+        .social-btn { width:34px; height:34px; background:rgba(255,255,255,.08); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.85rem; font-weight:700; color:white; transition:background .3s,color .3s; }
+        .social-btn:hover { background:var(--tl-green); color:var(--tl-black); }
+        @media(max-width:768px){ .menu-visual{display:none;} .menu-nav{width:100%;} .menu-nav-link{font-size:2.2rem;} }
+
+        /* ══ HERO ════════════════════════════════════ */
+        .hero {
+            background: var(--tl-black);
+            padding: 0;
+            position: relative; overflow: hidden;
+            min-height: 88vh;
+            display: flex; align-items: center;
+        }
+        .hero-bg {
+            position:absolute; inset:0;
+            background: linear-gradient(135deg, #000 0%, #1a2a00 40%, #3d6600 70%, var(--tl-green) 100%);
+            opacity:.85;
+        }
+        .hero-grid {
+            position:absolute; inset:0;
+            background-image:
+                repeating-linear-gradient(90deg, rgba(125,193,14,.04) 0, rgba(125,193,14,.04) 1px, transparent 1px, transparent 70px),
+                repeating-linear-gradient(0deg,  rgba(125,193,14,.04) 0, rgba(125,193,14,.04) 1px, transparent 1px, transparent 70px);
+        }
+        .hero-orb {
+            position:absolute; right:-150px; top:-150px;
+            width:600px; height:600px; border-radius:50%;
+            background: radial-gradient(circle, rgba(125,193,14,.2) 0%, transparent 65%);
+        }
+        .hero-orb2 {
+            position:absolute; left:-100px; bottom:-100px;
+            width:400px; height:400px; border-radius:50%;
+            background: radial-gradient(circle, rgba(125,193,14,.1) 0%, transparent 65%);
+        }
+        .hero-inner { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:60px; padding: 120px 0 100px; }
+        .hero-texto { max-width:620px; }
+        .hero-eyebrow {
+            font-size:.75rem; letter-spacing:.25em; text-transform:uppercase;
+            color: var(--tl-green); font-weight:600; margin-bottom:20px;
+            display:flex; align-items:center; gap:12px;
+        }
+        .hero-eyebrow::before { content:''; width:40px; height:2px; background:var(--tl-green); }
+        .hero-texto h1 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size: clamp(4rem,9vw,7.5rem);
+            font-weight:900; line-height:.88;
+            text-transform:uppercase; color:white; letter-spacing:.02em;
+        }
+        .hero-texto h1 .verde { color:var(--tl-green); }
+        .hero-texto h1 .blanco { color:white; }
+        .hero-sub {
+            margin-top:24px; font-size:1.08rem;
+            color:rgba(255,255,255,.6); font-weight:300;
+            max-width:500px; line-height:1.75;
+        }
+        .hero-btns { display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
+        .btn-hero-principal {
+            background: var(--tl-green); color: var(--tl-black);
+            padding: 16px 38px; border-radius: 40px;
+            font-weight:700; font-size:.95rem; letter-spacing:.06em;
+            transition: background .3s, transform .2s;
+            box-shadow: 0 6px 24px rgba(125,193,14,.35);
+        }
+        .btn-hero-principal:hover { background:var(--tl-green-l); transform:translateY(-2px); }
+        .btn-hero-sec {
+            background: transparent; color: white;
+            padding: 16px 38px; border-radius: 40px;
+            font-weight:600; font-size:.95rem; letter-spacing:.06em;
+            border: 2px solid rgba(255,255,255,.25);
+            transition: border-color .3s, background .3s;
+        }
+        .btn-hero-sec:hover { border-color:var(--tl-green); background:rgba(125,193,14,.08); }
+
+        .hero-stats { display:flex; flex-direction:column; gap:28px; }
+        .hero-stat-card {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(125,193,14,.2);
+            border-radius: 14px; padding: 22px 28px;
+            text-align:center; min-width:150px;
+            backdrop-filter:blur(10px);
+        }
+        .hero-stat-num {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:2.8rem; font-weight:900;
+            color:var(--tl-green); line-height:1;
+        }
+        .hero-stat-label {
+            font-size:.68rem; letter-spacing:.15em;
+            text-transform:uppercase; color:rgba(255,255,255,.4);
+            margin-top:4px;
+        }
+
+        /* ══ FRANJA SERVICIOS RÁPIDOS ════════════════ */
+        .franja-servicios {
+            background: var(--tl-green);
+            padding: 0;
+        }
+        .franja-inner {
+            display:grid; grid-template-columns: repeat(3,1fr);
+        }
+        .franja-item {
+            padding: 26px 28px;
+            display:flex; align-items:center; gap:14px;
+            border-right: 1px  rgba(0,0,0,.15);
+            cursor:default;
+            transition: background .25s;
+        }
+        .franja-item:last-child { border-right:none; }
+        .franja-item:hover { background: var(--tl-green-d); }
+        .franja-icon { font-size:1.8rem; flex-shrink:0; }
+        .franja-texto strong {
+            display:block;
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1rem; font-weight:700; text-transform:uppercase;
+            color:var(--tl-black); letter-spacing:.04em;
+        }
+        .franja-texto span {
+            font-size:.78rem; color:rgba(0,0,0,.6);
+        }
+
+        /* ══ SECCIÓN SERVICIOS ═══════════════════════ */
+        .servicios { background: var(--tl-dark); padding: 100px 0; }
+        .sec-header { text-align:center; margin-bottom:60px; }
+        .sec-tag {
+            display:inline-block;
+            background: rgba(125,193,14,.15); color:var(--tl-green);
+            font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+            padding:6px 18px; border-radius:20px; margin-bottom:16px;
+            border: 1px solid rgba(125,193,14,.3);
+        }
+        .sec-header h2 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:clamp(2rem,4.5vw,3.5rem); font-weight:900;
+            color:white; text-transform:uppercase; letter-spacing:.03em;
+        }
+        .sec-header h2 span { color:var(--tl-green); }
+        .sec-header p { margin-top:14px; color:rgba(255,255,255,.5); font-size:.97rem; max-width:540px; margin-left:auto; margin-right:auto; }
+
+        .servicios-grid {
+            display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+        }
+        /* ── SERV CARD rediseño: imagen fija + info desplegable ── */
+        .serv-card {
+            background: var(--tl-dark2);
+            border: 1px solid rgba(125,193,14,.12);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: border-color .3s, transform .3s, box-shadow .3s;
+            position: relative;
+        }
+        .serv-card::after {
+            content:''; position:absolute;
+            bottom:0; left:0; right:0; height:3px;
+            background: linear-gradient(90deg, var(--tl-green), var(--tl-green-l));
+            transform: scaleX(0); transform-origin:left;
+            transition: transform .4s ease;
+        }
+        .serv-card:hover { border-color:rgba(125,193,14,.35); transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,.4); }
+        .serv-card:hover::after { transform:scaleX(1); }
+
+        /* imagen cuadrada siempre visible */
+        .serv-img-fixed {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+        .serv-img-fixed img {
+            width: 150%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .serv-card:hover .serv-img-fixed img { transform: scale(1.06); }
+
+        /* cabecera del card: título + botón toggle */
+        .serv-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 22px 28px 16px;
+            cursor: pointer;
+            gap: 14px;
+        }
+        .serv-header h3 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1.3rem; font-weight:700; text-transform:uppercase;
+            color:white; letter-spacing:.04em; line-height:1.2;
+            flex: 1;
+        }
+        .serv-toggle-btn {
+            width: 36px; height: 36px; flex-shrink: 0;
+            border-radius: 50%;
+            background: rgba(125,193,14,.12);
+            border: 1px solid rgba(125,193,14,.3);
+            color: var(--tl-green);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; font-weight: 700;
+            cursor: pointer;
+            transition: background .25s, color .25s, transform .35s ease;
+            user-select: none;
+        }
+        .serv-header:hover .serv-toggle-btn { background: var(--tl-green); color: var(--tl-black); }
+        .serv-card.abierto .serv-toggle-btn { transform: rotate(45deg); background: var(--tl-green); color: var(--tl-black); }
+
+        /* contenido desplegable */
+        .serv-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .55s cubic-bezier(.4,0,.2,1), padding .35s ease;
+            padding: 0 28px;
+        }
+        .serv-card.abierto .serv-body {
+            max-height: 600px;
+            padding: 0 28px 28px;
+        }
+        .serv-body p { color:rgba(255,255,255,.55); font-size:.93rem; line-height:1.75; margin-bottom:16px; }
+        .serv-lista { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom: 20px; }
+        .serv-lista li {
+            font-size:.85rem; color:rgba(255,255,255,.5);
+            display:flex; align-items:center; gap:8px;
+        }
+        .serv-lista li::before { content:'✓'; color:var(--tl-green); font-weight:700; }
+
+        /* ══ SECCIÓN PROCESO ═════════════════════════ */
+        .proceso { background: var(--tl-black); padding: 100px 0; }
+        .proceso-steps {
+            display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+            margin-top:60px; position:relative;
+        }
+        .proceso-steps::before {
+            content:''; position:absolute;
+            top:36px; left:12.5%; right:12.5%; height:2px;
+            background: linear-gradient(90deg, var(--tl-green), var(--tl-green-l), var(--tl-green));
+            z-index:0;
+        }
+        .paso {
+            text-align:center; padding:0 20px;
+            position:relative; z-index:1;
+        }
+        .paso-num {
+            width:72px; height:72px; border-radius:50%;
+            background: var(--tl-green); color:var(--tl-black);
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1.8rem; font-weight:900;
+            display:flex; align-items:center; justify-content:center;
+            margin:0 auto 20px; box-shadow:0 0 0 6px rgba(125,193,14,.15);
+            transition: transform .3s, box-shadow .3s;
+        }
+        .paso:hover .paso-num { transform:scale(1.1); box-shadow:0 0 0 10px rgba(125,193,14,.2); }
+        .paso h4 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1.1rem; font-weight:700; text-transform:uppercase;
+            color:white; letter-spacing:.04em; margin-bottom:8px;
+        }
+        .paso p { font-size:.85rem; color:rgba(255,255,255,.45); line-height:1.6; }
+
+        /* ══ SECCIÓN CATÁLOGO ════════════════════════ */
+        .catalogo { background: var(--tl-dark); padding: 100px 0; }
+        .productos-grid {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+            margin-top:50px;
+        }
+        .prod-card {
+            background: var(--tl-dark2);
+            border: 1px solid rgba(125,193,14,.1);
+            border-radius:16px; overflow:hidden;
+            transition: transform .3s, box-shadow .3s, border-color .3s;
+        }
+        .prod-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,.4); border-color:rgba(125,193,14,.35); }
+        .prod-img {
+            height:180px;
+            background: linear-gradient(135deg, #1a2a00, #3d6600);
+            display:flex; align-items:center; justify-content:center;
+            font-size:3.5rem; position:relative;
+        }
+        .prod-badge-nuevo {
+            position:absolute; top:12px; right:12px;
+            background: var(--tl-green); color:var(--tl-black);
+            font-size:.6rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+            padding:4px 10px; border-radius:20px;
+        }
+        .prod-body { padding:24px; }
+        .prod-body h4 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1.2rem; font-weight:700; text-transform:uppercase;
+            color:white; letter-spacing:.04em; margin-bottom:8px;
+        }
+        .prod-body p { font-size:.87rem; color:rgba(255,255,255,.5); line-height:1.6; margin-bottom:16px; }
+        .prod-tag {
+            display:inline-block;
+            background:rgba(125,193,14,.1); color:var(--tl-green);
+            font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+            padding:3px 10px; border-radius:20px; margin-bottom:18px;
+            border:1px solid rgba(125,193,14,.2);
+        }
+        .btn-cotizar-tl {
+            width:100%;
+            background: var(--tl-green); color:var(--tl-black);
+            padding:12px 20px; border-radius:8px;
+            font-weight:700; font-size:.85rem; letter-spacing:.06em;
+            border:none; cursor:pointer;
+            transition: background .25s, transform .2s;
+            text-align:center; display:block;
+        }
+        .btn-cotizar-tl:hover { background:var(--tl-green-l); transform:scale(1.02); }
+
+        /* ══ CTA CENTRAL ═════════════════════════════ */
+        .cta-central {
+            background: linear-gradient(135deg, #2d4f00 0%, var(--tl-green) 60%, var(--tl-green-l) 100%);
+            padding: 90px 0;
+            text-align:center; position:relative; overflow:hidden;
+        }
+        .cta-central::before {
+            content:''; position:absolute; inset:0;
+            background-image:
+                repeating-linear-gradient(90deg, rgba(0,0,0,.06) 0, rgba(0,0,0,.06) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(0deg,  rgba(0,0,0,.06) 0, rgba(0,0,0,.06) 1px, transparent 1px, transparent 60px);
+        }
+        .cta-central-inner { position:relative; z-index:1; }
+        .cta-central h2 {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:clamp(2.5rem,6vw,5rem); font-weight:900;
+            text-transform:uppercase; color:var(--tl-black);
+            line-height:.95; margin-bottom:20px;
+        }
+        .cta-central p { font-size:1.05rem; color:rgba(0,0,0,.65); max-width:520px; margin:0 auto 40px; }
+        .cta-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+        .btn-cta-negro {
+            background: var(--tl-black); color:var(--tl-green);
+            padding:16px 40px; border-radius:40px;
+            font-weight:700; font-size:.95rem; letter-spacing:.06em;
+            transition:background .3s, transform .2s;
+            box-shadow:0 6px 24px rgba(0,0,0,.3);
+        }
+        .btn-cta-negro:hover { background:#222; transform:translateY(-2px); }
+        .btn-cta-outline {
+            background:transparent; color:var(--tl-black);
+            padding:16px 40px; border-radius:40px;
+            font-weight:600; font-size:.95rem; letter-spacing:.06em;
+            border:2px solid rgba(0,0,0,.3);
+            transition:background .3s;
+        }
+        .btn-cta-outline:hover { background:rgba(0,0,0,.1); }
+
+        /* ══ FOOTER ══════════════════════════════════ */
+        .footer { background: var(--tl-black); border-top: 2px solid var(--tl-green); padding:60px 0 0; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:50px; margin-bottom:50px; }
+        .footer-brand .logo-tl { font-size:2rem; margin-bottom:16px; display:block; }
+        .footer-brand p { font-size:.88rem; color:rgba(255,255,255,.4); line-height:1.7; max-width:280px; }
+        .footer-brand .footer-electromec {
+            margin-top:20px; display:inline-flex; align-items:center; gap:8px;
+            background:rgba(0,54,68,.6); color:var(--cyan);
+            padding:8px 16px; border-radius:20px; font-size:.78rem; font-weight:600;
+            border:1px solid rgba(0,188,212,.2);
+            transition:background .3s;
+        }
+        .footer-brand .footer-electromec:hover { background:rgba(0,54,68,.9); }
+        .footer-col h4 {
+            font-family:'Barlow Condensed',sans-serif; font-size:1rem; font-weight:700;
+            text-transform:uppercase; letter-spacing:.12em;
+            color:var(--tl-green); margin-bottom:20px;
+        }
+        .footer-col a, .footer-col p {
+            display:block; font-size:.85rem;
+            color:rgba(255,255,255,.4); margin-bottom:10px;
+            transition:color .25s;
+        }
+        .footer-col a:hover { color:var(--tl-green); }
+        .footer-bottom {
+            border-top:1px solid rgba(255,255,255,.06);
+            padding:20px 0;
+            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+        }
+        .footer-bottom span { font-size:.78rem; color:rgba(255,255,255,.25); }
+        .footer-bottom .tl-badge {
+            font-size:.75rem; color:var(--tl-green); font-weight:600; letter-spacing:.08em;
+        }
+
+        /* ══ WHATSAPP ═════════════════════════════════ */
+        .whatsapp {
+            position:fixed; bottom:28px; right:28px; z-index:900;
+            width:58px; height:58px; border-radius:50%;
+            background: #25D366;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 4px 20px rgba(37,211,102,.4);
+            transition:transform .25s;
+        }
+        .whatsapp:hover { transform:scale(1.1); }
+        .whatsapp svg { width:30px; height:30px; fill:white; }
+
+        /* ══ RESPONSIVE ══════════════════════════════ */
+        @media(max-width:1024px){
+            .franja-inner { grid-template-columns:repeat(3,1fr); }
+            .servicios-grid { grid-template-columns:1fr; }
+            .proceso-steps { grid-template-columns:repeat(2,1fr); gap:40px; }
+            .proceso-steps::before { display:none; }
+            .productos-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media(max-width:768px){
+            .header { padding:0 16px; }
+            .nav-links { display:none; }
+            .franja-inner { grid-template-columns:1fr; }
+            .hero-stats { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+            .hero-stat-card { min-width:130px; }
+            .proceso-steps { grid-template-columns:1fr; }
+            .productos-grid { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr; gap:30px; }
+            .footer-bottom { flex-direction:column; text-align:center; gap:8px; }
+            /* Hero */
+            .hero { min-height:auto; padding:80px 0 60px; }
+            .hero-inner { flex-direction:column; text-align:center; }
+            .hero h1 { font-size:clamp(3rem,12vw,5rem); }
+            .hero-btns { justify-content:center; }
+            /* Contacto */
+            .contacto-grid { grid-template-columns:1fr; gap:40px; }
+            /* CTA */
+            .cta-central-inner { flex-direction:column; text-align:center; gap:20px; }
+        }
+        @media(max-width:480px){
+            .franja-inner { grid-template-columns:1fr; }
+            .hero-stats { gap:10px; }
+            .hero-stat-card { min-width:100px; padding:14px; }
+            .productos-grid { grid-template-columns:1fr; }
+            .whatsapp { bottom:16px; right:16px; width:50px; height:50px; }
+        }
+    </style>
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://electromec.pe/titanlift.html">
+    <meta property="og:title"       content="ELECTROMEC – Soluciones Eléctricas Industriales">
+    <meta property="og:description" content="Especialistas en instalaciones eléctricas, tableros industriales, ascensores y mantenimiento en Tacna, Perú.">
+    <meta property="og:image"       content="img/carrusel1.jpg">
+    <meta property="og:locale"      content="es_PE">
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+    <a href="titanlift.html" class="logo-area">
+        <img src="img/TITANLIFTS-removebg-preview.png" alt="TitanLift" loading="lazy">
+        <small class="by">Tacna - Perú</small>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#servicios" class="activo">Servicios</a></li>
+        <li><a href="#proceso">Cómo trabajamos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="index.html"><img src="img/seccionele.png" alt="Electromec" style="height:22px;vertical-align:middle;" loading="lazy"></a></li>
+    </ul>
+    <div class="menu-boton" onclick="abrirMenu()">MENU</div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay" onclick="cerrarMenu()"></div>
+
+<!-- PANEL MENÚ LATERAL -->
+<div id="panelMenu" class="panel-menu">
+    <div class="menu-visual">
+        <div class="menu-visual-item" onclick="location.href='#servicios'; cerrarMenu()">
+            <img src="img/ascensores-electricos.webp" alt="Ascensores" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+            <div class="menu-visual-label">Servicios</div>
+        </div>
+        <div class="menu-visual-item" onclick="location.href='#catalogo'; cerrarMenu()">
+            <img src="img/Montacarga-Ascensores-Paez.jpg" alt="Montacargas" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+            <div class="menu-visual-label">Productos</div>
+        </div>
+        <div class="menu-visual-item" onclick="location.href='index.html'">
+            <img src="img/carrusel3.jpeg" alt="Electromec" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+            <div class="menu-visual-label">Electromec</div>
+        </div>
+    </div>
+    <div class="menu-nav">
+        <div class="menu-nav-top">
+            <button class="cerrar-menu" onclick="cerrarMenu()">Cerrar</button>
+        </div>
+        <nav class="menu-nav-links">
+            <a href="#servicios"  class="menu-nav-link activo" onclick="cerrarMenu()">Servicios</a>
+            <a href="#proceso"    class="menu-nav-link" onclick="cerrarMenu()">Proceso</a>
+            <a href="#contacto"   class="menu-nav-link" onclick="cerrarMenu()">Contacto</a>
+            <a href="nosotros.html" class="menu-nav-link">Nosotros</a>
+            <a href="index.html" class="menu-nav-link">Electromec</a>
+        </nav>
+        <div class="menu-nav-cta">
+            <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20TitánLift" target="_blank" class="btn-menu-cta"> Contactar por WhatsApp</a>
+            <div class="menu-nav-contact">
+                <a href="tel:+51971022550">+51 971 022 550</a>
+                <a href="mailto:contacto@electromec.com">contacto@electromec.com</a>
+            </div>
+            <div class="menu-nav-social">
+                <a href="#" class="social-btn">f</a>
+                <a href="#" class="social-btn">in</a>
+                <a href="https://wa.me/51971022550" target="_blank" class="social-btn">wa</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb2"></div>
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-texto">
+                <p class="hero-eyebrow anim">Tacna, Perú · Elevación Vertical</p>
+                <h1 class="anim anim-delay-1">
+                    <span class="verde">TITAN</span><br>
+                    <span class="blanco">LIFT</span>
+                </h1>
+                <p class="hero-sub anim anim-delay-2">Marca especializada en sistemas de elevación vertical. Ofrecemos servicios de mantenimiento preventivo y correctivo, además de la venta e instalación de ascensores y montacargas. 
+                Brindamos soluciones para el sector industrial y residencial, con altos estándares de seguridad, calidad y eficiencia. </p>
+                <div class="hero-btns anim anim-delay-3">
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-hero-principal"> Evaluación gratuita</a>
+                    <a href="#servicios" class="btn-hero-sec">Ver servicios ↓</a>
+                </div>
+            </div>
+            <div class="hero-stats anim anim-delay-2">
+                <div class="hero-stat-card">
+                    <div class="hero-stat-num">+150</div>
+                    <div class="hero-stat-label">Equipos atendidos</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-num">24/7</div>
+                    <div class="hero-stat-label">Soporte técnico</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FRANJA SERVICIOS RÁPIDOS -->
+<div class="franja-servicios">
+    <div class="franja-inner">
+        <div class="franja-item">
+            <span class="franja-icon"></span>
+            <div class="franja-texto">
+                <strong>Mantenimiento</strong>
+                <span>Preventivo y correctivo</span>
+            </div>
+        </div>
+        <div class="franja-item">
+            <span class="franja-icon"></span>
+            <div class="franja-texto">
+                <strong>Ascensores</strong>
+                <span>Venta e instalación</span>
+            </div>
+        </div>
+        <div class="franja-item">
+            <span class="franja-icon"></span>
+            <div class="franja-texto">
+                <strong>Montacargas</strong>
+                <span>Venta e instalación</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="servicios">
+    <div class="container">
+        <div class="sec-header">
+            <span class="sec-tag">Lo que hacemos</span>
+            <h2>NUESTROS <span>SERVICIOS</span></h2>
+            <p>Soluciones integrales en elevación vertical para cualquier tipo de proyecto, industria o edificio.</p>
+        </div>
+        <div class="servicios-grid">
+
+            <div class="serv-card anim anim-delay-1">
+                <div class="serv-img-fixed">
+                    <img src="img/mantenimiento-preventivo.jpg" alt="Mantenimiento" loading="lazy">
+                </div>
+                <div class="serv-header" onclick="toggleServ(this)">
+                    <h3>Mantenimiento Preventivo y Correctivo</h3>
+                    <span class="serv-toggle-btn">+</span>
+                </div>
+                <div class="serv-body">
+                    <p>Garantizamos la operación continua y segura de tus equipos de elevación mediante revisiones periódicas y atención inmediata ante fallas.</p>
+                    <ul class="serv-lista">
+                        <li>Revisión de sistemas eléctricos y mecánicos</li>
+                        <li>Lubricación y ajuste de componentes</li>
+                        <li>Diagnóstico y corrección de fallas</li>
+                        <li>Informe técnico detallado post-servicio</li>
+                    </ul>
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20cotizar%20Mantenimiento" target="_blank" class="btn-cotizar-tl"> Cotizar por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="serv-card anim anim-delay-2">
+                <div class="serv-img-fixed">
+                    <img src="img/instaladores-ascensores.webp" alt="Instalación de ascensores" loading="lazy">
+                </div>
+                <div class="serv-header" onclick="toggleServ(this)">
+                    <h3>Venta e Instalación de Ascensores</h3>
+                    <span class="serv-toggle-btn">+</span>
+                </div>
+                <div class="serv-body">
+                    <p>Suministramos e instalamos ascensores para edificios residenciales, comerciales e industriales, adaptados a cada proyecto con todas las certificaciones.</p>
+                    <ul class="serv-lista">
+                        <li>Ascensores residenciales y comerciales</li>
+                        <li>Instalación certificada y segura</li>
+                        <li>Modernización de equipos existentes</li>
+                        <li>Asesoría técnica personalizada</li>
+                    </ul>
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20cotizar%20un%20Ascensor" target="_blank" class="btn-cotizar-tl"> Cotizar por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="proceso">
+    <div class="container">
+        <div class="sec-header">
+            <span class="sec-tag">Cómo trabajamos</span>
+            <h2>NUESTRO <span>PROCESO</span></h2>
+            <p>Un flujo claro y transparente desde el primer contacto hasta la entrega del servicio.</p>
+        </div>
+        <div class="proceso-steps">
+            <div class="paso anim anim-delay-1">
+                <div class="paso-num">01</div>
+                <h4>Contacto</h4>
+                <p>Nos escribes por WhatsApp o el formulario y un especialista responde en menos de 2 horas.</p>
+            </div>
+            <div class="paso anim anim-delay-2">
+                <div class="paso-num">02</div>
+                <h4>Diagnóstico</h4>
+                <p>Visitamos el lugar y evaluamos el equipo sin costo. Identificamos el problema o necesidad.</p>
+            </div>
+            <div class="paso anim anim-delay-3">
+                <div class="paso-num">03</div>
+                <h4>Propuesta</h4>
+                <p>Te entregamos una cotización detallada con tiempo de ejecución y garantía incluida.</p>
+            </div>
+            <div class="paso anim anim-delay-4">
+                <div class="paso-num">04</div>
+                <h4>Ejecución</h4>
+                <p>Realizamos el trabajo con técnicos especializados y te hacemos seguimiento post-servicio.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- CTA CENTRAL -->
+<section class="cta-central">
+    <div class="container">
+        <div class="cta-central-inner anim">
+            <h2>¿Tu equipo<br>necesita atención?</h2>
+            <p>Un técnico especialista de TitánLift evaluará tu equipo de elevación sin costo. Respondemos en menos de 2 horas.</p>
+            <div class="cta-btns">
+                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20de%20mi%20equipo%20de%20elevación" target="_blank" class="btn-cta-negro"> WhatsApp ahora</a>
+                <a href="#contacto" class="btn-cta-outline">Formulario de contacto</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" style="background:var(--tl-dark); padding:90px 0;">
+    <div class="container">
+        <div class="sec-header">
+            <span class="sec-tag">Contáctanos</span>
+            <h2>ESCRÍBENOS <span>HOY</span></h2>
+            <p>Nuestro equipo técnico está listo para atenderte y resolver cualquier consulta.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:50px; margin-top:50px; flex-wrap:wrap;">
+            <!-- Datos -->
+            <div class="anim" style="display:flex; flex-direction:column; gap:24px;">
+                <div style="background:var(--tl-dark2); border:1px solid rgba(125,193,14,.12); border-radius:14px; padding:24px 28px; display:flex; gap:18px; align-items:flex-start;">
+                    <span style="font-size:1.5rem;"></span>
+                    <div>
+                        <strong style="color:var(--tl-green); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:4px;">Dirección</strong>
+                        <span style="color:rgba(255,255,255,.55); font-size:.92rem;">Calle 1 de Septiembre Mz.Ñ - Lt.3, Tacna, Perú</span>
+                    </div>
+                </div>
+                <div style="background:var(--tl-dark2); border:1px solid rgba(125,193,14,.12); border-radius:14px; padding:24px 28px; display:flex; gap:18px; align-items:flex-start;">
+                    <span style="font-size:1.5rem;"></span>
+                    <div>
+                        <strong style="color:var(--tl-green); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:4px;">Teléfono</strong>
+                        <a href="tel:+51971022550" style="color:rgba(255,255,255,.55); font-size:.92rem;">+51 971 022 550</a>
+                    </div>
+                </div>
+                <div style="background:var(--tl-dark2); border:1px solid rgba(125,193,14,.12); border-radius:14px; padding:24px 28px; display:flex; gap:18px; align-items:flex-start;">
+                    <span style="font-size:1.5rem;"></span>
+                    <div>
+                        <strong style="color:var(--tl-green); font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; display:block; margin-bottom:4px;">Horario</strong>
+                        <span style="color:rgba(255,255,255,.55); font-size:.92rem;">Lun – Vie: 8:00 AM – 6:00 PM<br>Sábados: 8:00 AM – 1:00 PM</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20TitánLift" target="_blank" style="background:var(--tl-green); color:var(--tl-black); padding:16px 32px; border-radius:10px; font-weight:700; font-size:.92rem; text-align:center; transition:background .3s; display:block;">
+                     Escribir por WhatsApp
+                </a>
+            </div>
+            <!-- Formulario -->
+            <div class="anim anim-delay-2" style="background:var(--tl-dark2); border:1px solid rgba(125,193,14,.12); border-radius:20px; padding:40px;">
+                <form id="formTL" style="display:flex; flex-direction:column; gap:18px;">
+                    <div>
+                        <label style="display:block; font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--tl-green); margin-bottom:8px;">Nombre</label>
+                        <input type="text" placeholder="Tu nombre completo" required style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(125,193,14,.2); border-radius:8px; padding:13px 16px; color:white; font-family:'Barlow',sans-serif; font-size:.92rem; outline:none; transition:border-color .25s;" onfocus="this.style.borderColor='var(--tl-green)'" onblur="this.style.borderColor='rgba(125,193,14,.2)'">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--tl-green); margin-bottom:8px;">Teléfono</label>
+                        <input type="tel" placeholder="+51 000 000 000" style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(125,193,14,.2); border-radius:8px; padding:13px 16px; color:white; font-family:'Barlow',sans-serif; font-size:.92rem; outline:none; transition:border-color .25s;" onfocus="this.style.borderColor='var(--tl-green)'" onblur="this.style.borderColor='rgba(125,193,14,.2)'">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--tl-green); margin-bottom:8px;">Servicio requerido</label>
+                        <select required style="width:100%; background:var(--tl-dark2); border:1px solid rgba(125,193,14,.2); border-radius:8px; padding:13px 16px; color:rgba(255,255,255,.7); font-family:'Barlow',sans-serif; font-size:.92rem; outline:none;">
+                            <option value="">Seleccionar servicio...</option>
+                            <option>Mantenimiento preventivo</option>
+                            <option>Mantenimiento correctivo</option>
+                            <option>Instalación de ascensor</option>
+                            <option>Instalación de montacarga</option>
+                            <option>Venta de repuestos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--tl-green); margin-bottom:8px;">Mensaje</label>
+                        <textarea rows="4" placeholder="Cuéntanos sobre tu equipo o consulta..." style="width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(125,193,14,.2); border-radius:8px; padding:13px 16px; color:white; font-family:'Barlow',sans-serif; font-size:.92rem; outline:none; resize:vertical;" onfocus="this.style.borderColor='var(--tl-green)'" onblur="this.style.borderColor='rgba(125,193,14,.2)'"></textarea>
+                    </div>
+                    <button type="submit" style="background:var(--tl-green); color:var(--tl-black); padding:15px 30px; border-radius:8px; font-weight:700; font-size:.92rem; letter-spacing:.06em; border:none; cursor:pointer; transition:background .25s;">Enviar solicitud</button>
+                    <div id="tlSuccess" style="display:none; background:rgba(125,193,14,.15); border:1px solid var(--tl-green); border-radius:8px; padding:14px; text-align:center; color:var(--tl-green); font-weight:600;"> ¡Mensaje enviado! Te contactaremos pronto.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="logo-tl"><span class="titan">TITÁN</span><span class="lift">LIFT</span></span>
+                <p>Empresa especializada en soluciones de elevación vertical en Tacna, Perú. Mantenimiento, instalación para ascensores y montacargas.</p>
+                <a href="index.html" class="footer-electromec">← Volver a Electromec</a>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <a href="#servicios">Mantenimiento preventivo</a>
+                <a href="#servicios">Mantenimiento correctivo</a>
+                <a href="#servicios">Instalación de ascensores</a>
+                <a href="#servicios">Instalación de montacargas</a>
+                <a href="#catalogo">Venta de repuestos</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p> Calle 1 de Septiembre Mz.Ñ - Lt.3, Tacna</p>
+                <p> +51 971 022 550</p>
+                <p> contacto@electromec.com</p>
+                <p> Lun–Vie 8am – 6pm</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 TitánLift – Todos los derechos reservados</span>
+            <span class="tl-badge"> Marca asociada de ELECTROMEC · Tacna, Perú</span>
+        </div>
+    </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20TitánLift" class="whatsapp" target="_blank">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.549 4.116 1.508 5.856L0 24l6.335-1.493A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.206-1.49l-.374-.223-3.76.886.931-3.659-.244-.386A9.789 9.789 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+    /* TOGGLE INFO SERVICIO */
+    function toggleServ(header) {
+        const card = header.closest('.serv-card');
+        card.classList.toggle('abierto');
+    }
+
+    /* MENÚ */
+    function abrirMenu() {
+        document.getElementById('panelMenu').classList.add('activo');
+        document.getElementById('menuOverlay').classList.add('activo');
+        document.body.style.overflow = 'hidden';
+    }
+    function cerrarMenu() {
+        document.getElementById('panelMenu').classList.remove('activo');
+        document.getElementById('menuOverlay').classList.remove('activo');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
+
+    /* FORMULARIO */
+    document.getElementById('formTL').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type="submit"]');
+        btn.textContent = 'Enviando...'; btn.disabled = true;
+        setTimeout(() => {
+            document.getElementById('tlSuccess').style.display = 'block';
+            btn.textContent = 'Enviar solicitud'; btn.disabled = false;
+            this.reset();
+            setTimeout(() => { document.getElementById('tlSuccess').style.display = 'none'; }, 4000);
+        }, 1000);
+    });
+
+    /* ANIMACIONES SCROLL */
+    const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1 }
+    );
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

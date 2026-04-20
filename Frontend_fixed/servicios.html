@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>ELECTROMEC | Servicios</title>
+    <meta name="description" content="Servicios eléctricos industriales: instalaciones, mantenimiento, tableros, automatización y más.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: rgb(0, 54, 68);
+            --primary-dark: rgb(0, 35, 45);
+            --secondary: #00bcd4;
+            --orange: #ff5a1f;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --gray: #555;
+            --tl-green:  #7dc10e;
+            --tl-green-d:#5e9a00;
+            --tl-green-l:#a8e033;
+            --tl-black:  #0f0f0f;
+            --tl-dark:   #1a1a1a;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', Arial, sans-serif; line-height: 1.6; background: #fff; overflow-x: hidden; }
+
+        a { text-decoration: none; }
+
+        /* NAV TITAN */
+        .nav-tintalift {
+            background: var(--tl-green) !important;
+            color: var(--tl-black) !important;
+            padding: 5px 14px !important;
+            border-radius: 20px !important;
+            font-weight: 700 !important;
+        }
+        .nav-tintalift:hover { background: var(--tl-green-l) !important; }
+        .nav-tintalift::after { display: none !important; }
+
+        /* HEADER */
+        .header {
+            background: var(--primary);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .logo-area {
+        display: flex;
+        flex-direction: column; /* coloca todo en vertical */
+        align-items: center; /* opcional: centra */
+        }
+        .logo-area img { height: 39px; }
+        .logo-area small {
+        font-size: .7rem;
+        font-weight: 400;
+        color: rgba(255,255,255,.35);
+        letter-spacing: .15em;
+        display: block;
+        margin-top: 4px; /* mejor positivo para separarlo */
+        } 
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); font-size: 0.88rem; font-weight: bold; letter-spacing: 0.05em; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.activo { color: var(--secondary); }
+        .menu-boton { background: black; color: white; padding: 10px 22px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: background 0.3s; }
+        .menu-boton:hover { background: var(--secondary); }
+
+        /* PANEL MENÚ LATERAL */
+        .menu-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 9998; backdrop-filter: blur(3px); }
+        .menu-overlay.activo { display: block; }
+        .panel-menu { position: fixed; top: 0; right: -100%; width: 100%; height: 100%; display: flex; z-index: 9999; transition: right .5s cubic-bezier(.4,0,.2,1); }
+        .panel-menu.activo { right: 0; }
+        .menu-visual { flex:1; display:grid; grid-template-rows:repeat(2,1fr); overflow:hidden; }
+        .menu-visual-item { position:relative; overflow:hidden; cursor:pointer; }
+        .menu-visual-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; filter:brightness(.65); }
+        .menu-visual-item:hover img { transform:scale(1.06); filter:brightness(.8); }
+        .menu-visual-label { position:absolute; bottom:18px; left:22px; font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:900; color:white; text-transform:uppercase; letter-spacing:.06em; text-shadow:0 2px 8px rgba(0,0,0,.5); display:flex; align-items:center; gap:10px; }
+        .menu-visual-label::before { content:''; width:28px; height:3px; background:var(--cyan); display:block; }
+        .menu-nav { width:420px; flex-shrink:0; background:white; display:flex; flex-direction:column; padding:32px 40px 36px; overflow-y:auto; }
+        .menu-nav-top { display:flex; justify-content:flex-end; margin-bottom:40px; }
+        .cerrar-menu { display:flex; align-items:center; gap:8px; background:var(--light); border:none; cursor:pointer; padding:10px 20px; border-radius:30px; font-size:.82rem; font-weight:700; color:var(--primary); letter-spacing:.08em; transition:background .3s; }
+        .cerrar-menu:hover { background:var(--primary); color:white; }
+        .menu-nav-links { flex:1; display:flex; flex-direction:column; justify-content:center; gap:6px; }
+        .menu-nav-link { font-size:2.8rem; font-weight:900; color:#ccc; text-transform:uppercase; letter-spacing:.02em; line-height:1.1; display:flex; align-items:center; gap:12px; padding:6px 0; opacity:0; transform:translateX(20px); transition:color .25s, transform .4s ease, opacity .4s ease; }
+        .menu-nav-link::before { content:'▶'; font-size:1rem; color:var(--secondary); opacity:0; transform:translateX(-8px); transition:opacity .25s, transform .25s; }
+        .menu-nav-link:hover { color:var(--primary); transform:translateX(6px) !important; }
+        .menu-nav-link:hover::before { opacity:1; transform:translateX(0); }
+        .menu-nav-link.activo { color:var(--primary); }
+        .menu-nav-link.activo::before { opacity:1; transform:translateX(0); }
+        .panel-menu.activo .menu-nav-link { opacity:1; transform:translateX(0); }
+        .panel-menu.activo .menu-nav-link:nth-child(1) { transition-delay:.1s; }
+        .panel-menu.activo .menu-nav-link:nth-child(2) { transition-delay:.17s; }
+        .panel-menu.activo .menu-nav-link:nth-child(3) { transition-delay:.24s; }
+        .panel-menu.activo .menu-nav-link:nth-child(4) { transition-delay:.31s; }
+        .panel-menu.activo .menu-nav-link:nth-child(5) { transition-delay:.38s; }
+        .menu-nav-cta { margin-top:32px; }
+        .btn-menu-cta { display:block; text-align:center; background:var(--primary); color:white; padding:15px 30px; border-radius:8px; font-weight:700; font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; margin-bottom:20px; transition:background .3s; }
+        .btn-menu-cta:hover { background:var(--secondary); color:white; }
+        .menu-nav-contact { font-size:.8rem; color:var(--gray); line-height:1.7; }
+        .menu-nav-contact a { color:var(--gray); transition:color .3s; display:block; }
+        .menu-nav-contact a:hover { color:var(--primary); }
+        .menu-nav-social { display:flex; gap:10px; margin-top:12px; }
+        .social-btn { width:34px; height:34px; background:var(--light); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:var(--primary); transition:background .3s,color .3s; cursor:pointer; font-weight:700; }
+        .social-btn:hover { background:var(--primary); color:white; }
+        @media (max-width:768px) { .menu-visual { display:none; } .menu-nav { width:100%; } .menu-nav-link { font-size:2.2rem; } }
+
+        /* HERO */
+        .hero { height: 60vh; position: relative; overflow: hidden; display: flex; align-items: center; }
+        .hero-slider { position: absolute; width: 100%; height: 100%; }
+        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s; }
+        .slide.active { opacity: 1; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-overlay { position: absolute; width: 100%; height: 100%; background: linear-gradient(90deg, rgb(0,54,68) 35%, rgba(0,0,0,0.3)); }
+        .hero-content { position: relative; z-index: 2; color: white; max-width: 700px; margin-left: 80px; animation: fadeUp 0.8s ease both; }
+        .hero-eyebrow { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--secondary); }
+        .hero-content h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.05; font-weight: 900; }
+        .hero-content h1 span { color: var(--secondary); }
+        .hero-content p { margin-top: 16px; font-size: 1.05rem; color: #ddd; max-width: 480px; }
+        .hero-buttons { margin-top: 28px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-principal { background: var(--orange); color: white; padding: 14px 30px; border-radius: 40px; font-weight: bold; transition: transform 0.2s, background 0.3s; }
+        .btn-principal:hover { background: #e04a10; transform: translateY(-2px); }
+        .btn-secundario { border: 2px solid white; padding: 14px 30px; border-radius: 40px; color: white; transition: background 0.3s; }
+        .btn-secundario:hover { background: rgba(255,255,255,0.1); }
+
+        /* STATS BAR */
+        .stats-bar { background: var(--primary-dark); display: flex; justify-content: space-around; align-items: center; padding: 20px 40px; flex-wrap: wrap; gap: 15   px; }
+        .stat-item { text-align: center; color: white; }
+        .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--secondary); line-height: 1; }
+        .stat-label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-top: 4px; }
+
+        /* SECTION TAGS & TITLES */
+        .section-tag { display: inline-block; background: var(--secondary); color: white; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 16px; font-weight: bold; }
+
+        /* ══════════════════════════════════════════
+           EMPRESA DIVIDER
+        ══════════════════════════════════════════ */
+        .empresa-divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 50px 60px 0;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .empresa-divider-line { flex: 1; height: 2px; background: #e0e0e0; }
+        .empresa-divider-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .empresa-divider-badge .badge-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--secondary);
+            display: inline-block;
+        }
+        .empresa-divider-badge.titan {
+            background: var(--tl-black);
+            color: var(--tl-green);
+        }
+        .empresa-divider-badge.titan .badge-dot { background: var(--tl-green); }
+
+        /* ══════════════════════════════════════════
+           ELECTROMEC SERVICIOS SECTION
+        ══════════════════════════════════════════ */
+        .electromec-section {
+            padding: 40px 60px 80px;
+            background: white;
+        }
+
+        .electromec-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        .electromec-intro h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .electromec-intro p { color: var(--gray); font-size: 1rem; line-height: 1.7; }
+
+        /* ══ CARDS DE SERVICIO (estilo home) CON DESPLEGABLE ══ */
+        .servicios-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 0;
+        }
+
+        .serv-card {
+            border: 2px solid #e8eef0;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+        }
+        .serv-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 0;
+            background: var(--secondary);
+            transition: height 0.4s;
+            z-index: 2;
+        }
+        .serv-card:hover,
+        .serv-card.activo {
+            border-color: var(--secondary);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0,54,68,0.14);
+        }
+        .serv-card:hover::before,
+        .serv-card.activo::before { height: 100%; }
+
+        .serv-card.activo {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(0,54,68,0.18);
+            transform: translateY(-4px);
+        }
+        .serv-card.activo::before { background: var(--primary); height: 100%; }
+
+        .serv-card-img {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+        .serv-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .serv-card:hover .serv-card-img img,
+        .serv-card.activo .serv-card-img img { transform: scale(1.06); }
+
+        .serv-card-body {
+            padding: 22px 22px 18px;
+        }
+        .serv-card-num {
+            position: absolute;
+            top: 14px; right: 18px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(0,54,68,0.07);
+            line-height: 1;
+            z-index: 3;
+        }
+        .serv-card-body h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+        .serv-card-body p {
+            font-size: 0.84rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        .serv-card-footer {
+            padding: 12px 22px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .serv-card-arrow {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #eef7f9;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+            color: var(--primary);
+            transition: background 0.3s, transform 0.4s;
+        }
+        .serv-card.activo .serv-card-arrow {
+            background: var(--primary);
+            color: white;
+            transform: rotate(180deg);
+        }
+        .serv-card-tag {
+            font-size: 0.7rem;
+            color: var(--secondary);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* PANEL DESPLEGABLE */
+        .serv-panel-wrap {
+            grid-column: 1 / -1;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
+        }
+        .serv-panel-wrap.open { max-height: 900px; }
+
+        .serv-panel {
+            background: #fff;
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .serv-panel-header {
+            background: var(--primary);
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .serv-panel-header h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+        .serv-panel-header p { font-size: 0.85rem; opacity: 0.75; margin-top: 2px; }
+
+        .subservicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0;
+        }
+        .subservicio-card {
+            padding: 28px 28px;
+            border-right: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+            position: relative;
+        }
+        .subservicio-card:hover { background: #f8fbfc; }
+        .subservicio-card:last-child { border-right: none; }
+
+        .subservicio-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .subservicio-card p { font-size: 0.86rem; color: var(--gray); line-height: 1.65; }
+        .subservicio-tag-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+        .subservicio-tag {
+            background: #eef7f9;
+            color: var(--primary);
+            font-size: 0.68rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        .servicio-bloque-footer {
+            padding: 18px 30px;
+            background: #f8fbfc;
+            border-top: 1px solid #eef0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .servicio-bloque-footer p { font-size: 0.85rem; color: var(--gray); }
+        .btn-cotizar {
+            background: var(--orange);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-cotizar:hover { background: #e04a10; transform: translateY(-2px); }
+        .clas-despl-img {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+        .clas-despl-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+        .clas-despl-img img,
+        .clas-despl-img img { transform: scale(1.06); }
+
+        @media (max-width: 900px) {
+            .servicios-cards-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════════
+           TITAN LIFT SECTION
+        ══════════════════════════════════════════ */
+        .titanlift-section {
+            background: var(--tl-black);
+            padding: 40px 60px 80px;
+        }
+        /* Ajuste para que las tarjetas estilo Electromec funcionen en el fondo negro de Titan */
+        .titanlift-section .serv-card {
+        background: #1a1a1a;
+        border-color: rgba(125, 193, 14, 0.2);
+        }
+
+        .titanlift-section .serv-card-body h3 {
+        color: var(--tl-green);
+        }
+        .titanlift-section .serv-card-body p {
+        color: rgba(255, 255, 255, 0.075);
+        }
+        .titanlift-section .serv-card-arrow {
+        background: rgba(125, 193, 14, 0.1);
+        color: var(--tl-green);
+        }
+        .titanlift-section .serv-card.activo .serv-card-arrow {
+        background: var(--tl-green);
+        color: var(--tl-black);
+        }
+        .titanlift-section .serv-panel {
+        border-color: var(--tl-green);
+        background: #1a1a1a;
+        }
+        .titanlift-section .serv-panel-header {
+        background: var(--tl-green);
+        color: var(--tl-black);
+        }
+        .titanlift-section .subservicio-card {
+        border-right: 1px solid rgba(125, 193, 14, 0.1);
+        border-bottom: 1px solid rgba(125, 193, 14, 0.1);
+        }
+        .titanlift-section .subservicio-card h4 {
+        color: var(--tl-green);
+        }
+
+        .titanlift-hero-banner {
+            background: linear-gradient(135deg, #4a7a00 0%, var(--tl-green) 55%, var(--tl-green-l) 100%);
+            border-radius: 20px;
+            padding: 60px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        .titanlift-hero-banner::before {
+            content:''; position:absolute; top:-60px; right:-60px;
+            width:350px; height:350px; border-radius:50%; background:rgba(255,255,255,.08);
+        }
+        .titanlift-hero-banner::after {
+            content:''; position:absolute; bottom:-80px; left:-40px;
+            width:250px; height:250px; border-radius:50%; background:rgba(0,0,0,.1);
+        }
+        .tl-banner-inner { position: relative; z-index: 1; }
+        .tl-badge {
+            display:inline-block; background:rgba(0,0,0,.22); color:var(--tl-black);
+            font-size:.68rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+            padding:5px 18px; border-radius:20px; margin-bottom:20px;
+        }
+        .tl-title {
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:clamp(3rem,8vw,6rem); font-weight:900;
+            line-height:1; margin-bottom:14px; letter-spacing:.04em;
+        }
+        .tl-title .tinta { color:var(--tl-black); }
+        .tl-title .lift  { color:#fff; }
+        .tl-sub { font-size:1rem; color:rgba(0,0,0,.75); max-width:600px; margin:0 auto 30px; font-weight:500; }
+        .btn-titanlift {
+            display:inline-block; background:var(--tl-black); color:var(--tl-green);
+            padding:14px 36px; border-radius:40px; font-weight:700; font-size:.95rem;
+            letter-spacing:.05em; transition:background .3s,color .3s,transform .2s;
+            box-shadow:0 4px 20px rgba(0,0,0,.3);
+        }
+        .btn-titanlift:hover { background:#222; color:var(--tl-green-l); transform:translateY(-2px); }
+
+        /* TITAN SERVICIO BLOQUE */
+        .tl-servicio-bloque {
+            background: var(--tl-dark);
+            border: 1px solid rgba(125,193,14,0.15);
+            border-radius: 20px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .tl-servicio-bloque:hover { border-color: rgba(125,193,14,0.4); box-shadow: 0 8px 40px rgba(125,193,14,0.1); }
+
+        .tl-servicio-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 28px 36px;
+            cursor: pointer;
+            user-select: none;
+            border-left: 4px solid var(--tl-green);
+        }
+        .tl-servicio-icon {
+            width: 60px; height: 60px;
+            background: rgba(125,193,14,0.12);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        .tl-servicio-title { flex: 1; }
+        .tl-servicio-title h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.45rem;
+            font-weight: 900;
+            color: var(--tl-green);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+        .tl-servicio-title p { font-size: 0.87rem; color: rgba(255,255,255,0.5); }
+        .tl-servicio-arrow { font-size: 1.4rem; color: var(--tl-green); transition: transform 0.4s; opacity: 0.7; }
+        .tl-servicio-bloque.open .tl-servicio-arrow { transform: rotate(180deg); }
+
+        .tl-servicio-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .tl-servicio-bloque.open .tl-servicio-body { max-height: 600px; }
+
+        .tl-subservicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0;
+            border-top: 1px solid rgba(125,193,14,0.1);
+        }
+        .tl-subservicio-card {
+            padding: 30px 28px;
+            border-right: 1px solid rgba(125,193,14,0.1);
+            border-bottom: 1px solid rgba(125,193,14,0.1);
+            transition: background 0.3s;
+        }
+        .tl-subservicio-card:hover { background: rgba(125,193,14,0.05); }
+        .tl-subservicio-card:last-child { border-right: none; }
+        .tl-subservicio-card-icon { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+        .tl-subservicio-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--tl-green);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+        .tl-subservicio-card p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+        .tl-tag-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+        .tl-tag {
+            background: rgba(125,193,14,0.12);
+            color: var(--tl-green);
+            font-size: 0.67rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        .tl-servicio-footer {
+            padding: 18px 36px;
+            background: rgba(125,193,14,0.04);
+            border-top: 1px solid rgba(125,193,14,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .tl-servicio-footer p { font-size: 0.84rem; color: rgba(255,255,255,0.4); }
+        .btn-tl-cotizar {
+            background: var(--tl-green);
+            color: var(--tl-black);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn-tl-cotizar:hover { background: var(--tl-green-l); transform: translateY(-2px); }
+
+        /* PROCESO */
+        .proceso-section { padding: 70px 40px; background: var(--primary); color: white; text-align: center; }
+        .proceso-section .section-tag { background: var(--orange); }
+        .proceso-section h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: white; margin-bottom: 50px; font-weight: 900; }
+        .proceso-steps { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+        .paso { flex: 1; min-width: 180px; max-width: 220px; text-align: center; padding: 0 20px; position: relative; }
+        .paso::after { content: '→'; position: absolute; right: -8px; top: 28px; color: var(--secondary); font-size: 1.5rem; }
+        .paso:last-child::after { display: none; }
+        .paso-num { width: 56px; height: 56px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; margin: 0 auto 14px; color: white; }
+        .paso h4 { font-size: 0.95rem; margin-bottom: 6px; }
+        .paso p { font-size: 0.78rem; opacity: 0.65; line-height: 1.5; }
+
+        /* CTA */
+        .cta-section { padding: 80px 40px; background: var(--light); text-align: center; }
+        .cta-section h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--primary); margin-bottom: 14px; font-weight: 900; }
+        .cta-section p { color: var(--gray); max-width: 500px; margin: 0 auto 32px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-wa { background: #25d366; color: white; padding: 14px 30px; border-radius: 40px; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: background 0.3s, transform 0.2s; }
+        .btn-wa:hover { background: #1db954; transform: translateY(-2px); }
+        .btn-email { border: 2px solid var(--primary); color: var(--primary); padding: 14px 30px; border-radius: 40px; font-weight: bold; transition: background 0.3s, color 0.3s; }
+        .btn-email:hover { background: var(--primary); color: white; }
+
+        /* FOOTER */
+        .footer { background: var(--primary); color: white; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .footer p { font-size: 0.85rem; opacity: 0.75; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--secondary); font-size: 0.82rem; }
+
+        /* WHATSAPP FLOTANTE */
+        .whatsapp { position: fixed; bottom: 22px; right:24px; width: 58px; height: 58px; z-index: 1000; }
+        .whatsapp img { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 4px 14px rgba(0,0,0,0.35); transition: transform 0.3s; }
+        .whatsapp img:hover { transform: scale(1.1); }
+
+        /* ANIMACIONES */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .anim { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .anim.visible { opacity: 1; transform: translateY(0); }
+        .anim-delay-1 { transition-delay: 0.1s; }
+        .anim-delay-2 { transition-delay: 0.2s; }
+        .anim-delay-3 { transition-delay: 0.3s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .header { padding: 0 16px; }
+            .nav-links { display: none; }
+            .hero-content { margin-left: 20px; margin-right: 20px; }
+            .electromec-section, .titanlift-section { padding: 30px 20px 60px; }
+            .empresa-divider { padding: 40px 20px 0; }
+            .servicio-bloque-header, .tl-servicio-header { padding: 22px 20px; }
+            .subservicios-grid, .tl-subservicios-grid { grid-template-columns: 1fr; }
+            .subservicio-card:last-child, .tl-subservicio-card:last-child { border-right: none; }
+            .paso::after { display: none; }
+            .titanlift-hero-banner { padding: 40px 24px; }
+        }
+        @media (max-width: 768px) {
+            .hero { min-height: 280px; padding: 60px 0 40px; }
+            .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+            .stats-bar-row { grid-template-columns: repeat(2,1fr); }
+            .proceso-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 50px 20px; }
+            .cta-section h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+            .cta-btns { flex-direction: column; align-items: center; }
+        }
+        @media (max-width: 480px) {
+            .subservicios-grid { grid-template-columns: 1fr; }
+            .tl-franja-items { grid-template-columns: 1fr; }
+            .footer { padding: 20px 16px; flex-direction: column; text-align: center; gap: 14px; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+    <!-- Open Graph / WhatsApp -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://electromec.pe/servicios.html">
+    <meta property="og:title"       content="ELECTROMEC – Soluciones Eléctricas Industriales">
+    <meta property="og:description" content="Especialistas en instalaciones eléctricas, tableros industriales, ascensores y mantenimiento en Tacna, Perú.">
+    <meta property="og:image"       content="img/carrusel1.jpg">
+    <meta property="og:locale"      content="es_PE">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <a href="index.html" class="logo-area">
+        <img src="img/lofo.png" alt="Electromec Logo" onerror="this.style.display='none'">
+        <small class="by"> Tacna, Perú</small>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html" class="activo">Servicios</a></li>
+        <li><a href="catalogo.html">Productos</a></li>
+        <li><a href="titanlift.html"><img src="img/iconotintan.png" alt="TitanLift" style="height:22px;vertical-align:middle;" loading="lazy"></a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <div class="menu-boton" onclick="abrirMenu()">MENU</div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay" onclick="cerrarMenu()"></div>
+
+<!-- PANEL MENÚ LATERAL -->
+<div id="panelMenu" class="panel-menu">
+    <div class="menu-visual">
+        <div class="menu-visual-item" onclick="location.href='servicios.html'">
+            <img src="img/carrusel2.jpg" alt="Servicios" loading="lazy">
+            <div class="menu-visual-label">Servicios</div>
+        </div>
+        <div class="menu-visual-item" onclick="location.href='catalogo.html'">
+            <img src="img/carrusel3.jpeg" alt="Productos" loading="lazy">
+            <div class="menu-visual-label">Productos</div>
+        </div>
+    </div>
+    <div class="menu-nav">
+        <div class="menu-nav-top">
+            <button class="cerrar-menu" onclick="cerrarMenu()">Cerrar ✕</button>
+        </div>
+        <nav class="menu-nav-links">
+            <a href="index.html" class="menu-nav-link">Inicio</a>
+            <a href="nosotros.html" class="menu-nav-link">Nosotros</a>
+            <a href="servicios.html" class="menu-nav-link activo">Servicios</a>
+            <a href="catalogo.html" class="menu-nav-link">Productos</a>
+            <a href="titanlift.html" class="menu-nav-link">TitanLift</a>
+            <a href="index.html#contacto" class="menu-nav-link">Contáctanos</a>
+        </nav>
+        <div class="menu-nav-cta">
+            <a href="index.html#contacto" class="btn-menu-cta">Solicita tu presupuesto</a>
+            <div class="menu-nav-contact">
+                <a href="mailto:contacto@electromec.com">contacto@electromec.com</a>
+                <a href="tel:+51971022550">+51 971 022 550</a>
+            </div>
+            <div class="menu-nav-social">
+                <a href="#" class="social-btn">f</a>
+                <a href="#" class="social-btn">in</a>
+                <a href="https://wa.me/51971022550" target="_blank" class="social-btn">wa</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-slider">
+        <div class="slide active"><img src="img/carrusel4.jpg" alt="slide"></div>
+        <div class="slide"><img src="img/carrusel2.jpg" alt="slide" loading="lazy"></div>
+        <div class="slide"><img src="img/carrusel3.jpeg" alt="slide" loading="lazy"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">Lo que hacemos</p>
+        <h1>NUESTROS<br><span>SERVICIOS</span></h1>
+        <p>Brindamos soluciones eléctricas, industriales y de sistemas de elevación, orientadas a optimizar la eficiencia y seguridad del sector empresarial e industrial. </p>
+        <div class="hero-buttons">
+            <a href="#electromec-servicios" class="btn-principal">Ver servicios</a>
+            <a href="#contacto-cta" class="btn-secundario">Cotizar ahora</a>
+        </div>
+    </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+    <div class="stat-item">
+        <div class="stat-num">150+</div>
+        <div class="stat-label">Proyectos realizados</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Empresas especializadas</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Garantía de calidad</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Mantenimiento</div>
+    </div>
+</div>
+
+<!-- ══ ELECTROMEC DIVIDER ══ -->
+<div class="empresa-divider" id="electromec-servicios">
+    <div class="empresa-divider-line"></div>
+    <div class="empresa-divider-badge">
+        <span class="badge-dot"></span>
+         Electromec Perú
+    </div>
+    <div class="empresa-divider-line"></div>
+</div>
+
+<!-- ══ ELECTROMEC SERVICIOS ══ -->
+<section class="electromec-section">
+    <div class="electromec-intro anim">
+        <span class="section-tag">Servicios eléctricos e industriales</span>
+        <h2>Especialidades de Electromec</h2>
+        <p>Ofrecemos soluciones integrales en instalaciones eléctricas, máquinas eléctricas y automatización industrial para empresas del sector comercial e industrial.</p>
+    </div>
+
+    <!-- GRID DE TARJETAS -->
+    <div class="servicios-cards-grid" id="serv-cards-grid">
+
+        <!-- TARJETA 1: Instalaciones Eléctricas -->
+        <div class="serv-card anim anim-delay-1" onclick="toggleServCard('panel-instalaciones', this)">
+            <span class="serv-card-num">01</span>
+            <div class="serv-card-img">
+                <img src="img/instalaciones-electricas-industriales.webp" alt="Instalaciones Eléctricas" onerror="this.src='img/cableado.webp'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Instalaciones Eléctricas</h3>
+                <p>Diseño, montaje y puesta en marcha de sistemas eléctricos con los más altos estándares de seguridad.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- TARJETA 2: Máquinas Eléctricas -->
+        <div class="serv-card anim anim-delay-2" onclick="toggleServCard('panel-maquinas', this)">
+            <span class="serv-card-num">02</span>
+            <div class="serv-card-img">
+                <img src="img/electricidad-industrial-1760980416.jpg" alt="Máquinas Eléctricas" onerror="this.src='img/electro.png'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Máquinas Eléctricas</h3>
+                <p>Instalación y mantenimiento integral de equipos y maquinaria eléctrica industrial.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- TARJETA 3: Automatización y Control -->
+        <div class="serv-card anim anim-delay-3" onclick="toggleServCard('panel-automatizacion', this)">
+            <span class="serv-card-num">03</span>
+            <div class="serv-card-img">
+                <img src="img/automatizacion.jpg" alt="Automatización y Control" onerror="this.src='img/tablero.jpg'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Automatización y Control</h3>
+                <p>Sistemas inteligentes de control y automatización para procesos industriales.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <!-- PANEL 1: Instalaciones Eléctricas -->
+        <div class="serv-panel-wrap" id="panel-instalaciones">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Instalaciones Eléctricas</h3>
+                        <p>Diseño, montaje y puesta en marcha de sistemas eléctricos con los más altos estándares de seguridad.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                         <img src="img/instalaciones-residenciales.jpg" alt="residencial">
+                        </div>
+                        <h4>Instalaciones Residenciales</h4>
+                        <p>Instalación completa de sistemas eléctricos en viviendas, departamentos y conjuntos habitacionales. Incluye tableros domiciliarios, cableado, tomacorrientes, iluminación y sistemas de protección.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Viviendas</span>
+                            <span class="subservicio-tag">Departamentos</span>
+                            <span class="subservicio-tag">Urbanizaciones</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                        <img src="img/images (1).jpg" alt="industriales">
+                        </div>
+                        <h4>Instalaciones Industriales</h4>
+                        <p>Proyectos eléctricos de media y baja tensión para plantas, fábricas y almacenes industriales. Tendido de cables, ductos, bandejas portacables y conexiones a maquinaria.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Plantas</span>
+                            <span class="subservicio-tag">Fábricas</span>
+                            <span class="subservicio-tag">Media tensión</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Cumplimiento del Código Nacional de Electricidad y normativas vigentes.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: Máquinas Eléctricas -->
+        <div class="serv-panel-wrap" id="panel-maquinas">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Máquinas Eléctricas</h3>
+                        <p>Instalación y mantenimiento integral de equipos y maquinaria eléctrica industrial.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                            <img src="img/Mtto_en_instalaciones_electricas.jpg" alt="instalacioens-electricas">
+                        </div>
+                        <h4>Instalación de Máquinas</h4>
+                        <p>Instalación técnica de motores eléctricos, bombas, compresores, ventiladores y equipos industriales. Incluye conexionado, pruebas de funcionamiento y puesta en marcha.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Motores</span>
+                            <span class="subservicio-tag">Bombas</span>
+                            <span class="subservicio-tag">Compresores</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                        <img src="img/preventivo-correctivo.jpg" alt="preventivo-correctivo">
+                        </div>
+                        <h4>Mantenimiento Preventivo y Correctivo</h4>
+                        <p>Programas de mantenimiento periódico para prolongar la vida útil de equipos. Diagnóstico de fallas, reparación y reemplazo de componentes para evitar paradas no planificadas.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Preventivo</span>
+                            <span class="subservicio-tag">Correctivo</span>
+                            <span class="subservicio-tag">Diagnóstico</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Atención rápida ante emergencias. Técnicos certificados disponibles.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: Automatización y Control -->
+        <div class="serv-panel-wrap" id="panel-automatizacion">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Automatización y Control</h3>
+                        <p>Sistemas inteligentes de control y automatización para procesos industriales.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                        <img src="img/TABLERO-ELECTRICO-EINSAC.jpg" alt="tablero">
+                        </div>
+                        <h4>Armado de Tableros de Automatización</h4>
+                        <p>Diseño y fabricación de tableros eléctricos de control y automatización a medida: PLCs, variadores de frecuencia, relés, contactores y HMI. Integración con sistemas SCADA.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">PLC</span>
+                            <span class="subservicio-tag">SCADA</span>
+                            <span class="subservicio-tag">HMI</span>
+                            <span class="subservicio-tag">A medida</span>
+                        </div>
+                    </div>
+                        <div class="subservicio-card">
+                        <div class="clas-despl-img">
+                        <img src="img/IMG-nota-Mantenimiento-Electrico-Industrial-edited.jpg" alt="tablero">
+                        </div>
+                        <h4>Mant. a Sistemas de Automatización</h4>
+                        <p>Mantenimiento preventivo y correctivo de sistemas de control automatizado. Actualización de firmware, calibración de sensores, revisión de actuadores y optimización de procesos.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Preventivo</span>
+                            <span class="subservicio-tag">Correctivo</span>
+                            <span class="subservicio-tag">Calibración</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer">
+                    <p>Soluciones personalizadas según el proceso y necesidad de tu planta.</p>
+                    <a href="#contacto-cta" class="btn-cotizar">Solicitar cotización →</a>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /servicios-cards-grid -->
+
+</section><!-- /electromec-section -->
+
+<!-- ══ TITAN LIFT DIVIDER ══ -->
+<div class="empresa-divider" style="background: var(--tl-black); padding-bottom: 0;">
+    <div class="empresa-divider-line" style="background: rgba(125,193,14,0.25);"></div>
+    <div class="empresa-divider-badge titan">
+        <span class="badge-dot"></span>
+         Titan Lift
+    </div>
+    <div class="empresa-divider-line" style="background: rgba(125,193,14,0.25);"></div>
+</div>
+
+<!-- ══ TITAN LIFT SECTION ══ -->
+<section class="titanlift-section" id="titanlift">
+
+    <div class="titanlift-hero-banner anim">
+        <div class="tl-banner-inner">
+            <div class="tl-badge">Empresa especializada en elevación vertical</div>
+            <div class="tl-title">
+                <span class="tinta">TITAN</span> <span class="lift">LIFT</span>
+            </div>
+            <p class="tl-sub">Especialistas en equipos de elevación vertical: mantenimiento, venta e instalación de ascensores y montacargas.</p>
+            <a href="titanlift.html" class="btn-titanlift">Ver página completa →</a>
+        </div>
+    </div>
+
+    <div class="servicios-cards-grid">
+
+        <div class="serv-card anim anim-delay-1" onclick="toggleServCard('panel-tl-mant', this)">
+            <span class="serv-card-num">01</span>
+            <div class="serv-card-img">
+                <img src="img/mantenimiento-ascensores.jpg" alt="Mantenimiento" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Mantenimiento de Equipos</h3>
+                <p>Servicio preventivo y correctivo para garantizar el funcionamiento ininterrumpido de sus elevadores.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <div class="serv-card anim anim-delay-2" onclick="toggleServCard('panel-tl-instalacion', this)">
+            <span class="serv-card-num">02</span>
+            <div class="serv-card-img">
+                <img src="img/instalacion-ascensores.jpg" alt="Venta e Instalación" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
+            </div>
+            <div class="serv-card-body">
+                <h3>Venta e Instalación</h3>
+                <p>Suministramos e instalamos ascensores y montacargas de última generación para cualquier edificación.</p>
+            </div>
+            <div class="serv-card-footer">
+                <span class="serv-card-tag">Ver detalles</span>
+                <div class="serv-card-arrow">▼</div>
+            </div>
+        </div>
+
+        <div class="serv-panel-wrap" id="panel-tl-mant">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Servicios de Mantenimiento</h3>
+                        <p>Planes personalizados para ascensores eléctricos, hidráulicos y montacargas.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <h4>Mantenimiento Preventivo</h4>
+                        <p>Revisiones mensuales, lubricación técnica y ajuste de sistemas de seguridad para evitar averías.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Mensual</span>
+                            <span class="subservicio-tag">Seguridad</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <h4>Mantenimiento Correctivo</h4>
+                        <p>Reparación inmediata de fallas, cambio de repuestos originales y modernización de componentes.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Repuestos</span>
+                            <span class="subservicio-tag">Urgencias</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer" style="background: #111;">
+                    <p style="color: #666;">Técnicos especialistas en Tacna con atención 24/7.</p>
+                    <a href="#contacto-cta" class="btn-tl-cotizar">Solicitar servicio →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="serv-panel-wrap" id="panel-tl-instalacion">
+            <div class="serv-panel">
+                <div class="serv-panel-header">
+                    <div>
+                        <h3>Venta e Instalación</h3>
+                        <p>Equipos certificados bajo normativa internacional de seguridad.</p>
+                    </div>
+                </div>
+                <div class="subservicios-grid">
+                    <div class="subservicio-card">
+                        <h4>Ascensores</h4>
+                        <p>Modelos residenciales y comerciales con acabados de lujo y eficiencia energética.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Pasajeros</span>
+                            <span class="subservicio-tag">Camilleros</span>
+                        </div>
+                    </div>
+                    <div class="subservicio-card">
+                        <h4>Montacargas</h4>
+                        <p>Soluciones de carga pesada para industrias, almacenes y centros comerciales.</p>
+                        <div class="subservicio-tag-list">
+                            <span class="subservicio-tag">Alta Carga</span>
+                            <span class="subservicio-tag">Plataformas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicio-bloque-footer" style="background: #111;">
+                    <p style="color: #666;">Garantía extendida en todas nuestras instalaciones.</p>
+                    <a href="#contacto-cta" class="btn-tl-cotizar">Solicitar proyecto →</a>
+                </div>
+            </div>
+        </div>
+
+    </div></section>
+
+<!-- PROCESO -->
+<section class="proceso-section">
+    <span class="section-tag">Cómo trabajamos</span>
+    <h2>Nuestro proceso de trabajo</h2>
+    <div class="proceso-steps">
+        <div class="paso anim anim-delay-1">
+            <div class="paso-num">1</div>
+            <h4>Consulta</h4>
+            <p>Analizamos tus necesidades y requerimientos técnicos.</p>
+        </div>
+        <div class="paso anim anim-delay-2">
+            <div class="paso-num">2</div>
+            <h4>Diagnóstico</h4>
+            <p>Evaluamos el proyecto y elaboramos una propuesta técnica.</p>
+        </div>
+        <div class="paso anim anim-delay-3">
+            <div class="paso-num">3</div>
+            <h4>Presupuesto</h4>
+            <p>Presentamos un presupuesto claro y sin sorpresas.</p>
+        </div>
+        <div class="paso anim anim-delay-1">
+            <div class="paso-num">4</div>
+            <h4>Ejecución</h4>
+            <p>Nuestro equipo técnico realiza el trabajo con precisión.</p>
+        </div>
+        <div class="paso anim anim-delay-2">
+            <div class="paso-num">5</div>
+            <h4>Entrega</h4>
+            <p>Verificamos y certificamos cada trabajo realizado.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto-cta">
+    <span class="section-tag">Contáctanos</span>
+    <h2>¿Tienes un proyecto?<br>Hablemos</h2>
+    <p>Nuestro equipo técnico está listo para asesorarte y darte la mejor solución para tu empresa.</p>
+    <div class="cta-buttons">
+        <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" target="_blank" class="btn-wa">
+             WhatsApp
+        </a>
+        <a href="mailto:contacto@electromec.com" class="btn-email">✉ Enviar correo</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 ELECTROMEC & TITAN LIFT — Todos los derechos reservados · Tacna, Perú</p>
+    <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="catalogo.html">Productos</a>
+        <a href="titanlift.html">TitanLift</a>
+        <a href="index.html#contacto">Contacto</a>
+    </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" class="whatsapp" target="_blank">
+    <img src="img/whatsapp (1).png" alt="WhatsApp" onerror="this.src='img/whatsapp.png'" loading="lazy">
+</a>
+
+<script>
+    // Carrusel hero
+    let slides = document.querySelectorAll('.slide');
+    let idx = 0;
+    function cambiarSlide() {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+    }
+    if (slides.length) setInterval(cambiarSlide, 4000);
+
+    // Menú lateral
+    function abrirMenu() {
+        document.getElementById('panelMenu').classList.add('activo');
+        document.getElementById('menuOverlay').classList.add('activo');
+        document.body.style.overflow = 'hidden';
+    }
+    function cerrarMenu() {
+        document.getElementById('panelMenu').classList.remove('activo');
+        document.getElementById('menuOverlay').classList.remove('activo');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
+
+    // Toggle tarjetas Electromec (card + panel desplegable)
+    function toggleServCard(panelId, cardEl) {
+        const panel = document.getElementById(panelId);
+        const allCards = document.querySelectorAll('.serv-card');
+        const allPanels = document.querySelectorAll('.serv-panel-wrap');
+        const isOpen = panel.classList.contains('open');
+
+        // Cerrar todos
+        allCards.forEach(c => c.classList.remove('activo'));
+        allPanels.forEach(p => p.classList.remove('open'));
+
+        // Si no estaba abierto, abrir este
+        if (!isOpen) {
+            cardEl.classList.add('activo');
+            panel.classList.add('open');
+            // Scroll suave al panel
+            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+        }
+    }
+
+    // Toggle Titan Lift bloques
+    function toggleTLBloque(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle('open');
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
