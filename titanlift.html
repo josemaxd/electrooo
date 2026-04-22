@@ -153,92 +153,166 @@
         .social-btn:hover { background:var(--tl-green); color:var(--tl-black); }
         @media(max-width:768px){ .menu-visual{display:none;} .menu-nav{width:100%;} .menu-nav-link{font-size:2.2rem;} }
 
-        /* ══ HERO ════════════════════════════════════ */
-        .hero {
-            background: var(--tl-black);
-            padding: 0;
-            position: relative; overflow: hidden;
-            min-height: 88vh;
-            display: flex; align-items: center;
-        }
-        .hero-bg {
+        /* ══ HERO CON CARRUSEL (estilo Electromec) ═══ */
+        .hero { height:100vh; position:relative; overflow:hidden; display:flex; align-items:center; }
+        .hero-slider { position:absolute; inset:0; }
+        .slide { position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease; }
+        .slide.activo { opacity:1; }
+        .slide img { width:100%; height:100%; object-fit:cover; }
+        .hero-overlay {
             position:absolute; inset:0;
-            background: linear-gradient(135deg, #000 0%, #1a2a00 40%, #3d6600 70%, var(--tl-green) 100%);
-            opacity:.85;
+            background:linear-gradient(105deg, rgba(0,15,0,.96) 30%, rgba(10,40,0,.72) 60%, rgba(0,0,0,.28) 100%);
         }
-        .hero-grid {
-            position:absolute; inset:0;
+        .hero-deco {
+            position:absolute; right:0; top:0; width:42%; height:100%; opacity:.05;
             background-image:
-                repeating-linear-gradient(90deg, rgba(125,193,14,.04) 0, rgba(125,193,14,.04) 1px, transparent 1px, transparent 70px),
-                repeating-linear-gradient(0deg,  rgba(125,193,14,.04) 0, rgba(125,193,14,.04) 1px, transparent 1px, transparent 70px);
+                repeating-linear-gradient(90deg, var(--tl-green) 0, var(--tl-green) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(0deg,  var(--tl-green) 0, var(--tl-green) 1px, transparent 1px, transparent 60px);
         }
-        .hero-orb {
-            position:absolute; right:-150px; top:-150px;
-            width:600px; height:600px; border-radius:50%;
-            background: radial-gradient(circle, rgba(125,193,14,.2) 0%, transparent 65%);
+        /* Dots */
+        .slide-dots {
+            position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+            display:flex; gap:10px; z-index:3;
         }
-        .hero-orb2 {
-            position:absolute; left:-100px; bottom:-100px;
-            width:400px; height:400px; border-radius:50%;
-            background: radial-gradient(circle, rgba(125,193,14,.1) 0%, transparent 65%);
+        .dot {
+            width:8px; height:8px; border-radius:50%;
+            background:rgba(255,255,255,.35); cursor:pointer;
+            border:none; transition:background .3s, transform .3s;
         }
-        .hero-inner { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:60px; padding: 120px 0 100px; }
-        .hero-texto { max-width:620px; }
+        .dot.activo { background:var(--tl-green); transform:scale(1.3); }
+        /* Flechas */
+        .hero-arrow {
+            position:absolute; top:50%; transform:translateY(-50%);
+            z-index:4; width:46px; height:46px; border-radius:50%;
+            background:rgba(0,0,0,.4); border:1px solid rgba(125,193,14,.3);
+            color:white; font-size:1.1rem; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            transition:background .25s, border-color .25s;
+        }
+        .hero-arrow:hover { background:var(--tl-green); border-color:var(--tl-green); color:var(--tl-black); }
+        .hero-arrow-prev { left:20px; }
+        .hero-arrow-next { right:20px; }
+        @media(max-width:768px){ .hero-arrow { display:none; } }
+
+        /* Contenido hero */
+        .hero-content {
+            position:relative; z-index:2; color:white;
+            margin-left:80px; max-width:680px;
+        }
         .hero-eyebrow {
-            font-size:.75rem; letter-spacing:.25em; text-transform:uppercase;
-            color: var(--tl-green); font-weight:600; margin-bottom:20px;
-            display:flex; align-items:center; gap:12px;
+            display:flex; align-items:center; gap:10px;
+            font-size:.78rem; letter-spacing:.25em; text-transform:uppercase;
+            color:var(--tl-green); margin-bottom:16px; font-weight:600;
+            animation:fadeUp .8s ease both;
         }
-        .hero-eyebrow::before { content:''; width:40px; height:2px; background:var(--tl-green); }
-        .hero-texto h1 {
+        .hero-eyebrow::before { content:''; display:block; width:30px; height:2px; background:var(--tl-green); }
+        .hero h1 {
             font-family:'Barlow Condensed',sans-serif;
-            font-size: clamp(4rem,9vw,7.5rem);
-            font-weight:900; line-height:.88;
-            text-transform:uppercase; color:white; letter-spacing:.02em;
+            font-size:clamp(3rem,7vw,6.5rem);
+            font-weight:900; line-height:.95; letter-spacing:.02em;
+            text-transform:uppercase; animation:fadeUp .8s .12s ease both;
         }
-        .hero-texto h1 .verde { color:var(--tl-green); }
-        .hero-texto h1 .blanco { color:white; }
+        .hero h1 .verde { color:var(--tl-green); }
         .hero-sub {
-            margin-top:24px; font-size:1.08rem;
-            color:rgba(255,255,255,.6); font-weight:300;
-            max-width:500px; line-height:1.75;
+            margin-top:20px; font-size:1.05rem;
+            color:rgba(255,255,255,.7); max-width:480px;
+            font-weight:300; animation:fadeUp .8s .24s ease both;
         }
-        .hero-btns { display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
+        .hero-buttons {
+            margin-top:32px; display:flex; gap:16px;
+            flex-wrap:wrap; animation:fadeUp .8s .36s ease both;
+        }
         .btn-hero-principal {
-            background: var(--tl-green); color: var(--tl-black);
-            padding: 16px 38px; border-radius: 40px;
-            font-weight:700; font-size:.95rem; letter-spacing:.06em;
-            transition: background .3s, transform .2s;
-            box-shadow: 0 6px 24px rgba(125,193,14,.35);
+            background:var(--tl-green); color:var(--tl-black);
+            padding:15px 34px; border-radius:40px; font-weight:700;
+            font-size:.88rem; letter-spacing:.08em;
+            box-shadow:0 6px 24px rgba(125,193,14,.35);
+            transition:background .3s, transform .2s;
         }
         .btn-hero-principal:hover { background:var(--tl-green-l); transform:translateY(-2px); }
         .btn-hero-sec {
-            background: transparent; color: white;
-            padding: 16px 38px; border-radius: 40px;
-            font-weight:600; font-size:.95rem; letter-spacing:.06em;
-            border: 2px solid rgba(255,255,255,.25);
-            transition: border-color .3s, background .3s;
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(255,255,255,.08); color:white;
+            padding:15px 34px; border-radius:40px; font-weight:700;
+            font-size:.88rem; letter-spacing:.08em;
+            border:2px solid rgba(255,255,255,.2);
+            transition:border-color .3s, background .3s;
         }
-        .btn-hero-sec:hover { border-color:var(--tl-green); background:rgba(125,193,14,.08); }
+        .btn-hero-sec:hover { border-color:var(--tl-green); background:rgba(125,193,14,.1); }
 
-        .hero-stats { display:flex; flex-direction:column; gap:28px; }
-        .hero-stat-card {
-            background: rgba(255,255,255,.05);
-            border: 1px solid rgba(125,193,14,.2);
-            border-radius: 14px; padding: 22px 28px;
-            text-align:center; min-width:150px;
-            backdrop-filter:blur(10px);
+        /* Tarjetas flotantes */
+        .hero-floating-cards {
+            position:absolute; right:56px; bottom:70px;
+            z-index:4; display:flex; flex-direction:column; gap:10px;
         }
-        .hero-stat-num {
-            font-family:'Barlow Condensed',sans-serif;
-            font-size:2.8rem; font-weight:900;
-            color:var(--tl-green); line-height:1;
+        .float-card {
+            display:flex; align-items:center; gap:14px;
+            background:rgba(255,255,255,.10);
+            backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+            border:1px solid rgba(255,255,255,.22);
+            border-radius:14px; padding:13px 18px; width:230px;
+            cursor:pointer; text-decoration:none;
+            transition:background .3s, transform .3s, border-color .3s, box-shadow .3s;
+            box-shadow:0 8px 28px rgba(0,0,0,.25);
+            position:relative; overflow:hidden;
         }
-        .hero-stat-label {
-            font-size:.68rem; letter-spacing:.15em;
-            text-transform:uppercase; color:rgba(255,255,255,.4);
-            margin-top:4px;
+        .float-card::before {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(120deg,rgba(125,193,14,.18) 0%,transparent 70%);
+            opacity:0; transition:opacity .35s;
         }
+        .float-card:hover {
+            background:rgba(255,255,255,.18);
+            transform:translateX(-5px) translateY(-2px);
+            border-color:var(--tl-green);
+            box-shadow:0 14px 40px rgba(0,0,0,.35), 0 0 0 1px var(--tl-green);
+        }
+        .float-card:hover::before { opacity:1; }
+        .float-card-icon {
+            width:42px; height:42px; border-radius:10px;
+            background:var(--tl-green);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.3rem; flex-shrink:0;
+            transition:background .3s, transform .3s;
+            box-shadow:0 4px 14px rgba(125,193,14,.45);
+        }
+        .float-card:nth-child(2) .float-card-icon { background:var(--tl-black); box-shadow:0 4px 14px rgba(0,0,0,.35); }
+        .float-card:nth-child(3) .float-card-icon { background:rgba(125,193,14,.25); box-shadow:0 4px 14px rgba(125,193,14,.2); }
+        .float-card:hover .float-card-icon { transform:scale(1.1) rotate(-4deg); }
+        .float-card-text { flex:1; min-width:0; }
+        .float-card-label {
+            font-size:.66rem; letter-spacing:.15rem; text-transform:uppercase;
+            color:rgba(255,255,255,.5); font-weight:600; line-height:1; margin-bottom:3px;
+        }
+        .float-card-title {
+            font-family:'Barlow Condensed',sans-serif; font-size:1rem;
+            font-weight:900; color:white; text-transform:uppercase;
+            letter-spacing:.04em; line-height:1.1; white-space:nowrap;
+        }
+        .float-card-arrow { font-size:.95rem; color:rgba(255,255,255,.55); transition:color .3s, transform .3s; flex-shrink:0; }
+        .float-card:hover .float-card-arrow { color:var(--tl-green); transform:translateX(4px); }
+        @keyframes floatPulse { 0%,100%{box-shadow:0 8px 28px rgba(0,0,0,.25);} 50%{box-shadow:0 8px 32px rgba(125,193,14,.38);} }
+        .float-card { animation:fadeUp .7s ease both; }
+        .float-card:nth-child(1) { animation-delay:.55s; }
+        .float-card:first-child { animation:fadeUp .7s .55s ease both, floatPulse 3.5s 1.8s ease-in-out infinite; }
+        .float-card:first-child:hover { animation:none; }
+        .float-card:nth-child(2) { animation-delay:.70s; }
+        .float-card:nth-child(3) { animation-delay:.85s; }
+
+        @media(max-width:768px){
+            .hero-content { margin-left:24px; margin-right:24px; }
+            .hero-floating-cards {
+                position:absolute; right:unset; left:50%; transform:translateX(-50%);
+                bottom:52px; flex-direction:row; gap:8px;
+                width:calc(100% - 32px); max-width:480px;
+            }
+            .float-card { flex:1; width:auto; min-width:0; flex-direction:column; align-items:center; text-align:center; padding:10px 8px; gap:7px; }
+            .float-card-title { font-size:.8rem; white-space:normal; }
+            .float-card-label { font-size:.6rem; }
+            .float-card-icon { width:34px; height:34px; font-size:1rem; }
+            .float-card-arrow { display:none; }
+        }
+        @media(max-width:400px){ .float-card { padding:8px 6px; } .float-card-title { font-size:.75rem; } .float-card-icon { width:30px; height:30px; } }
 
         /* ══ FRANJA SERVICIOS RÁPIDOS ════════════════ */
         .franja-servicios {
@@ -537,6 +611,147 @@
         .whatsapp:hover { transform:scale(1.1); }
         .whatsapp svg { width:30px; height:30px; fill:white; }
 
+        /* ══ CARRUSEL TESTIMONIOS ════════════════════ */
+        .carrusel-section {
+            background: var(--tl-black);
+            padding: 100px 0;
+            overflow: hidden;
+        }
+        .carrusel-track-wrap {
+            position: relative;
+            margin-top: 60px;
+            overflow: hidden;
+        }
+        .carrusel-track-wrap::before,
+        .carrusel-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .carrusel-track-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, var(--tl-black), transparent);
+        }
+        .carrusel-track-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, var(--tl-black), transparent);
+        }
+        .carrusel-track {
+            display: flex;
+            gap: 24px;
+            transition: transform .5s cubic-bezier(.4,0,.2,1);
+            will-change: transform;
+        }
+        .testi-card {
+            flex: 0 0 360px;
+            background: var(--tl-dark2);
+            border: 1px solid rgba(125,193,14,.12);
+            border-radius: 20px;
+            padding: 32px 30px;
+            position: relative;
+            transition: border-color .3s, transform .3s;
+        }
+        .testi-card:hover {
+            border-color: rgba(125,193,14,.4);
+            transform: translateY(-4px);
+        }
+        .testi-quote {
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--tl-green);
+            opacity: .35;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+        .testi-text {
+            font-size: .93rem;
+            color: rgba(255,255,255,.6);
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+        .testi-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+        .testi-stars span {
+            color: var(--tl-green);
+            font-size: 1rem;
+        }
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid rgba(125,193,14,.1);
+            padding-top: 20px;
+        }
+        .testi-avatar {
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--tl-green-d), var(--tl-green));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 900; font-size: 1.1rem;
+            color: var(--tl-black);
+            flex-shrink: 0;
+        }
+        .testi-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .06em;
+            color: white;
+        }
+        .testi-role {
+            font-size: .75rem;
+            color: rgba(255,255,255,.35);
+            letter-spacing: .08em;
+            margin-top: 2px;
+        }
+        .carrusel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 44px;
+        }
+        .carrusel-btn {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: rgba(125,193,14,.1);
+            border: 1px solid rgba(125,193,14,.25);
+            color: var(--tl-green);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .25s, transform .2s;
+        }
+        .carrusel-btn:hover {
+            background: var(--tl-green);
+            color: var(--tl-black);
+            transform: scale(1.08);
+        }
+        .carrusel-dots {
+            display: flex;
+            gap: 8px;
+        }
+        .carrusel-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(125,193,14,.25);
+            cursor: pointer;
+            transition: background .3s, transform .3s;
+        }
+        .carrusel-dot.activo {
+            background: var(--tl-green);
+            transform: scale(1.3);
+        }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(28px);} to{opacity:1;transform:translateY(0);} }
+
         /* ══ RESPONSIVE ══════════════════════════════ */
         @media(max-width:1024px){
             .franja-inner { grid-template-columns:repeat(3,1fr); }
@@ -549,17 +764,12 @@
             .header { padding:0 16px; }
             .nav-links { display:none; }
             .franja-inner { grid-template-columns:1fr; }
-            .hero-stats { flex-direction:row; flex-wrap:wrap; justify-content:center; }
-            .hero-stat-card { min-width:130px; }
             .proceso-steps { grid-template-columns:1fr; }
             .productos-grid { grid-template-columns:1fr; }
             .footer-grid { grid-template-columns:1fr; gap:30px; }
             .footer-bottom { flex-direction:column; text-align:center; gap:8px; }
-            /* Hero */
-            .hero { min-height:auto; padding:80px 0 60px; }
-            .hero-inner { flex-direction:column; text-align:center; }
             .hero h1 { font-size:clamp(3rem,12vw,5rem); }
-            .hero-btns { justify-content:center; }
+            .hero-buttons { justify-content:center; }
             /* Contacto */
             .contacto-grid { grid-template-columns:1fr; gap:40px; }
             /* CTA */
@@ -585,10 +795,11 @@
 <!-- HEADER -->
 <header class="header">
     <a href="titanlift.html" class="logo-area">
-        <img src="img/TITANLIFTS-removebg-preview.png" alt="TitanLift" loading="lazy">
+        <img src="img/titan-logo-removebg-preview.png" alt="TitanLift" loading="lazy">
         <small class="by">Tacna - Perú</small>
     </a>
     <ul class="nav-links">
+        <li><a href="index.html" class="footer-electromec">Inicio</a></li>
         <li><a href="#servicios" class="activo">Servicios</a></li>
         <li><a href="#proceso">Cómo trabajamos</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -642,37 +853,66 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-orb"></div>
-    <div class="hero-orb2"></div>
+<section class="hero" id="heroSection">
+    <!-- Slider de fondo -->
+    <div class="hero-slider">
+        <div class="slide activo"><img src="img/carrusel4.jpg" alt="TitánLift ascensores" loading="eager"></div>
+        <div class="slide"><img src="img/carruseltitan.jpg" alt="TitánLift montacargas" loading="lazy"></div>
+        <div class="slide"><img src="img/ascensortintanlift.jpg" alt="Instalación ascensores" loading="lazy"></div>
+        <div class="slide"><img src="img/ascensores-electricos.webp" alt="Mantenimiento elevadores" loading="lazy"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-deco"></div>
+
+    
+    <!-- Contenido principal -->
     <div class="container">
-        <div class="hero-inner">
-            <div class="hero-texto">
-                <p class="hero-eyebrow anim">Tacna, Perú · Elevación Vertical</p>
-                <h1 class="anim anim-delay-1">
-                    <span class="verde">TITAN</span><br>
-                    <span class="blanco">LIFT</span>
-                </h1>
-                <p class="hero-sub anim anim-delay-2">Marca especializada en sistemas de elevación vertical. Ofrecemos servicios de mantenimiento preventivo y correctivo, además de la venta e instalación de ascensores y montacargas. 
-                Brindamos soluciones para el sector industrial y residencial, con altos estándares de seguridad, calidad y eficiencia. </p>
-                <div class="hero-btns anim anim-delay-3">
-                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-hero-principal"> Evaluación gratuita</a>
-                    <a href="#servicios" class="btn-hero-sec">Ver servicios ↓</a>
-                </div>
-            </div>
-            <div class="hero-stats anim anim-delay-2">
-                <div class="hero-stat-card">
-                    <div class="hero-stat-num">+150</div>
-                    <div class="hero-stat-label">Equipos atendidos</div>
-                </div>
-                <div class="hero-stat-card">
-                    <div class="hero-stat-num">24/7</div>
-                    <div class="hero-stat-label">Soporte técnico</div>
-                </div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Tacna, Perú · Elevación Vertical</p>
+            <h1>
+                SOLUCIONES<br>
+                EN <span class="verde">ELEVACIÓN</span><br>
+                VERTICAL
+            </h1>
+            <p class="hero-sub">Especialistas en mantenimiento preventivo y correctivo de ascensores, venta e instalación de montacargas y repuestos. Altos estándares de seguridad, calidad y eficiencia.</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-hero-principal"> Evaluación gratuita</a>
+                <a href="#servicios" class="btn-hero-sec">Ver servicios ↓</a>
             </div>
         </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="slide-dots">
+        <div class="dot activo" onclick="irSlide(0)"></div>
+        <div class="dot" onclick="irSlide(1)"></div>
+        <div class="dot" onclick="irSlide(2)"></div>
+        <div class="dot" onclick="irSlide(3)"></div>
+    </div>
+
+    <!-- Tarjetas flotantes -->
+    <div class="hero-floating-cards">
+        <a href="#servicios" class="float-card">
+            <div class="float-card-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--tl-black)"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="float-card-text">
+                <div class="float-card-label">Explora</div>
+                <div class="float-card-title">Servicios</div>
+            </div>
+            <span class="float-card-arrow">&#8250;</span>
+        </a>
+        <a href="https://wa.me/51971022550?text=Hola,%20quiero%20contactar%20TitánLift" target="_blank" class="float-card">
+            <div class="float-card-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(125,193,14,.9)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.549 4.116 1.508 5.856L0 24l6.335-1.493A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.206-1.49l-.374-.223-3.76.886.931-3.659-.244-.386A9.789 9.789 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            </div>
+            <div class="float-card-text">
+                <div class="float-card-label">Contactar</div>
+                <div class="float-card-title">WhatsApp</div>
+            </div>
+            <span class="float-card-arrow">&#8250;</span>
+        </a>
     </div>
 </section>
 
@@ -942,7 +1182,79 @@
         }, 1000);
     });
 
-    /* ANIMACIONES SCROLL */
+    /* CARRUSEL HERO */
+    /* CARRUSEL */
+    const slides = document.querySelectorAll('.slide');
+    const dots   = document.querySelectorAll('.dot');
+    let idx = 0, timer;
+    function irSlide(n) {
+        slides[idx].classList.remove('active'); dots[idx].classList.remove('active');
+        idx = n;
+        slides[idx].classList.add('active'); dots[idx].classList.add('active');
+        clearInterval(timer); timer = setInterval(siguiente, 5000);
+    }
+    function siguiente() { irSlide((idx + 1) % slides.length); }
+    timer = setInterval(siguiente, 5000);
+    /* Pausa al hover */
+    var heroEl = document.getElementById('heroSection');
+    if (heroEl) {
+        heroEl.addEventListener('mouseenter', function(){ clearInterval(heroTimer); });
+        heroEl.addEventListener('mouseleave', function(){ heroTimer = setInterval(heroSig, 5000); });
+    }
+
+
+    (function() {
+        const track    = document.getElementById('carruselTrack');
+        const dotsWrap = document.getElementById('carruselDots');
+        const cards    = track.querySelectorAll('.testi-card');
+        const cardW    = 360 + 24; // card width + gap
+        let current    = 0;
+        let autoTimer;
+
+        // Padding offset to center the first card with fade edges
+        const offset = 60;
+
+        // Build dots
+        cards.forEach((_, i) => {
+            const d = document.createElement('button');
+            d.className = 'carrusel-dot' + (i === 0 ? ' activo' : '');
+            d.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(d);
+        });
+
+        function goTo(idx) {
+            if (idx < 0) idx = cards.length - 1;
+            if (idx >= cards.length) idx = 0;
+            current = idx;
+            track.style.transform = `translateX(calc(${offset}px - ${current * cardW}px))`;
+            dotsWrap.querySelectorAll('.carrusel-dot').forEach((d, i) => {
+                d.classList.toggle('activo', i === current);
+            });
+        }
+
+        function startAuto() {
+            autoTimer = setInterval(() => goTo(current + 1), 4000);
+        }
+        function stopAuto() {
+            clearInterval(autoTimer);
+        }
+
+        document.getElementById('carruselPrev').addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+        document.getElementById('carruselNext').addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+        // Touch / swipe
+        let touchStartX = 0;
+        track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; stopAuto(); }, { passive: true });
+        track.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+            startAuto();
+        });
+
+        goTo(0);
+        startAuto();
+    })();
+
     const observer = new IntersectionObserver(
         entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
         { threshold: 0.1 }

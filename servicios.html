@@ -1193,9 +1193,12 @@
         document.getElementById('panelMenu').classList.remove('activo');
         document.getElementById('menuOverlay').classList.remove('activo');
         document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
-
+        document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('activo');
+    });
+}
+    
+     
     // Toggle tarjetas Electromec (card + panel desplegable)
     function toggleServCard(panelId, cardEl) {
         const panel = document.getElementById(panelId);

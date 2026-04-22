@@ -299,8 +299,9 @@
             opacity: 1;
             transform: translateX(0);
         }
-        .menu-nav-link.activo { color: var(--primary); }
-        .menu-nav-link.activo::before { opacity: 1; transform: translateX(0); }
+        .menu-nav-link.activo {
+            color: var(--primary);
+        }
 
         .menu-nav-cta {
             margin-top: 32px;
@@ -445,6 +446,37 @@
         .serv-home-card h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:.04em; margin-bottom:8px; }
         .serv-home-card p { font-size:.86rem; color:var(--gray); line-height:1.6; font-weight:300; }
         .servicios-ver-mas { text-align:center; margin-top:42px; }
+
+        /* ── MINI TITANLIFT BANNER ── */
+        .mini-tl-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:16px;
+            margin:28px auto 0; max-width:680px;
+            background:linear-gradient(120deg,#0f1f10 0%,#1a2e0a 60%,#223a0c 100%);
+            border:1px solid var(--tl-green); border-radius:16px;
+            padding:16px 22px; box-shadow:0 4px 24px rgba(125,193,14,.13);
+        }
+        .mini-tl-left { display:flex; align-items:center; gap:14px; min-width:0; }
+        .mini-tl-logo { height:36px; width:auto; flex-shrink:0; filter:brightness(1.1); }
+        .mini-tl-texto { min-width:0; }
+        .mini-tl-tag {
+            display:inline-block; font-size:.62rem; font-weight:700; letter-spacing:.12em;
+            text-transform:uppercase; color:var(--tl-green); background:rgba(125,193,14,.12);
+            border-radius:999px; padding:2px 10px; margin-bottom:4px;
+        }
+        .mini-tl-desc { font-size:.8rem; color:rgba(255,255,255,.7); margin:0; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .mini-tl-btn {
+            flex-shrink:0; display:inline-block; background:var(--tl-green); color:#0f1f10;
+            font-weight:800; font-size:.8rem; letter-spacing:.05em; padding:10px 20px;
+            border-radius:999px; text-decoration:none; white-space:nowrap;
+            transition:background .25s, transform .2s, box-shadow .25s;
+            box-shadow:0 2px 12px rgba(125,193,14,.3);
+        }
+        .mini-tl-btn:hover { background:var(--tl-green-l); transform:translateY(-2px); box-shadow:0 6px 20px rgba(125,193,14,.45); }
+        @media(max-width:560px) {
+            .mini-tl-banner { flex-direction:column; align-items:flex-start; }
+            .mini-tl-desc { white-space:normal; }
+            .mini-tl-btn { align-self:stretch; text-align:center; }
+        }
         .btn-ver-mas { display:inline-flex; align-items:center; gap:8px; background:var(--primary); color:white; padding:15px 36px; border-radius:40px; font-weight:700; font-size:.88rem; letter-spacing:.1em; text-transform:uppercase; transition:background .3s,transform .2s; }
         .btn-ver-mas:hover { background:var(--primary-l); transform:translateY(-2px); }
         .serv-home-icon{width:100%;height:180px;   /* altura igual para todas */overflow:hidden;border-radius:8px;margin-bottom:14px;}
@@ -1091,11 +1123,13 @@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-slider">
+        <a href="#ubicacion">
         <div class="slide active"><img src="img/carrusel4.jpg" alt="Electromec industrial"></div>
+        </a>
         <div class="slide"><img src="img/carrusel2.jpg" alt="Instalaciones eléctricas" loading="lazy"></div>
-        <div class="slide"><img src="img/carrusel3.jpeg" alt="Tableros industriales" loading="lazy"></div>
-        
+        <div class="slide"><img src="img/ascensorr.webp" alt="Tableros industriales" loading="lazy"></div>
     </div>
+    
     <div class="hero-overlay"></div>
     <div class="hero-deco"></div>
     <div class="hero-content">
@@ -1103,7 +1137,7 @@
         <h1>EXCELENCIA<br>EN <span>SOLUCIONES</span><br><span class="naranja">ELÉCTRICAS</span></h1>
         <p class="hero-sub">Especialistas en instalaciones industriales, diseño y fabricación de tableros eléctricos, sistemas de elevación (ascensores) y mantenimiento técnico de alta precisión. </p>
         <div class="hero-buttons">
-            <a href="servicios.html" class="btn-principal">Nuestros servicios</a>
+            <a href="servicios.html#electromec-servicios" class="btn-principal">Nuestros servicios</a>
             <a href="#catalogo" class="btn-secundario">Ver catálogo</a>
         </div>
     </div>
@@ -1138,39 +1172,9 @@
 <div class="stats-bar">
     <div class="stat-item anim anim-delay-1"><div class="stat-num">100%</div><div class="stat-label">Tacneños</div></div>
     <div class="stat-item anim anim-delay-2"><div class="stat-num">150+</div><div class="stat-label">Proyectos realizados</div></div>
-    <div class="stat-item anim anim-delay-3"><div class="stat-num">6</div><div class="stat-label">Líneas de servicio</div></div>
+    <div class="stat-item anim anim-delay-3"><div class="stat-num" id="viewerCount">6</div><div class="stat-label">Personas estan viendo esto</div></div>
     <div class="stat-item anim anim-delay-4"><div class="stat-num">100%</div><div class="stat-label">Garantía de calidad</div></div>
 </div>
-
-<!-- NOSOTROS -->
-<section id="nosotros" class="nosotros">
-    <div class="container">
-        <div class="nosotros-inner">
-            <div class="nosotros-texto anim">
-                <span class="section-tag">Quiénes somos</span>
-                <h2>SOMOS <span>ELECTROMEC</span></h2>
-                <p>Somos una empresa tacneña especializada en soluciones eléctricas e industriales, orientada a atender al sector empresarial, institucional e industrial de la zona sur del país. 
-                Nos distinguimos por la alta calidad técnica de nuestros trabajos, el cumplimiento de plazos y nuestro firme compromiso con la seguridad en cada instalación que realizamos.</p> 
-                <p>Trabajamos bajo principios claros que garantizan resultados confiables: 
-                Seguridad: Cumplimiento de todas las normativas eléctricas vigentes. 
-                Calidad: Uso de materiales certificados y mano de obra especializada. 
-                Eficiencia: Soluciones optimizadas que reducen costos operativos. 
-                Compromiso: Acompañamiento integral en cada proyecto, desde el inicio hasta su finalización.</p>
-                <div class="nosotros-valores">
-                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Seguridad</h4><p>Cumplimos todas las normativas eléctricas vigentes.</p></div></div>
-                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Eficiencia</h4><p>Soluciones optimizadas para reducir costos operativos.</p></div></div>
-                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Calidad</h4><p>Materiales certificados y mano de obra experta.</p></div></div>
-                    <div class="valor-item"><div class="valor-icon"><img src="img/logo.3.png" alt="logo" loading="lazy"></div><div><h4>Compromiso</h4><p>Acompañamos cada proyecto de inicio a fin.</p></div></div>
-                </div>
-            </div>
-            <div class="nosotros-visual anim anim-delay-2">
-                <div class="nosotros-img-wrap">
-                    <img src="img/page1.png" alt="ELECTROMEC" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- SERVICIOS RESUMEN -->
 <section id="servicios" class="servicios-home">
@@ -1198,7 +1202,7 @@
                 <div class="serv-card-arrow">▼</div>
             </div>
         </div>
-
+ 
         <!-- TARJETA 2: Máquinas Eléctricas -->
         <div class="serv-card anim anim-delay-2" onclick="toggleServCard('panel-maquinas', this)">
             <span class="serv-card-num">02</span>
@@ -1360,6 +1364,19 @@
 
     </div><!-- /servicios-cards-grid -->
         <div class="servicios-ver-mas anim"><a href="servicios.html" class="btn-ver-mas">Ver todos los servicios</a></div>
+
+        <!-- MINI TITANLIFT BANNER -->
+        <div class="mini-tl-banner anim">
+            <div class="mini-tl-left">
+                <img src="img/TITANLIFTS-removebg-preview.png" alt="TitanLift" class="mini-tl-logo" onerror="this.style.display='none'">
+                <div class="mini-tl-texto">
+                    <span class="mini-tl-tag">Marca aliada</span>
+                    <p class="mini-tl-desc">Ascensores y montacargas en Tacna — instalación, mantenimiento y repuestos.</p>
+                </div>
+            </div>
+            <a href="titanlift.html" class="mini-tl-btn">Ver TitanLift ›</a>
+        </div>
+
     </div>
 </section>
 
@@ -1423,139 +1440,6 @@
             </div>
         </div>
         <a href="catalogo.html" class="btn-secundario">VER MAS</a>
-    </div>
-</section>
-
-<!-- TINTALIFT -->
-<section id="tintalift" class="tintalift-section">
-
-    <div class="tintalift-hero">
-        <div class="container">
-            <div class="tintalift-hero-inner">
-                <div class="tintalift-badge anim">Marca especializada en sistemas de elevación vertical en Tacna, Perú. </div>
-                <h2 class="tintalift-title anim anim-delay-1">
-                    <span class="tinta">TITAN</span><span class="lift">LIFT</span>
-                </h2>
-                <p class="tintalift-sub anim anim-delay-2">Ofrecemos servicios de mantenimiento, instalación, venta y suministro de repuestos para ascensores y montacargas, con altos estándares de seguridad y confiabilidad.</p>
-                <div class="tl-hero-btns anim anim-delay-3">
-                    <a href="titanlift.html" class="btn-tintalift">Ver página TitanLift</a>
-                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20TitánLift" target="_blank" class="btn-tintalift-outline">Solicitar por WhatsApp</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <!-- Stats TitanLift -->
-        <div class="tl-stats anim">
-            <div class="tl-stat-item">
-                <strong>+30</strong>
-                <span>Equipos mantenidos</span>
-            </div>
-            <div class="tl-stat-item">
-                <strong>100%</strong>
-                <span>Equipos certificados</span>
-            </div>
-            <div class="tl-stat-item">
-                <strong>24/7</strong>
-                <span>Soporte de emergencia</span>
-            </div>
-            <div class="tl-stat-item">
-                <strong>5★</strong>
-                <span>Satisfacción del cliente</span>
-            </div>
-        </div>
-
-        <!-- Servicios exactos -->
-        <div class="tl-servicios-titulo anim">
-            <span class="section-tag" style="background:var(--tl-green);color:#000">Nuestros Servicios</span>
-            <h3>TODO LO QUE HACE <span style="color:var(--tl-green)">TITAN LIFT</span></h3>
-        </div>
-
-        <div class="tintalift-servicios">
-            <div class="tl-card anim anim-delay-1">
-                <span class="tl-card-num">01</span>
-                <div class="tl-card-icon"></div>
-                <h4>Mantenimiento Preventivo y Correctivo</h4>
-                <p>Servicio técnico integral para equipos de elevación vertical como ascensores y montacargas. Incluye revisiones periódicas, diagnóstico y reparación de fallas, garantizando una operación continua, segura y eficiente.</p>
-                <a href="https://wa.me/51971022550?text=Hola,%20necesito%20mantenimiento%20de%20mi%20equipo%20de%20elevación" target="_blank" class="tl-card-btn">Solicitar mantenimiento</a>
-            </div>
-            <div class="tl-card anim anim-delay-2">
-                <span class="tl-card-num">02</span>
-                <div class="tl-card-icon"></div>
-                <h4>Venta de Repuestos para Ascensores</h4>
-                <p>Suministro de repuestos originales y compatibles para ascensores de distintas marcas. Contamos con puertas, motores, variadores, botoneras y más, con entrega rápida en Tacna para reducir tiempos de parada. </p>
-                <a href="https://wa.me/51971022550?text=Hola,%20necesito%20repuestos%20para%20mi%20ascensor" target="_blank" class="tl-card-btn">Consultar repuestos</a>
-            </div>
-            <div class="tl-card anim anim-delay-3">
-                <span class="tl-card-num">03</span>
-                <div class="tl-card-icon"></div>
-                <h4>Venta e Instalación de Montacargas y Ascensores</h4>
-                <p>Suministro e instalación completa de sistemas de elevación nuevos para edificios residenciales, comerciales e industriales. Incluye asesoría técnica, instalación certificada y puesta en marcha del equipo.</p>
-                <a href="https://wa.me/51971022550?text=Hola,%20quiero%20instalar%20un%20ascensor%20o%20montacargas" target="_blank" class="tl-card-btn">Solicitar instalación</a>
-            </div>
-        </div>
-
-        <div class="tintalift-cta anim">
-            <div class="tintalift-cta-inner">
-                <div>
-                    <h3>¿Tu equipo necesita atención?</h3>
-                    <p>Un técnico especialista evaluará tu equipo sin costo en Tacna.</p>
-                </div>
-                <div class="tintalift-cta-btns">
-                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-tl-wa">WhatsApp</a>
-                    <a href="titanlift.html" class="btn-tl-form">Ver más de TitanLift</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-
-<!-- TESTIMONIOS -->
-<section class="testimonios">
-    <div class="container">
-        <div class="testimonios-header anim">
-            <span class="section-tag">Testimonios</span>
-            <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
-        </div>
-        <div class="testimonios-grid">
-            <div class="testimonio-card anim anim-delay-1">
-                <div class="testimonio-verificado">Verificado</div>
-                <div class="testimonio-stars">★★★★★</div>
-                <p>"Excelente servicio eléctrico industrial. El equipo de ELECTROMEC demostró gran profesionalismo y terminaron el trabajo antes del plazo acordado."</p>
-                <div class="testimonio-autor"><div class="autor-avatar">I</div><div><div class="autor-nombre">Industrias del Sur S.A.C.</div><div class="autor-empresa">Sector industrial · Tacna</div></div></div>
-            </div>
-            <div class="testimonio-card anim anim-delay-2">
-                <div class="testimonio-verificado">Verificado</div>
-                <div class="testimonio-stars">★★★★★</div>
-                <p>"Trabajo rápido y muy profesional. Instalaron nuestro tablero eléctrico sin interrumpir las operaciones. Totalmente recomendados."</p>
-                <div class="testimonio-autor"><div class="autor-avatar">C</div><div><div class="autor-nombre">Constructora Andina E.I.R.L.</div><div class="autor-empresa">Construcción · Tacna</div></div></div>
-            </div>
-            <div class="testimonio-card anim anim-delay-3">
-                <div class="testimonio-verificado">Verificado</div>
-                <div class="testimonio-stars">★★★★★</div>
-                <p>"Instalaron el ascensor de nuestro edificio con total seguridad y cumpliendo con todas las certificaciones requeridas. Muy satisfechos."</p>
-                <div class="testimonio-autor"><div class="autor-avatar">E</div><div><div class="autor-nombre">Edificio Residencial San Martín</div><div class="autor-empresa">Inmobiliaria · Tacna</div></div></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- MARCAS -->
-<section class="marcas">
-    <div class="container">
-        <h3>Marcas con las que trabajamos</h3>
-        <div class="marcas-row">
-            <div class="marca-item">SCHNEIDER</div>
-            <div class="marca-item">LEGRAND</div>
-            <div class="marca-item">ABB</div>
-            <div class="marca-item">TITAN LIFT</div>
-            <div class="marca-item">BTICINO</div>
-            <div class="marca-item">INDECO</div>
-        </div>
     </div>
 </section>
 
@@ -1676,11 +1560,15 @@
         document.body.style.overflow = 'hidden';
     }
     function cerrarMenu() {
-        document.getElementById('panelMenu').classList.remove('activo');
-        document.getElementById('menuOverlay').classList.remove('activo');
-        document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarMenu(); });
+    document.getElementById('panelMenu').classList.remove('activo');
+    document.getElementById('menuOverlay').classList.remove('activo');
+    document.body.style.overflow = '';
+
+    // Quitar flechita activa
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.remove('activo');
+    });
+}
 
     /* WHATSAPP COTIZAR */
     function cotizarWhatsApp(producto, precio) {
@@ -1777,6 +1665,33 @@
         { threshold: 0.1 }
     );
     document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+    /* ── CONTADOR VISITANTES EN VIVO ── */
+    (function () {
+        const el = document.getElementById('viewerCount');
+        if (!el) return;
+        const MIN = 2, MAX = 30;
+        let actual = Math.floor(Math.random() * (15 - 8 + 1)) + 8;
+        el.textContent = actual;
+
+        function actualizar() {
+            const paso  = Math.floor(Math.random() * 5) + 1;
+            const subir = Math.random() < 0.55;
+            actual = Math.max(MIN, Math.min(MAX, actual + (subir ? paso : -paso)));
+
+            el.style.transition = 'opacity .35s';
+            el.style.opacity = '0';
+            setTimeout(() => {
+                el.textContent = actual;
+                el.style.opacity = '1';
+            }, 350);
+
+            const delay = (Math.random() * 2 + 3) * 60 * 1000;
+            setTimeout(actualizar, delay);
+        }
+
+        setTimeout(actualizar, (Math.random() * 2 + 3) * 60 * 1000);
+    })();
 </script>
 </body>
 </html>
