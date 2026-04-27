@@ -95,7 +95,9 @@
         .menu-nav-link:hover { color:var(--primary); transform:translateX(6px); }
         .menu-nav-link:hover::before { opacity:1; transform:translateX(0); }
         .menu-nav-link.activo { color:var(--primary); }
-        .menu-nav-link.activo::before { opacity:1; transform:translateX(0); }
+        .menu-nav-link.activo::before { opacity:1 !important; transform:translateX(0) !important; }
+        .menu-nav-links:has(.menu-nav-link:hover) .menu-nav-link.activo::before { opacity:0 !important; transform:translateX(-8px) !important; }
+        .menu-nav-links:has(.menu-nav-link.activo:hover) .menu-nav-link.activo::before { opacity:1 !important; transform:translateX(0) !important; }
         .tintalift-link { color:var(--tl-green)!important; font-weight:700!important; }
         .menu-nav-cta { margin-top:32px; }
         .btn-menu-cta { display:block; text-align:center; background:var(--primary); color:white; padding:15px 30px; border-radius:8px; font-family:'Barlow',sans-serif; font-weight:700; font-size:.88rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:20px; transition:background .3s; }
