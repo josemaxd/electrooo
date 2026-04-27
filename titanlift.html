@@ -364,7 +364,7 @@
         .sec-header p { margin-top:14px; color:rgba(255,255,255,.5); font-size:.97rem; max-width:540px; margin-left:auto; margin-right:auto; }
 
         .servicios-grid {
-            display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
+            display:grid; grid-template-columns:repeat(3,1fr); gap:30px; align-items:flex-start;
         }
         /* ── SERV CARD rediseño: imagen fija + info desplegable ── */
         .serv-card {
@@ -374,6 +374,11 @@
             overflow: hidden;
             transition: border-color .3s, transform .3s, box-shadow .3s;
             position: relative;
+            z-index: 1;
+        }
+        .serv-card.abierto {
+            z-index: 10;
+            box-shadow: 0 20px 60px rgba(125,193,14,.25);
         }
         .serv-card::after {
             content:''; position:absolute;
@@ -436,7 +441,7 @@
             padding: 0 28px;
         }
         .serv-card.abierto .serv-body {
-            max-height: 600px;
+            max-height: 800px;
             padding: 0 28px 28px;
         }
         .serv-body p { color:rgba(255,255,255,.55); font-size:.93rem; line-height:1.75; margin-bottom:16px; }
@@ -862,15 +867,17 @@
         <div class="slide activo" data-href="#servicios"><img src="img/carrusel4.jpg" alt="TitánLift ascensores" loading="eager"></div>
         <div class="slide" data-href="#proceso"><img src="img/carruseltitan.jpg" alt="TitánLift montacargas" loading="lazy"></div>
         <div class="slide" data-href="#galeria"><img src="img/ascensortintanlift.jpg" alt="Instalación ascensores" loading="lazy"></div>
-        <div class="slide" data-href="#contacto"><img src="img/ascensores-electricos.webp" alt="Mantenimiento elevadores" loading="lazy"></div>
     </div>
 
     <div class="hero-overlay"></div>
     <div class="hero-deco"></div>
 
+    <!-- Capa clickeable transparente para slides -->
+    <div id="slide-click-layer" style="position:absolute;inset:0;z-index:3;cursor:pointer;"></div>
+
     <!-- Contenido principal -->
-    <div class="container">
-        <div class="hero-content">
+    <div class="container" style="position:relative;z-index:4;">
+        <div class="hero-content" style="pointer-events:none;">
             <p class="hero-eyebrow">Tacna, Perú · Elevación Vertical</p>
             <h1>
                 SOLUCIONES<br>
@@ -878,7 +885,7 @@
                 VERTICAL
             </h1>
             <p class="hero-sub">Especialistas en mantenimiento preventivo y correctivo de ascensores, venta e instalación de montacargas y repuestos. Altos estándares de seguridad, calidad y eficiencia.</p>
-            <div class="hero-buttons">
+            <div class="hero-buttons" style="pointer-events:auto;">
                 <a href="#servicios" class="btn-hero-principal">Ver servicios ↓</a>
                 <a href="https://wa.me/51971022550?text=Hola,%20quiero%20una%20evaluación%20gratuita%20con%20TitánLift" target="_blank" class="btn-hero-sec"> Evaluación gratuita</a>
             </div>
@@ -886,7 +893,7 @@
     </div>
 
     <!-- Dots -->
-    <div class="slide-dots">
+    <div class="slide-dots" style="z-index:10;">
         <div class="dot activo" onclick="irSlide(0)"></div>
         <div class="dot" onclick="irSlide(1)"></div>
         <div class="dot" onclick="irSlide(2)"></div>
@@ -990,6 +997,25 @@
                         <li>Instalación certificada y segura</li>
                         <li>Modernización de equipos existentes</li>
                         <li>Asesoría técnica personalizada</li>
+                    </ul>
+                    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20cotizar%20un%20Ascensor" target="_blank" class="btn-cotizar-tl"> Cotizar por WhatsApp</a>
+                </div>
+            </div>
+            <div class="serv-card anim anim-delay-2">
+                <div class="serv-img-fixed">
+                    <img src="img/montacargass.jpg" alt="Instalación de ascensores" loading="lazy">
+                </div>
+                <div class="serv-header" onclick="toggleServ(this)">
+                    <h3>plataforma para discapacitados y montacargas </h3>
+                    <span class="serv-toggle-btn">+</span>
+                </div>
+                <div class="serv-body">
+                    <p>Suministramos e instalamos de plataforma para discapacitados y montacargas .</p>
+                    <ul class="serv-lista">
+                        <li>plataforma para discapacitados y montacargas</li>
+                        <li>Instalación certificada y segura</li>
+                        <li>Modernos equipos y instalacion eficeinte</li>
+                        <li>Asesoría técnica personalizados</li>
                     </ul>
                     <a href="https://wa.me/51971022550?text=Hola,%20quiero%20cotizar%20un%20Ascensor" target="_blank" class="btn-cotizar-tl"> Cotizar por WhatsApp</a>
                 </div>
@@ -1144,7 +1170,7 @@
 </section>
 
 <!-- CONTACTO -->
-<section id="contacto" style="background:var(--tl-dark); padding:90px 0;">
+<section id="contactoss" style="background:var(--tl-dark); padding:90px 0;">
     <div class="container">
         <div class="sec-header">
             <span class="sec-tag">Contáctanos</span>
@@ -1298,15 +1324,18 @@
     function heroSig() { irSlide(heroIdx + 1); }
     heroTimer = setInterval(heroSig, 5000);
 
-    /* Click en slide → ir a sección */
-    document.querySelectorAll('.hero-slider .slide').forEach(function(slide) {
-        slide.addEventListener('click', function() {
-            var href = this.dataset.href;
-            if (!href) return;
-            var target = document.querySelector(href);
+    /* Click en slide → capa transparente sobre el hero */
+    const slideClickLayer = document.getElementById('slide-click-layer');
+    if (slideClickLayer) {
+        slideClickLayer.addEventListener('click', function() {
+            const activeSlide = document.querySelector('.hero-slider .slide.activo');
+            if (!activeSlide) return;
+            const href = activeSlide.dataset.href;
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-    });
+    }
 
     /* Pausa al hover */
     var heroEl = document.getElementById('heroSection');

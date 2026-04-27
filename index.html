@@ -1191,42 +1191,43 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <!-- HERO -->
 <section class="hero">
     <div class="hero-slider">
-        <div class="slide active" data-href="#servicios" style="cursor:pointer">
+        <div class="slide active" data-href="#ubicacion" style="cursor:pointer">
             <img src="img/carrusel4.jpg" alt="Electromec industrial">
         </div>
-        <div class="slide" data-href="#proyectos" style="cursor:pointer" loading="lazy">
+        <div class="slide" data-href="#servicios" style="cursor:pointer" loading="lazy">
             <img src="img/carrusel2.jpg" alt="Instalaciones eléctricas" loading="lazy">
         </div>
-        <div class="slide" data-href="#contacto" style="cursor:pointer">
+        <div class="slide" data-href="titanlift.html" style="cursor:pointer">
             <img src="img/ascensorr.webp" alt="Tableros industriales" loading="lazy">
         </div>
     </div>
-    
+
     <div class="hero-overlay"></div>
     <div class="hero-deco"></div>
-    <div class="hero-content">
-        <p class="hero-eyebrow">Tacna, Perú </p>
+    <!-- Capa transparente clickeable que redirige según el slide activo -->
+    <div id="slide-click-layer" style="position:absolute;inset:0;z-index:3;cursor:pointer;"></div>
+    <div class="hero-content" style="pointer-events:none;">
+        <p class="hero-eyebrow">SEDE TACNA - PERU </p>
         <h1>EXCELENCIA<br>EN <span>SOLUCIONES</span><br><span class="naranja">ELÉCTRICAS</span></h1>
         <p class="hero-sub">Especialistas en instalaciones industriales, diseño y fabricación de tableros eléctricos, sistemas de elevación (ascensores) y mantenimiento técnico de alta precisión. </p>
-        <div class="hero-buttons">
+        <div class="hero-buttons" style="pointer-events:auto;">
             <a href="servicios.html#electromec-servicios" class="btn-principal">Nuestros servicios</a>
             <a href="#catalogo" class="btn-secundario">Ver catálogo</a>
         </div>
     </div>
-    <div class="slide-dots">
+    <div class="slide-dots" style="z-index:10;">
         <div class="dot active" onclick="irSlide(0)"></div>
         <div class="dot" onclick="irSlide(1)"></div>
         <div class="dot" onclick="irSlide(2)"></div>
     </div>
 
 <!-- TARJETAS FLOTANTES -->
-    <div class="hero-floating-cards">
+    <div class="hero-floating-cards" style="z-index:10;">
         <a href="servicios.html" class="float-card">
             <div class="float-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="float-card-text">
@@ -1258,9 +1259,8 @@
 <section id="servicios" class="servicios-home">
     <div class="container">
         <div class="servicios-home-header anim">
-            <span class="section-tag">Lo que hacemos</span>
             <h2>NUESTROS SERVICIOS</h2>
-            <p>Soluciones eléctricas e industriales a la medida, con altos estándares técnicos, seguridad y máxima eficiencia.</p>
+            <p>Soluciones eléctricas industriales a la medida, con altos estándares técnicos, seguridad y máxima eficiencia.</p>
         </div>
         <!-- GRID DE TARJETAS -->
     <div class="servicios-cards-grid" id="serv-cards-grid">
@@ -1441,20 +1441,17 @@
         </div>
 
     </div><!-- /servicios-cards-grid -->
-        <div class="servicios-ver-mas anim"><a href="servicios.html" class="btn-ver-mas">Ver todos los servicios</a></div>
-
         <!-- TITANLIFT CARD -->
         <a href="#titanlift" class="tl-card anim" id="titanlift" onclick="document.getElementById('titanlift').scrollIntoView({behavior:'smooth'}); return false;">
-            <img src="img/ascensorr.webp" alt="TitanLift" class="tl-card-img" onerror="this.src='img/carrusel4.jpg'">
+            <img src="img/ascensor.png" alt="TitanLift" class="tl-card-img" onerror="this.src='img/carrusel4.jpg'">
             <div class="tl-card-overlay"></div>
             <div class="tl-card-body">
                 <span class="tl-card-tag">Marca aliada</span>
-                <img src="img/TITANLIFTS-removebg-preview.png" alt="TitanLift" class="tl-card-logo" onerror="this.style.display='none'">
+                <img src="" alt="TitanLift" class="tl-card-logo" onerror="this.style.display='none'">
                 <p class="tl-card-desc">Ascensores y montacargas en Tacna</p>
                 <span class="tl-card-btn">Ver más ›</span>
             </div>
         </a>
-
     </div>
 </section>
 
@@ -1631,10 +1628,13 @@
     function siguiente() { irSlide((idx + 1) % slides.length); }
     timer = setInterval(siguiente, 5000);
 
-    /* CLICK EN SLIDE → IR A SECCIÓN */
-    slides.forEach(slide => {
-        slide.addEventListener('click', function(e) {
-            const href = this.dataset.href;
+    /* CLICK EN SLIDE → capa transparente encima del hero */
+    const slideClickLayer = document.getElementById('slide-click-layer');
+    if (slideClickLayer) {
+        slideClickLayer.addEventListener('click', function() {
+            const activeSlide = document.querySelector('.slide.active');
+            if (!activeSlide) return;
+            const href = activeSlide.dataset.href;
             if (!href) return;
             if (href.startsWith('#')) {
                 const target = document.querySelector(href);
@@ -1643,7 +1643,7 @@
                 window.location.href = href;
             }
         });
-    });
+    }
 
     /* MENÚ */
     function abrirMenu() {
@@ -1684,7 +1684,7 @@
             } else {
                 input?.classList.remove('error');
                 if (msg) msg.classList.remove('visible');
-            }
+            }   
         }
 
         const nombre   = document.getElementById('fc-nombre').value.trim();
