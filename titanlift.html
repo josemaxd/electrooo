@@ -329,11 +329,11 @@
             padding: 26px 28px;
             display:flex; align-items:center; gap:14px;
             border-right: 1px  rgba(0,0,0,.15);
-            cursor:default;
-            transition: background .25s;
+            cursor:pointer;
+            transition: background .25s, transform .2s;
         }
         .franja-item:last-child { border-right:none; }
-        .franja-item:hover { background: var(--tl-green-d); }
+        .franja-item:hover { background: var(--tl-green-d); transform: translateY(-2px); }
         .franja-icon { font-size:1.8rem; flex-shrink:0; }
         .franja-texto strong {
             display:block;
@@ -1046,21 +1046,21 @@
 <!-- FRANJA SERVICIOS RÁPIDOS -->
 <div class="franja-servicios">
     <div class="franja-inner">
-        <div class="franja-item">
+        <div class="franja-item" data-servicio="mantenimiento">
             <span class="franja-icon"></span>
             <div class="franja-texto">
                 <strong>Mantenimiento</strong>
                 <span>Preventivo y correctivo</span>
             </div>
         </div>
-        <div class="franja-item">
+        <div class="franja-item" data-servicio="ascensores">
             <span class="franja-icon"></span>
             <div class="franja-texto">
                 <strong>Ascensores</strong>
                 <span>Venta e instalación</span>
             </div>
         </div>
-        <div class="franja-item">
+        <div class="franja-item" data-servicio="montacargas">
             <span class="franja-icon"></span>
             <div class="franja-texto">
                 <strong>Montacargas</strong>
@@ -1080,7 +1080,7 @@
         </div>
         <div class="servicios-grid">
 
-            <div class="serv-card anim anim-delay-1">
+            <div class="serv-card anim anim-delay-1" data-servicio="mantenimiento">
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
                         <img src="img/mantenimiento-preventivo.jpg" alt="Mantenimiento preventivo" loading="lazy">
@@ -1107,7 +1107,7 @@
                 </div>
             </div>
 
-            <div class="serv-card anim anim-delay-2">
+            <div class="serv-card anim anim-delay-2" data-servicio="ascensores">
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
                         <img src="img/instaladores-ascensores.webp" alt="Instalación de ascensores" loading="lazy">
@@ -1133,7 +1133,7 @@
                     <a href="https://wa.me/51971022550?text=Hola,%20quiero%20cotizar%20un%20Ascensor" target="_blank" class="btn-cotizar-tl"> Cotizar por WhatsApp</a>
                 </div>
             </div>
-            <div class="serv-card anim anim-delay-2">
+            <div class="serv-card anim anim-delay-2" data-servicio="montacargas">
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
                         <img src="img/montacargass.jpg" alt="Montacargas" loading="lazy">
@@ -1559,6 +1559,28 @@
             startAuto();
         });
     })();
+
+    /* FRANJA ITEMS – Click para abrir servicios */
+    document.querySelectorAll('.franja-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const servicio = this.dataset.servicio;
+            const card = document.querySelector(`.serv-card[data-servicio="${servicio}"]`);
+            
+            if (card) {
+                // Scroll hacia la sección de servicios
+                const serviciosSection = document.getElementById('servicios');
+                serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Esperar un poco para que termine el scroll, luego abrir la tarjeta
+                setTimeout(() => {
+                    const header = card.querySelector('.serv-header');
+                    if (header && !card.classList.contains('abierto')) {
+                        toggleServ(header);
+                    }
+                }, 500);
+            }
+        });
+    });
 
     /* TOGGLE INFO SERVICIO – acordeón: agranda la activa, achica las demás */
     function toggleServ(header) {

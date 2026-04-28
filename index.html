@@ -62,6 +62,38 @@
         .nav-tintalift::after { display: none !important; }
 
         .tintalift-section { background: var(--tl-black); padding-bottom: 80px; }
+        
+        /* ══ FRANJA SERVICIOS RÁPIDOS ════════════════ */
+        .franja-servicios {
+            background: linear-gradient(135deg, #003545 0%, #00505a 100%);
+            padding: 0;
+            border-top: 3px solid var(--cyan);
+            border-bottom: 3px solid var(--cyan);
+        }
+        .franja-inner {
+            display:grid; grid-template-columns: repeat(3,1fr);
+        }
+        .franja-item {
+            padding: 28px 24px;
+            display:flex; align-items:center; gap:14px;
+            border-right: 2px solid rgba(0,188,212,.2);
+            cursor:pointer;
+            transition: background .3s, transform .2s;
+        }
+        .franja-item:last-child { border-right:none; }
+        .franja-item:hover { background: rgba(0,188,212,.08); transform: translateY(-3px); }
+        .franja-icon { font-size:2rem; flex-shrink:0; }
+        .franja-texto strong {
+            display:block;
+            font-family:'Barlow Condensed',sans-serif;
+            font-size:1rem; font-weight:700; text-transform:uppercase;
+            color:white; letter-spacing:.04em;
+        }
+        .franja-texto span {
+            font-size:.78rem; color:rgba(255,255,255,.65);
+        }
+        
+        .tintalift-section { background: var(--tl-black); padding-bottom: 80px; }
         .tintalift-hero {
             background: linear-gradient(135deg, #4a7a00 0%, var(--tl-green) 55%, var(--tl-green-l) 100%);
             padding: 90px 0 70px; position: relative; overflow: hidden;
@@ -287,12 +319,17 @@
 
         /* ══ CARDS DE SERVICIO CON DESPLEGABLE ══ */
         .servicios-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 0; }
-        .serv-card { border: 2px solid #e8eef0; border-radius: 14px; overflow: hidden; cursor: pointer; position: relative; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; background: #fff; }
+        .serv-card { border: 2px solid #e8eef0; border-radius: 14px; overflow: hidden; cursor: pointer; position: relative; transition: border-color 0.3s, transform 0.45s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s; background: #fff; }
         .serv-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: var(--secondary); transition: height 0.4s; z-index: 2; }
-        .serv-card:hover, .serv-card.activo { border-color: var(--cyan); transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,54,68,0.14); }
+        .serv-card:hover, .serv-card.activo { border-color: var(--cyan); transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 36px rgba(0,54,68,0.14); }
         .serv-card:hover::before, .serv-card.activo::before { height: 100%; }
-        .serv-card.activo { border-color: var(--primary); box-shadow: 0 8px 32px rgba(0,54,68,0.18); transform: translateY(-4px); }
+        .serv-card.activo { border-color: var(--primary); box-shadow: 0 8px 32px rgba(0,54,68,0.18); transform: translateY(-4px) scale(1.04); animation: zoomIn 0.45s cubic-bezier(0.4,0,0.2,1) forwards; }
         .serv-card.activo::before { background: var(--primary); height: 100%; }
+        
+        @keyframes zoomIn {
+            0% { transform: translateY(-4px) scale(1); }
+            100% { transform: translateY(-4px) scale(1.04); }
+        }
         .serv-card-body { padding: 22px 22px 18px; }
         .serv-card-num { position: absolute; top: 14px; right: 18px; font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 900; color: rgba(0,54,68,0.07); line-height: 1; z-index: 3; }
         .serv-card-body h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
@@ -586,13 +623,28 @@
         </a>
     </div>
 </section>
-
-<!-- STATS -->
-<div class="stats-bar">
-    <div class="stat-item anim anim-delay-1"><div class="stat-num">100%</div><div class="stat-label">Tacneños</div></div>
-    <div class="stat-item anim anim-delay-2"><div class="stat-num">150+</div><div class="stat-label">Proyectos realizados</div></div>
-    <div class="stat-item anim anim-delay-3"><div class="stat-num" id="viewerCount">6</div><div class="stat-label">Personas estan viendo esto</div></div>
-    <div class="stat-item anim anim-delay-4"><div class="stat-num">100%</div><div class="stat-label">Garantía de calidad</div></div>
+<!-- FRANJA SERVICIOS RÁPIDOS -->
+<div class="franja-servicios">
+    <div class="franja-inner">
+        <div class="franja-item" data-servicio="instalaciones">
+            <div class="franja-texto">
+                <strong>Instalaciones</strong>
+                <span>Eléctricas industriales</span>
+            </div>
+        </div>
+        <div class="franja-item" data-servicio="tableros">
+            <div class="franja-texto">
+                <strong>Maquinas</strong>
+                <span>Eléctricas y Instalacion</span>
+            </div>
+        </div>
+        <div class="franja-item" data-servicio="mantenimiento">
+            <div class="franja-texto">
+                <strong>Automatizacion</strong>
+                <span>De Sistema y Control</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- SERVICIOS -->
@@ -606,7 +658,7 @@
         <div class="servicios-cards-grid" id="serv-cards-grid">
 
             <!-- TARJETA 1: Instalaciones Eléctricas -->
-            <div class="serv-card anim anim-delay-1" onclick="toggleServCard('panel-instalaciones', this)">
+            <div class="serv-card anim anim-delay-1" data-servicio="instalaciones" onclick="toggleServCard('panel-instalaciones', this)">
                 <span class="serv-card-num">01</span>
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
@@ -629,7 +681,7 @@
             </div>
 
             <!-- TARJETA 2: Máquinas Eléctricas -->
-            <div class="serv-card anim anim-delay-2" onclick="toggleServCard('panel-maquinas', this)">
+            <div class="serv-card anim anim-delay-2" data-servicio="tableros" onclick="toggleServCard('panel-maquinas', this)">
                 <span class="serv-card-num">02</span>
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
@@ -652,7 +704,7 @@
             </div>
 
             <!-- TARJETA 3: Automatización y Control -->
-            <div class="serv-card anim anim-delay-3" onclick="toggleServCard('panel-automatizacion', this)">
+            <div class="serv-card anim anim-delay-3" data-servicio="mantenimiento" onclick="toggleServCard('panel-automatizacion', this)">
                 <span class="serv-card-num">03</span>
                 <div class="serv-img-carousel" data-sic>
                     <div class="sic-track">
@@ -1029,6 +1081,27 @@
         document.getElementById('menuOverlay').classList.remove('activo');
         document.body.style.overflow = '';
     }
+
+    /* ══ FRANJA ITEMS – Click para abrir servicios ══ */
+    document.querySelectorAll('.franja-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const servicio = this.dataset.servicio;
+            const card = document.querySelector(`.serv-card[data-servicio="${servicio}"]`);
+            
+            if (card) {
+                // Scroll hacia la sección de servicios
+                const serviciosSection = document.getElementById('servicios');
+                serviciosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Esperar un poco para que termine el scroll, luego abrir la tarjeta
+                setTimeout(() => {
+                    if (!card.classList.contains('activo')) {
+                        card.click();
+                    }
+                }, 500);
+            }
+        });
+    });
 
     /* ══ COTIZAR WHATSAPP ══ */
     function cotizarWhatsApp(producto, precio) {
