@@ -399,14 +399,58 @@
         .proyectos-header h2 { font-family:'Barlow Condensed',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:white; text-transform:uppercase; }
         .proyectos-header p { color:rgba(255,255,255,.45); margin-top:8px; font-size:.9rem; font-weight:300; }
         .proyectos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-        .proyecto { position:relative; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.5); }
-        .proyecto img { width:100%; height:260px; object-fit:cover; transition:transform .55s ease; }
-        .proyecto:hover img { transform:scale(1.07); }
-        .proyecto-overlay { position:absolute; inset:0; background:linear-gradient(0deg,rgba(0,54,68,.95) 0%,rgba(0,54,68,.4) 50%,transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:26px; text-align:left; opacity:0; transition:opacity .4s; }
-        .proyecto:hover .proyecto-overlay { opacity:1; }
-        .proyecto-overlay h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.25rem; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+
+        /* Tarjeta proyecto con mini-carrusel */
+        .proyecto { position:relative; border-radius:14px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.5); background:#0d2030; border:1px solid rgba(0,188,212,.12); transition:transform .3s, box-shadow .3s; }
+        .proyecto:hover { transform:translateY(-5px); box-shadow:0 18px 48px rgba(0,0,0,.7); }
+        .proyecto-carousel { position:relative; height:190px; overflow:hidden; }
+        .proyecto-carousel .pc-track { display:flex; height:100%; transition:transform .5s cubic-bezier(.4,0,.2,1); }
+        .proyecto-carousel .pc-track img { min-width:100%; width:100%; height:100%; object-fit:cover; flex-shrink:0; cursor:zoom-in; transition:transform .4s; }
+        .proyecto-carousel .pc-track img:hover { transform:scale(1.04); }
+        .pc-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.5); border:1px solid rgba(0,188,212,.35); color:white; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:.95rem; display:flex; align-items:center; justify-content:center; z-index:4; opacity:0; transition:opacity .3s, background .25s; padding:0; }
+        .proyecto-carousel:hover .pc-btn { opacity:1; }
+        .pc-btn:hover { background:var(--cyan); border-color:var(--cyan); }
+        .pc-prev { left:7px; }
+        .pc-next { right:7px; }
+        .pc-dots { position:absolute; bottom:6px; left:50%; transform:translateX(-50%); display:flex; gap:5px; z-index:4; }
+        .pc-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.35); border:none; cursor:pointer; padding:0; transition:background .3s, transform .3s; }
+        .pc-dot.activo { background:var(--cyan); transform:scale(1.3); }
+        .pc-counter { position:absolute; top:8px; right:10px; background:rgba(0,0,0,.55); color:rgba(255,255,255,.8); font-size:.65rem; font-weight:700; letter-spacing:.1em; padding:3px 8px; border-radius:20px; z-index:4; pointer-events:none; }
+
+        .proyecto-info { padding:16px 18px 18px; }
+        .proyecto-info h3 { font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:700; color:white; text-transform:uppercase; letter-spacing:.04em; margin-bottom:4px; }
+        .proyecto-info .proy-tag { font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan); background:rgba(0,188,212,.1); border-radius:20px; padding:3px 9px; display:inline-block; }
         .btn-ver { display:inline-block; padding:8px 22px; background:var(--orange); color:white; border-radius:30px; font-weight:700; font-size:.78rem; letter-spacing:.08em; transition:background .3s; width:fit-content; }
         .btn-ver:hover { background:var(--orange-d); }
+
+        /* Lightbox de proyectos con descripción */
+        .proy-lightbox { position:fixed; inset:0; z-index:99999; background:rgba(0,0,0,0); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .35s ease, background .35s ease; backdrop-filter:blur(0px); }
+        .proy-lightbox.activo { opacity:1; pointer-events:all; background:rgba(0,0,0,.92); backdrop-filter:blur(12px); }
+        .proy-lb-inner { display:flex; gap:0; max-width:92vw; max-height:90vh; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(0,188,212,.2); transform:scale(.7); transition:transform .4s cubic-bezier(.34,1.25,.64,1); }
+        .proy-lightbox.activo .proy-lb-inner { transform:scale(1); }
+        .proy-lb-img-side { position:relative; background:#000; display:flex; align-items:center; justify-content:center; max-width:65vw; }
+        .proy-lb-img-side img { display:block; max-width:65vw; max-height:85vh; width:auto; height:auto; object-fit:contain; }
+        .proy-lb-info { width:300px; flex-shrink:0; background:linear-gradient(160deg,#0a1f2b,#0d2a38); display:flex; flex-direction:column; padding:30px 26px; overflow-y:auto; }
+        .proy-lb-badge { font-size:.62rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan); background:rgba(0,188,212,.12); border-radius:20px; padding:4px 12px; display:inline-block; margin-bottom:14px; }
+        .proy-lb-info h2 { font-family:'Barlow Condensed',sans-serif; font-size:1.5rem; font-weight:900; color:white; text-transform:uppercase; letter-spacing:.04em; margin-bottom:16px; line-height:1.1; }
+        .proy-lb-desc { font-size:.84rem; color:rgba(255,255,255,.65); line-height:1.7; flex:1; }
+        .proy-lb-desc strong { color:var(--cyan); display:block; margin-top:14px; margin-bottom:4px; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; }
+        .proy-lb-step { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+        .proy-lb-step-num { width:22px; height:22px; border-radius:50%; background:var(--cyan); color:var(--dark); font-size:.7rem; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+        .proy-lb-step p { font-size:.82rem; color:rgba(255,255,255,.6); line-height:1.5; margin:0; }
+        .proy-lb-close { position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2); color:white; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; z-index:5; transition:background .25s, transform .3s; }
+        .proy-lb-close:hover { background:var(--cyan); transform:rotate(90deg) scale(1.1); }
+        .proy-lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,.08); border:1px solid rgba(0,188,212,.35); color:white; font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:5; transition:background .25s; }
+        .proy-lb-nav:hover { background:var(--cyan); }
+        .proy-lb-prev { left:14px; }
+        .proy-lb-next { right:14px; }
+        .proy-lb-counter { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.45); font-size:.72rem; letter-spacing:.16em; font-family:'Barlow Condensed',sans-serif; font-weight:600; text-transform:uppercase; pointer-events:none; }
+        @media(max-width:768px){
+            .proy-lb-inner { flex-direction:column; max-width:96vw; max-height:92vh; }
+            .proy-lb-img-side { max-width:96vw; }
+            .proy-lb-img-side img { max-width:96vw; max-height:50vh; }
+            .proy-lb-info { width:100%; padding:20px; }
+        }
 
         /* CATÁLOGO */
         .catalogo { padding:90px 0; background:var(--light); }
@@ -474,10 +518,17 @@
         .footer-col p { font-size:.82rem; color:rgba(255,255,255,.45); margin-bottom:8px; line-height:1.5; }
         .footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:.75rem; color:rgba(255,255,255,.25); }
 
-        /* WHATSAPP */
-        .whatsapp { position:fixed; bottom:24px; right:24px; width:58px; height:58px; z-index:1000; }
+        /* BOTONES FLOTANTES */
+        .floating-social { position:fixed; bottom:24px; right:24px; z-index:1000; display:flex; flex-direction:column; align-items:center; gap:10px; }
+        .whatsapp { width:58px; height:58px; }
         .whatsapp img { width:100%; height:100%; border-radius:50%; box-shadow:0 4px 16px rgba(0,0,0,.35); transition:transform .3s; }
         .whatsapp img:hover { transform:scale(1.12); }
+        .float-social-btn { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.35); transition:transform .3s,box-shadow .3s; text-decoration:none; overflow:hidden; }
+        .float-social-btn:hover { transform:scale(1.12); box-shadow:0 6px 22px rgba(0,0,0,.45); }
+        .float-social-btn.facebook { background:#1877f2; }
+        .float-social-btn.tiktok { background:#010101; border:1px solid rgba(255,255,255,.15); }
+        .float-social-btn img { width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+        @media (max-width:768px) { .floating-social { bottom:18px; right:18px; } .whatsapp { width:52px; height:52px; } .float-social-btn { width:42px; height:42px; } }
 
         /* TARJETAS FLOTANTES */
         .hero-floating-cards { position: absolute; right: 56px; bottom: 70px; z-index: 4; display: flex; flex-direction: column; gap: 10px; }
@@ -515,7 +566,7 @@
 
         /* RESPONSIVE */
         @media (max-width:1024px) { .catalogo-grid { grid-template-columns:repeat(2,1fr); } .proyectos-grid { grid-template-columns:repeat(2,1fr); } .stats-bar { grid-template-columns:repeat(2,1fr); } .nosotros-inner { grid-template-columns:1fr; gap:40px; } .ubicacion-grid, .contacto-inner { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr 1fr; } }
-        @media (max-width:768px) { .header { padding:0 16px; } .nav-links { display:none; } .hero-content { margin-left:20px; margin-right:20px; } .hero-content h1 { font-size:clamp(2.4rem,9vw,3.5rem); } .hero-buttons { flex-direction:column; gap:10px; align-items:flex-start; } .catalogo-grid { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr; gap:28px; } .stats-bar { grid-template-columns:repeat(2,1fr); gap:0; } .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:20px; } .nosotros-inner { grid-template-columns:1fr; } .nosotros-visual { display:none; } .nosotros-valores { grid-template-columns:repeat(2,1fr); } .proyectos-grid { grid-template-columns:1fr; } .proyecto img { height:220px; } .servicios-cards-grid { grid-template-columns: 1fr; } .mapa iframe { height:260px; } .contacto-inner { grid-template-columns:1fr; gap:36px; } .footer-bottom { flex-direction:column; gap:8px; text-align:center; } .whatsapp { bottom:18px; right:18px; width:52px; height:52px; } }
+        @media (max-width:768px) { .header { padding:0 16px; } .nav-links { display:none; } .hero-content { margin-left:20px; margin-right:20px; } .hero-content h1 { font-size:clamp(2.4rem,9vw,3.5rem); } .hero-buttons { flex-direction:column; gap:10px; align-items:flex-start; } .catalogo-grid { grid-template-columns:1fr; } .footer-grid { grid-template-columns:1fr; gap:28px; } .stats-bar { grid-template-columns:repeat(2,1fr); gap:0; } .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:20px; } .nosotros-inner { grid-template-columns:1fr; } .nosotros-visual { display:none; } .nosotros-valores { grid-template-columns:repeat(2,1fr); } .proyectos-grid { grid-template-columns:1fr; } .proyecto img { height:220px; } .servicios-cards-grid { grid-template-columns: 1fr; } .mapa iframe { height:260px; } .contacto-inner { grid-template-columns:1fr; gap:36px; } .footer-bottom { flex-direction:column; gap:8px; text-align:center; } .floating-social { bottom:18px; right:18px; } .whatsapp { width:52px; height:52px; } }
         @media (max-width:480px) { .nosotros-valores { grid-template-columns:1fr; } .hero-content { margin-left:16px; } .hero-eyebrow { font-size:.65rem; } .contacto-form { padding:24px 20px; } .footer-grid { grid-template-columns:1fr; } }
     </style>
 </head>
@@ -605,11 +656,11 @@
         <div class="dot" onclick="irSlide(2)"></div>
     </div>
     <div class="hero-floating-cards" style="z-index:10;">
-        <a href="servicios.html" class="float-card">
+        <a href="nosotros.html " class="float-card">
             <div class="float-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <div class="float-card-text">
                 <div class="float-card-label">Explora</div>
-                <div class="float-card-title">Servicios</div>
+                <div class="float-card-title">Sobre Nosotros</div>
             </div>
             <span class="float-card-arrow">&#8250;</span>
         </a>
@@ -871,21 +922,101 @@
             <p>Selección de trabajos ejecutados en la región, que evidencian nuestra capacidad técnica, cumplimiento y estándares de calidad.</p>
         </div>
         <div class="proyectos-grid">
-            <div class="proyecto anim anim-delay-1">
-                <img src="img/sc.png" alt="Proyecto 1" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
-                <div class="proyecto-overlay"><h3>Instalación Eléctrica Industrial</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+
+            <!-- Proyecto 1 -->
+            <div class="proyecto anim anim-delay-1"
+                 data-proy-titulo="Instalación Eléctrica Industrial"
+                 data-proy-tag="Instalaciones · Baja tensión"
+                 data-proy-desc="Diseño y ejecución completa del sistema eléctrico de una planta industrial en Tacna, incluyendo tablero principal de distribución, canalización y tendido de conductores."
+                 data-proy-pasos='["Relevamiento técnico y planos eléctricos","Suministro de materiales certificados","Montaje de tablero de distribución","Tendido de bandejas y ductos","Conexionado, pruebas y puesta en marcha"]'>
+                <div class="proyecto-carousel" data-pc>
+                    <div class="pc-track">
+                        <img src="img/sc.png" alt="Instalación eléctrica 1" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+                        <img src="img/instalaciones-electricas-industriales.webp" alt="Instalación eléctrica 2" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+                        <img src="img/images (1).jpg" alt="Instalación eléctrica 3" onerror="this.src='img/carrusel1.jpg'" loading="lazy">
+                    </div>
+                    <button class="pc-btn pc-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="pc-btn pc-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="pc-dots"></div>
+                    <div class="pc-counter">1 / 3</div>
+                </div>
+                <div class="proyecto-info">
+                    <span class="proy-tag">Instalaciones · Baja tensión</span>
+                    <h3>Instalación Eléctrica Industrial</h3>
+                </div>
             </div>
-            <div class="proyecto anim anim-delay-2">
-                <img src="img/sd.jpg" alt="Proyecto 2" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
-                <div class="proyecto-overlay"><h3>Tablero de Control Industrial</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+
+            <!-- Proyecto 2 -->
+            <div class="proyecto anim anim-delay-2"
+                 data-proy-titulo="Tablero de Control Industrial"
+                 data-proy-tag="Tableros · Automatización"
+                 data-proy-desc="Fabricación y montaje de tablero eléctrico industrial para control de motores y distribución de fuerza en planta procesadora, con protecciones termomagnéticas y guardamotores."
+                 data-proy-pasos='["Ingeniería y diseño del diagrama unifilar","Fabricación de gabinete metálico","Montaje de elementos de control y fuerza","Cableado interno y etiquetado","Pruebas FAT y comisionamiento en sitio"]'>
+                <div class="proyecto-carousel" data-pc>
+                    <div class="pc-track">
+                        <img src="img/sd.jpg" alt="Tablero control 1" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+                        <img src="img/tablero.jpg" alt="Tablero control 2" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+                        <img src="img/TABLERO-ELECTRICO-EINSAC.jpg" alt="Tablero control 3" onerror="this.src='img/carrusel2.jpg'" loading="lazy">
+                    </div>
+                    <button class="pc-btn pc-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="pc-btn pc-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="pc-dots"></div>
+                    <div class="pc-counter">1 / 3</div>
+                </div>
+                <div class="proyecto-info">
+                    <span class="proy-tag">Tableros · Automatización</span>
+                    <h3>Tablero de Control Industrial</h3>
+                </div>
             </div>
-            <div class="proyecto anim anim-delay-3">
-                <img src="img/sf.jpg" alt="Proyecto 3" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
-                <div class="proyecto-overlay"><h3>Sistema de Automatización</h3><a href="servicios.html" class="btn-ver">Ver más</a></div>
+
+            <!-- Proyecto 3 -->
+            <div class="proyecto anim anim-delay-3"
+                 data-proy-titulo="Sistema de Automatización"
+                 data-proy-tag="Automatización · PLC"
+                 data-proy-desc="Implementación de sistema de automatización con PLC para control de proceso productivo, incluyendo variadores de frecuencia, sensores y HMI para monitoreo en tiempo real."
+                 data-proy-pasos='["Análisis del proceso y definición de I/O","Programación PLC y configuración de variadores","Instalación de sensores y actuadores","Integración de HMI y SCADA","Capacitación al personal operativo"]'>
+                <div class="proyecto-carousel" data-pc>
+                    <div class="pc-track">
+                        <img src="img/sf.jpg" alt="Automatización 1" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
+                        <img src="img/automatizacion.jpg" alt="Automatización 2" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
+                        <img src="img/preventivo-correctivo.jpg" alt="Automatización 3" onerror="this.src='img/carrusel3.jpeg'" loading="lazy">
+                    </div>
+                    <button class="pc-btn pc-prev" aria-label="Anterior">&#8249;</button>
+                    <button class="pc-btn pc-next" aria-label="Siguiente">&#8250;</button>
+                    <div class="pc-dots"></div>
+                    <div class="pc-counter">1 / 3</div>
+                </div>
+                <div class="proyecto-info">
+                    <span class="proy-tag">Automatización · PLC</span>
+                    <h3>Sistema de Automatización</h3>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
+
+<!-- LIGHTBOX PROYECTOS (con descripción de proceso) -->
+<div class="proy-lightbox" id="proyLightbox">
+    <div class="proy-lb-inner">
+        <div class="proy-lb-img-side" style="position:relative;">
+            <button class="proy-lb-nav proy-lb-prev" id="plbPrev">&#8249;</button>
+            <img id="plbImg" src="" alt="Proyecto">
+            <button class="proy-lb-nav proy-lb-next" id="plbNext">&#8250;</button>
+            <div class="proy-lb-counter" id="plbCounter"></div>
+        </div>
+        <div class="proy-lb-info">
+            <button class="proy-lb-close" id="plbClose">✕</button>
+            <span class="proy-lb-badge" id="plbTag"></span>
+            <h2 id="plbTitulo"></h2>
+            <div class="proy-lb-desc">
+                <p id="plbDescTxt"></p>
+                <strong>Proceso de ejecución</strong>
+                <div id="plbPasos"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- CATÁLOGO -->
 <section id="catalogo" class="catalogo">
@@ -1026,10 +1157,18 @@
     </div>
 </footer>
 
-<!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" class="whatsapp" target="_blank">
-    <img src="img/whatsapp (1).png" alt="WhatsApp" onerror="this.src='img/whatsapp.png'" loading="lazy">
-</a>
+<!-- BOTONES FLOTANTES -->
+<div class="floating-social">
+    <a href="https://tiktok.com" target="_blank" class="float-social-btn tiktok" aria-label="TikTok">
+        <img src="img/tik-tok (1).png" alt="TikTok" loading="lazy">
+    </a>
+    <a href="https://facebook.com" target="_blank" class="float-social-btn facebook" aria-label="Facebook">
+        <img src="img/facebook (1).png" alt="Facebook" loading="lazy">
+    </a>
+    <a href="https://wa.me/51971022550?text=Hola,%20quiero%20información%20sobre%20sus%20servicios" class="whatsapp" target="_blank">
+        <img src="img/social.png" alt="WhatsApp" onerror="this.src='img/whatsapp.png'" loading="lazy">
+    </a>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox-overlay" id="lightboxOverlay">
@@ -1163,7 +1302,7 @@
         if (!isOpen) {
             cardEl.classList.add('activo');
             panel.classList.add('open');
-            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+            setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
         }
     }
 
@@ -1191,6 +1330,98 @@
         }
         setTimeout(actualizar, (Math.random() * 2 + 3) * 60 * 1000);
     })();
+
+    /* ══ MINI-CARRUSELES EN PROYECTOS ══ */
+    document.querySelectorAll('.proyecto-carousel[data-pc]').forEach(function(carousel) {
+        const track   = carousel.querySelector('.pc-track');
+        const imgs    = carousel.querySelectorAll('.pc-track img');
+        const dots    = carousel.querySelector('.pc-dots');
+        const counter = carousel.querySelector('.pc-counter');
+        const btnPrev = carousel.querySelector('.pc-prev');
+        const btnNext = carousel.querySelector('.pc-next');
+        const card    = carousel.closest('.proyecto');
+        let current = 0;
+        const total = imgs.length;
+
+        imgs.forEach(function(_, i) {
+            const dot = document.createElement('button');
+            dot.className = 'pc-dot' + (i === 0 ? ' activo' : '');
+            dot.setAttribute('aria-label', 'Imagen ' + (i+1));
+            dot.addEventListener('click', function(e) { e.stopPropagation(); goTo(i); });
+            dots.appendChild(dot);
+        });
+
+        function updateUI() {
+            track.style.transform = 'translateX(-' + (current * 100) + '%)';
+            dots.querySelectorAll('.pc-dot').forEach(function(d,i){ d.classList.toggle('activo', i === current); });
+            counter.textContent = (current+1) + ' / ' + total;
+        }
+        function goTo(n) { current = (n + total) % total; updateUI(); }
+
+        btnPrev.addEventListener('click', function(e) { e.stopPropagation(); goTo(current-1); });
+        btnNext.addEventListener('click', function(e) { e.stopPropagation(); goTo(current+1); });
+
+        let autoplay;
+        carousel.addEventListener('mouseenter', function() { autoplay = setInterval(function(){ goTo(current+1); }, 2600); });
+        carousel.addEventListener('mouseleave', function() { clearInterval(autoplay); });
+
+        // Click en imagen → abrir lightbox con descripción
+        imgs.forEach(function(img, i) {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const srcs   = Array.from(imgs).map(function(im){ return im.src; });
+                const titulo = card.dataset.proyTitulo || '';
+                const tag    = card.dataset.proyTag    || '';
+                const desc   = card.dataset.proyDesc   || '';
+                const pasos  = JSON.parse(card.dataset.proyPasos || '[]');
+                abrirProyLightbox(srcs, i, titulo, tag, desc, pasos);
+            });
+        });
+
+        updateUI();
+    });
+
+    /* ══ LIGHTBOX PROYECTOS ══ */
+    let plbImgs = [], plbIdx = 0;
+
+    function abrirProyLightbox(srcs, idx, titulo, tag, desc, pasos) {
+        plbImgs = srcs; plbIdx = idx;
+        document.getElementById('plbTitulo').textContent  = titulo;
+        document.getElementById('plbTag').textContent     = tag;
+        document.getElementById('plbDescTxt').textContent = desc;
+        const pasosEl = document.getElementById('plbPasos');
+        pasosEl.innerHTML = '';
+        pasos.forEach(function(paso, i) {
+            const div = document.createElement('div');
+            div.className = 'proy-lb-step';
+            div.innerHTML = '<div class="proy-lb-step-num">' + (i+1) + '</div><p>' + paso + '</p>';
+            pasosEl.appendChild(div);
+        });
+        mostrarPlbImg();
+        document.getElementById('proyLightbox').classList.add('activo');
+        document.body.style.overflow = 'hidden';
+    }
+    function cerrarProyLightbox() {
+        document.getElementById('proyLightbox').classList.remove('activo');
+        document.body.style.overflow = '';
+    }
+    function mostrarPlbImg() {
+        document.getElementById('plbImg').src = plbImgs[plbIdx];
+        document.getElementById('plbCounter').textContent = (plbIdx+1) + ' / ' + plbImgs.length;
+    }
+    document.getElementById('plbClose').addEventListener('click', cerrarProyLightbox);
+    document.getElementById('proyLightbox').addEventListener('click', function(e) {
+        if (e.target === this) cerrarProyLightbox();
+    });
+    document.getElementById('plbPrev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        plbIdx = (plbIdx - 1 + plbImgs.length) % plbImgs.length; mostrarPlbImg();
+    });
+    document.getElementById('plbNext').addEventListener('click', function(e) {
+        e.stopPropagation();
+        plbIdx = (plbIdx + 1) % plbImgs.length; mostrarPlbImg();
+    });
 
     /* ══ MINI-CARRUSELES EN TARJETAS DE SERVICIO ══ */
     document.querySelectorAll('[data-sic]').forEach(function(carousel) {
@@ -1270,11 +1501,18 @@
         lbIdx = (lbIdx + 1) % lbImgs.length; mostrarLbImg();
     });
     document.addEventListener('keydown', function(e) {
-        const lb = document.getElementById('lightboxOverlay');
-        if (!lb.classList.contains('activo')) return;
-        if (e.key === 'Escape')      cerrarLightbox();
-        if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; mostrarLbImg(); }
-        if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImgs.length; mostrarLbImg(); }
+        const lb  = document.getElementById('lightboxOverlay');
+        const plb = document.getElementById('proyLightbox');
+        if (lb.classList.contains('activo')) {
+            if (e.key === 'Escape')      cerrarLightbox();
+            if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; mostrarLbImg(); }
+            if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImgs.length; mostrarLbImg(); }
+        }
+        if (plb.classList.contains('activo')) {
+            if (e.key === 'Escape')      cerrarProyLightbox();
+            if (e.key === 'ArrowLeft')  { plbIdx = (plbIdx - 1 + plbImgs.length) % plbImgs.length; mostrarPlbImg(); }
+            if (e.key === 'ArrowRight') { plbIdx = (plbIdx + 1) % plbImgs.length; mostrarPlbImg(); }
+        }
     });
 </script>
 </body>
